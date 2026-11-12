@@ -143,113 +143,78 @@ ocop-passport/
 
 ```mermaid
 flowchart LR
-  U1["Chủ cơ sở, nông hộ<br/>Tình nguyện viên Đoàn"]
-  U2["Người mua<br/>quét mã QR"]
-  U3["Đoàn xã, phường<br/>Đơn vị hỗ trợ OCOP"]
-  subgraph APP["Ứng dụng Next.js chạy trên trình duyệt"]
-    D["/diary<br/>Nhật ký số"]
-    P["/p/id<br/>Hộ chiếu số"]
-    S["/studio<br/>Trợ lý bán hàng"]
-    B["/dashboard<br/>Bảng điều khiển"]
-    ST[("lib/store.js<br/>localStorage")]
-  end
-  API["/api/generate<br/>route phía máy chủ"]
-  G["lib/guard.js<br/>Bộ lọc cảnh báo"]
-  AI["Anthropic API"]
-  TP["Mẫu câu dự phòng"]
-  U1 --> D
-  U1 --> S
-  D --> ST
-  ST --> P
+  U1["Chủ cơ sở và tình nguyện viên"] --> D["Nhật ký số"]
+  U1 --> S["Trợ lý bán hàng AI"]
+  D --> ST["Kho dữ liệu localStorage"]
+  ST --> P["Hộ chiếu số"]
   ST --> S
-  ST --> B
-  S --> API
-  API -->|"có khóa API"| AI
-  API -->|"không có khóa"| TP
-  API --> G
-  U2 --> P
-  U3 --> B
+  ST --> B["Bảng điều khiển"]
+  S --> API["API soạn nội dung"]
+  API --> G["Bộ lọc cảnh báo"]
+  API --> AI["Anthropic API"]
+  API --> TP["Mẫu câu dự phòng"]
+  U2["Người mua quét QR"] --> P
+  U3["Đoàn xã, phường"] --> B
 ```
 
 ### 2. Luồng sử dụng từ vườn đến người mua
 
 ```mermaid
 sequenceDiagram
-  actor CS as Chủ cơ sở
+  participant CS as Chủ cơ sở
   participant ND as Nhật ký số
   participant HC as Hộ chiếu số
   participant AI as Trợ lý AI
-  actor DM as Đoàn xác minh
-  actor NM as Người mua
+  participant DM as Đoàn xác minh
+  participant NM as Người mua
   CS->>ND: Chọn mốc, chụp ảnh, nói vài câu
-  ND->>ND: Tự gắn thời gian và vị trí
   ND->>HC: Cập nhật dòng thời gian
-  CS->>AI: Yêu cầu soạn nội dung bán hàng
-  AI-->>CS: Bản nháp
-  CS->>AI: Chỉnh sửa và bấm Duyệt
+  CS->>AI: Yêu cầu soạn nội dung
+  AI->>CS: Trả bản nháp
+  CS->>AI: Chỉnh sửa và duyệt
   DM->>HC: Xác minh hộ chiếu
-  CS->>HC: Tải mã QR, in lên bao bì
+  CS->>HC: Tải mã QR và in lên bao bì
   NM->>HC: Quét mã QR
-  HC-->>NM: Hành trình, bản đồ, chứng nhận, câu chuyện
-  NM->>NM: Bấm nút mua hàng
+  HC->>NM: Hành trình, bản đồ, chứng nhận
 ```
 
 ### 3. Kiểm soát nội dung AI
 
 ```mermaid
 flowchart TD
-  A["Nhật ký và hồ sơ sản phẩm"] --> B{"Có ANTHROPIC_API_KEY?"}
+  A["Nhật ký và hồ sơ sản phẩm"] --> B{"Có khóa API"}
   B -->|"Có"| C["AI soạn, chỉ dùng dữ kiện đã nhập"]
   B -->|"Không"| D["Soạn bằng mẫu câu"]
-  C --> E["Bộ lọc cụm từ thổi phồng, tuyên bố y tế"]
+  C --> E["Bộ lọc cụm từ thổi phồng"]
   D --> E
-  E --> F["Bản nháp, chờ duyệt"]
-  F --> G{"Còn cảnh báo?"}
-  G -->|"Còn"| H["Khóa nút Duyệt, chủ cơ sở sửa lại"]
+  E --> F["Bản nháp chờ duyệt"]
+  F --> G{"Còn cảnh báo"}
+  G -->|"Còn"| H["Khóa nút Duyệt, sửa lại"]
   H --> E
   G -->|"Hết"| I["Chủ cơ sở bấm Duyệt"]
-  I --> J["Lưu trạng thái Đã duyệt, cho phép sao chép đăng bài"]
+  I --> J["Lưu Đã duyệt và cho sao chép"]
 ```
 
 ### 4. Vòng đời của một hộ chiếu số
 
 ```mermaid
-stateDiagram-v2
-  state "Mới tạo, chưa có nhật ký" as A
-  state "Đang ghi nhật ký, hiện cảnh báo chờ xác minh" as B
-  state "Đã xác minh, hiện huy hiệu trên hộ chiếu" as C
-  [*] --> A: Thêm sản phẩm
-  A --> B: Lưu mốc đầu tiên
-  B --> B: Thêm mốc, ảnh, hồ sơ
-  B --> C: Đoàn bấm Xác minh
-  C --> B: Bỏ xác minh
+flowchart LR
+  A["Mới tạo, chưa có nhật ký"] -->|"Lưu mốc đầu tiên"| B["Đang ghi nhật ký, chờ xác minh"]
+  B -->|"Đoàn bấm Xác minh"| C["Đã xác minh"]
+  C -->|"Bỏ xác minh"| B
 ```
 
 ### 5. Kiến trúc mục tiêu khi có máy chủ (lộ trình)
 
 ```mermaid
 flowchart LR
-  subgraph CLIENT["Người dùng"]
-    F1["Nông hộ, tình nguyện viên"]
-    F2["Người mua"]
-    F3["Đơn vị quản lý"]
-  end
-  subgraph NEXT["Next.js trên Vercel"]
-    W["Giao diện và route API"]
-  end
-  subgraph SB["Supabase"]
-    AU["Auth và phân quyền theo vai trò"]
-    DB[("PostgreSQL<br/>sản phẩm, nhật ký, xác minh, lượt quét")]
-    SG[("Storage<br/>ảnh, video")]
-  end
-  LLM["Anthropic API"]
-  F1 --> W
-  F2 --> W
-  F3 --> W
-  W --> AU
-  W --> DB
-  W --> SG
-  W --> LLM
+  F1["Nông hộ, tình nguyện viên"] --> W["Next.js trên Vercel"]
+  F2["Người mua"] --> W
+  F3["Đơn vị quản lý"] --> W
+  W --> AU["Supabase Auth, phân quyền"]
+  W --> DB["PostgreSQL: sản phẩm, nhật ký, xác minh, lượt quét"]
+  W --> SG["Storage: ảnh, video"]
+  W --> LLM["Anthropic API"]
 ```
 
 ## Triển khai lên Vercel
