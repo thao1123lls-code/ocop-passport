@@ -18,11 +18,12 @@ Dự án dự thi **“Hành trình Vườn ươm ý tưởng số” TP. Đồn
 6. [Hướng dẫn dùng thử](#hướng-dẫn-dùng-thử)
 7. [Cấu trúc thư mục](#cấu-trúc-thư-mục)
 8. [Cách hệ thống hoạt động](#cách-hệ-thống-hoạt-động)
-9. [Triển khai lên Vercel](#triển-khai-lên-vercel)
-10. [Giới hạn hiện tại](#giới-hạn-hiện-tại)
-11. [Lộ trình phát triển](#lộ-trình-phát-triển)
-12. [Làm việc nhóm](#làm-việc-nhóm)
-13. [Xử lý sự cố](#xử-lý-sự-cố)
+9. [Sơ đồ hệ thống](#sơ-đồ-hệ-thống)
+10. [Triển khai lên Vercel](#triển-khai-lên-vercel)
+11. [Giới hạn hiện tại](#giới-hạn-hiện-tại)
+12. [Lộ trình phát triển](#lộ-trình-phát-triển)
+13. [Làm việc nhóm](#làm-việc-nhóm)
+14. [Xử lý sự cố](#xử-lý-sự-cố)
 
 ---
 
@@ -133,6 +134,123 @@ ocop-passport/
 - **Hiệu năng.** Ảnh nén còn tối đa 800 px; three.js và qrcode chỉ tải khi cần; cảnh 3D tạm dừng khi cuộn khỏi màn hình và tắt khi người dùng bật “giảm chuyển động”.
 - **Bảo mật.** Khóa API chỉ nằm ở máy chủ (`/api/generate`), không lộ ra trình duyệt. Link mua hàng chỉ chấp nhận `http(s)://`.
 - **Quyền riêng tư.** Hệ thống chưa thu thập thông tin cá nhân của người dùng; vị trí chỉ lấy khi bấm lưu và là tùy chọn.
+
+## Sơ đồ hệ thống
+
+> Các sơ đồ dưới đây dùng Mermaid, GitHub tự hiển thị khi xem README trên web.
+
+### 1. Kiến trúc hiện tại
+
+```mermaid
+flowchart LR
+  U1["Chủ cơ sở, nông hộ<br/>Tình nguyện viên Đoàn"]
+  U2["Người mua<br/>quét mã QR"]
+  U3["Đoàn xã, phường<br/>Đơn vị hỗ trợ OCOP"]
+  subgraph APP["Ứng dụng Next.js chạy trên trình duyệt"]
+    D["/diary<br/>Nhật ký số"]
+    P["/p/id<br/>Hộ chiếu số"]
+    S["/studio<br/>Trợ lý bán hàng"]
+    B["/dashboard<br/>Bảng điều khiển"]
+    ST[("lib/store.js<br/>localStorage")]
+  end
+  API["/api/generate<br/>route phía máy chủ"]
+  G["lib/guard.js<br/>Bộ lọc cảnh báo"]
+  AI["Anthropic API"]
+  TP["Mẫu câu dự phòng"]
+  U1 --> D
+  U1 --> S
+  D --> ST
+  ST --> P
+  ST --> S
+  ST --> B
+  S --> API
+  API -->|"có khóa API"| AI
+  API -->|"không có khóa"| TP
+  API --> G
+  U2 --> P
+  U3 --> B
+```
+
+### 2. Luồng sử dụng từ vườn đến người mua
+
+```mermaid
+sequenceDiagram
+  actor CS as Chủ cơ sở
+  participant ND as Nhật ký số
+  participant HC as Hộ chiếu số
+  participant AI as Trợ lý AI
+  actor DM as Đoàn xác minh
+  actor NM as Người mua
+  CS->>ND: Chọn mốc, chụp ảnh, nói vài câu
+  ND->>ND: Tự gắn thời gian và vị trí
+  ND->>HC: Cập nhật dòng thời gian
+  CS->>AI: Yêu cầu soạn nội dung bán hàng
+  AI-->>CS: Bản nháp
+  CS->>AI: Chỉnh sửa và bấm Duyệt
+  DM->>HC: Xác minh hộ chiếu
+  CS->>HC: Tải mã QR, in lên bao bì
+  NM->>HC: Quét mã QR
+  HC-->>NM: Hành trình, bản đồ, chứng nhận, câu chuyện
+  NM->>NM: Bấm nút mua hàng
+```
+
+### 3. Kiểm soát nội dung AI
+
+```mermaid
+flowchart TD
+  A["Nhật ký và hồ sơ sản phẩm"] --> B{"Có ANTHROPIC_API_KEY?"}
+  B -->|"Có"| C["AI soạn, chỉ dùng dữ kiện đã nhập"]
+  B -->|"Không"| D["Soạn bằng mẫu câu"]
+  C --> E["Bộ lọc cụm từ thổi phồng, tuyên bố y tế"]
+  D --> E
+  E --> F["Bản nháp, chờ duyệt"]
+  F --> G{"Còn cảnh báo?"}
+  G -->|"Còn"| H["Khóa nút Duyệt, chủ cơ sở sửa lại"]
+  H --> E
+  G -->|"Hết"| I["Chủ cơ sở bấm Duyệt"]
+  I --> J["Lưu trạng thái Đã duyệt, cho phép sao chép đăng bài"]
+```
+
+### 4. Vòng đời của một hộ chiếu số
+
+```mermaid
+stateDiagram-v2
+  state "Mới tạo, chưa có nhật ký" as A
+  state "Đang ghi nhật ký, hiện cảnh báo chờ xác minh" as B
+  state "Đã xác minh, hiện huy hiệu trên hộ chiếu" as C
+  [*] --> A: Thêm sản phẩm
+  A --> B: Lưu mốc đầu tiên
+  B --> B: Thêm mốc, ảnh, hồ sơ
+  B --> C: Đoàn bấm Xác minh
+  C --> B: Bỏ xác minh
+```
+
+### 5. Kiến trúc mục tiêu khi có máy chủ (lộ trình)
+
+```mermaid
+flowchart LR
+  subgraph CLIENT["Người dùng"]
+    F1["Nông hộ, tình nguyện viên"]
+    F2["Người mua"]
+    F3["Đơn vị quản lý"]
+  end
+  subgraph NEXT["Next.js trên Vercel"]
+    W["Giao diện và route API"]
+  end
+  subgraph SB["Supabase"]
+    AU["Auth và phân quyền theo vai trò"]
+    DB[("PostgreSQL<br/>sản phẩm, nhật ký, xác minh, lượt quét")]
+    SG[("Storage<br/>ảnh, video")]
+  end
+  LLM["Anthropic API"]
+  F1 --> W
+  F2 --> W
+  F3 --> W
+  W --> AU
+  W --> DB
+  W --> SG
+  W --> LLM
+```
 
 ## Triển khai lên Vercel
 
