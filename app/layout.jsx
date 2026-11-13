@@ -3,6 +3,7 @@ import PWA from "@/components/PWA";
 import NavBar from "@/components/NavBar";
 import ScrollReveal from "@/components/ScrollReveal";
 import ClientWidgets from "@/components/ClientWidgets";
+import LanguageTextSync from "@/components/LanguageTextSync";
 
 export const metadata = {
   title: {
@@ -33,6 +34,7 @@ export default function Root({ children }) {
       <body>
         <NavBar />
         {children}
+        <LanguageTextSync />
         <ScrollReveal />
         <ClientWidgets />
         <PWA />

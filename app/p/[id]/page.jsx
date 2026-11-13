@@ -9,11 +9,13 @@ import { useDB, STAGES, fmt, dec, fmtVND } from "@/lib/store";
 import ProductQR, { getPassportUrl } from "@/components/ProductQR";
 import JourneyShowcase from "@/components/JourneyShowcase";
 import FlavorRadar from "@/components/FlavorRadar";
+import { useLang } from "@/lib/i18n";
 
 // Dynamic load CartDrawer để đảm bảo trải nghiệm mua sắm đồng bộ
 const CartDrawer = dynamic(() => import("@/components/CartDrawer"), { ssr: false });
 
 export default function ProductDetailPage() {
+  const { lang } = useLang();
   const { id } = useParams();
   const [db, save] = useDB();
   const [q, setQ] = useState();
@@ -446,8 +448,8 @@ export default function ProductDetailPage() {
 
       {/* 3. PHÂN HỆ HÀNH TRÌNH TỪ VƯỜN ĐẾN TAY BẠN (CORE PASSPORT) */}
       <section style={{ marginTop: 36 }}>
-        <JourneyShowcase entries={p.entries || []} lang="vi" />
-        <FlavorRadar product={p} lang="vi" />
+        <JourneyShowcase entries={p.entries || []} lang={lang} />
+        <FlavorRadar product={p} lang={lang} />
 
         {/* Timeline nhật ký chi tiết */}
         <div className="card" style={{ marginTop: 24, padding: "24px 28px" }}>

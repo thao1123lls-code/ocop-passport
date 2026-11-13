@@ -5,6 +5,7 @@ import { useDB, STAGES, slug, uid, fmt, fmtVND } from "@/lib/store";
 import ProductQR from "@/components/ProductQR";
 import JourneyShowcase from "@/components/JourneyShowcase";
 import VoiceReactiveDotLoader from "@/components/VoiceReactiveDotLoader";
+import { useLang } from "@/lib/i18n";
 
 const shrink = (f) =>
   new Promise((ok) => {
@@ -48,6 +49,7 @@ const F = [
 ];
 
 export default function Diary() {
+  const { lang } = useLang();
   const [db, save] = useDB();
   const [pid, setPid] = useState("");
   const [productSearch, setProductSearch] = useState("");
@@ -499,7 +501,7 @@ export default function Diary() {
         <textarea id="story" value={p.story || ""} onChange={(e) => set("story", e.target.value)} />
       </details>
 
-      <JourneyShowcase entries={entries} lang="vi" />
+      <JourneyShowcase entries={entries} lang={lang} />
     </main>
   );
 }

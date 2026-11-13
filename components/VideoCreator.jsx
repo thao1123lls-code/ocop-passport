@@ -1,6 +1,8 @@
 "use client";
 import { useState, useRef } from "react";
 import { STAGES, fmtVND } from "@/lib/store";
+import { useLang } from "@/lib/i18n";
+import { translateUI } from "@/components/LanguageTextSync";
 
 const IDEAS = [
   "Khuyến mãi chốt đơn hôm nay",
@@ -68,6 +70,7 @@ function buildScenes(product, idea, customNote) {
 }
 
 export default function VideoCreator({ product }) {
+  const { lang } = useLang();
   const [idea, setIdea] = useState(IDEAS[0]);
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
@@ -77,7 +80,13 @@ export default function VideoCreator({ product }) {
   const canvasRef = useRef(null);
 
   if (!product) return null;
-  const scenes = buildScenes(product, idea, note);
+  const scenes = buildScenes(product, idea, note).map((scene) => ({
+    ...scene,
+    badge: translateUI(scene.badge, lang),
+    headline: translateUI(scene.headline, lang),
+    sub: translateUI(scene.sub, lang),
+    hook: translateUI(scene.hook, lang),
+  }));
 
   const speakPreview = () => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
@@ -86,7 +95,7 @@ export default function VideoCreator({ product }) {
       .map((s) => `${s.hook}. ${s.headline}. ${s.sub}`)
       .join(" ... ");
     const u = new SpeechSynthesisUtterance(script);
-    u.lang = "vi-VN";
+    u.lang = lang === "en" ? "en-US" : "vi-VN";
     u.rate = 1.05;
     window.speechSynthesis.speak(u);
   };
@@ -200,11 +209,11 @@ export default function VideoCreator({ product }) {
 
       ctx.fillStyle = "#FFDD00";
       ctx.font = "bold 15px system-ui, sans-serif";
-      ctx.fillText("★ OCOP PASSPORT ĐỒNG NAI", 42, 70);
+      ctx.fillText(translateUI("★ OCOP PASSPORT ĐỒNG NAI", lang), 42, 70);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 13px system-ui, sans-serif";
-      ctx.fillText(`LÔ ${product.lot || "0926"}`, W - 120, 70);
+      ctx.fillText(translateUI(`LÔ ${product.lot || "0926"}`, lang), W - 120, 70);
 
       // Hook Banner (Tiktok / Reels style headline)
       ctx.fillStyle = "#FFDD00";
@@ -233,11 +242,11 @@ export default function VideoCreator({ product }) {
 
         ctx.fillStyle = "#0278B3";
         ctx.font = "bold 18px system-ui, sans-serif";
-        ctx.fillText("QUÉT QR ĐỂ XEM HỘ CHIẾU & MUA", W / 2, boxY + 335);
+        ctx.fillText(translateUI("QUÉT QR ĐỂ XEM HỘ CHIẾU & MUA", lang), W / 2, boxY + 335);
 
         ctx.fillStyle = "#0F172A";
         ctx.font = "14px system-ui, sans-serif";
-        ctx.fillText("Giao hàng tận nơi · Kiểm tra nguồn gốc", W / 2, boxY + 375);
+        ctx.fillText(translateUI("Giao hàng tận nơi · Kiểm tra nguồn gốc", lang), W / 2, boxY + 375);
         ctx.textAlign = "left";
       } else if (img) {
         // Product / Diary photo
@@ -259,7 +268,7 @@ export default function VideoCreator({ product }) {
         ctx.fillRect(52, boxY + 20, 180, 34);
         ctx.fillStyle = "#FFFFFF";
         ctx.font = "bold 13px system-ui, sans-serif";
-        ctx.fillText("✓ ẢNH THẬT TẠI VƯỜN", 66, boxY + 42);
+        ctx.fillText(translateUI("✓ ẢNH THẬT TẠI VƯỜN", lang), 66, boxY + 42);
       } else {
         // Clean typographic product card
         ctx.fillStyle = "#FFFFFF";
@@ -286,7 +295,7 @@ export default function VideoCreator({ product }) {
 
         ctx.fillStyle = "#0278B3";
         ctx.font = "bold 16px system-ui, sans-serif";
-        ctx.fillText(`Cơ sở: ${product.farm || "Đồng Nai"}`, 64, boxY + 370);
+        ctx.fillText(translateUI(`Cơ sở: ${product.farm || "Đồng Nai"}`, lang), 64, boxY + 370);
       }
 
       // Bottom Commercial Caption Bar
@@ -311,7 +320,7 @@ export default function VideoCreator({ product }) {
       ctx.fillStyle = "#0F172A";
       ctx.font = "bold 16px system-ui, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("👉 BẤM ĐẶT HÀNG / QUÉT QR NGAY", W / 2, 916);
+      ctx.fillText(translateUI("👉 BẤM ĐẶT HÀNG / QUÉT QR NGAY", lang), W / 2, 916);
       ctx.textAlign = "left";
 
       setProgress(Math.min(100, Math.round((elapsed / totalMs) * 100)));
