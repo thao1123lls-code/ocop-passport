@@ -11,6 +11,19 @@ export default function NavBar() {
   const { lang, switchLang, t } = useLang();
   const [toastMsg, setToastMsg] = useState("");
   const toastTimeoutRef = useRef(null);
+  const navigationFallbackRef = useRef(null);
+
+  useEffect(() => {
+    if (navigationFallbackRef.current) {
+      clearTimeout(navigationFallbackRef.current);
+      navigationFallbackRef.current = null;
+    }
+  }, [path]);
+
+  useEffect(() => () => {
+    if (navigationFallbackRef.current) clearTimeout(navigationFallbackRef.current);
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+  }, []);
 
   useEffect(() => {
     const read = () => {
@@ -90,6 +103,12 @@ export default function NavBar() {
                 aria-label={label}
                 className={`nav-link${active ? " active" : ""}`}
                 aria-current={active ? "page" : undefined}
+                onClick={(event) => {
+                  if (active || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                  navigationFallbackRef.current = setTimeout(() => {
+                    if (window.location.pathname !== href) window.location.assign(href);
+                  }, 1400);
+                }}
               >
                 {label}
               </Link>
