@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Đăng Ký Chịu Tải Cao (High-Concurrency Form)</title>
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --success-bg: #f0fdf4;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 520px;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      border: 1px solid var(--border);
+    }
+
+    .header {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .badge-queue {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    input:disabled, select:disabled, textarea:disabled {
+      background-color: #f1f5f9;
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      background: var(--primary);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Spinner Animation */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Notification Cards */
+    .alert {
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .alert-success {
+      background: var(--success-bg);
+      border: 1px solid #bbf7d0;
+      color: var(--success);
+    }
+
+    .alert-danger {
+      background: var(--danger-bg);
+      border: 1px solid #fecaca;
+      color: var(--danger);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tracking-code {
+      font-family: monospace;
+      font-size: 13px;
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #0369a1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <div class="header">
+      <div class="badge-queue">
+        <span>⚡ Redis BullMQ Queue Active</span>
+      </div>
+      <h1>Đăng Ký Tham Gia Sự Kiện</h1>
+      <p>Hệ thống phân tán chịu tải cao, tiếp nhận tức thì không gián đoạn.</p>
+    </div>
+
+    <!-- Thông báo kết quả -->
+    <div id="alertSuccess" class="alert alert-success"></div>
+    <div id="alertDanger" class="alert alert-danger"></div>
+
+    <!-- Form thu thập thông tin -->
+    <form id="highLoadForm">
+      <div class="form-group">
+        <label for="fullName">Họ và tên *</label>
+        <input type="text" id="fullName" name="fullName" required placeholder="Nguyễn Văn A">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Địa chỉ Email *</label>
+        <input type="email" id="email" name="email" required placeholder="nguyenvana@gmail.com">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Số điện thoại *</label>
+        <input type="tel" id="phone" name="phone" required placeholder="0912 345 678">
+      </div>
+
+      <div class="form-group">
+        <label for="category">Hạng mục tham gia</label>
+        <select id="category" name="category">
+          <option value="OCOP_EXPO_VIP">Vé VIP Triển lãm OCOP Đồng Nai</option>
+          <option value="WORKSHOP_DIGITAL">Hội thảo Số hóa Nông nghiệp</option>
+          <option value="COMMUNITY_VOLUNTEER">Tình nguyện viên Đoàn số hóa</option>
+        </select>
+      </div>
+
+      <button type="submit" id="submitBtn" class="btn-submit">
+        <span id="btnText">Gửi Đăng Ký Ngay</span>
+        <span id="btnSpinner" class="spinner" style="display: none;"></span>
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // 1. Sinh UUID v4 làm Idempotency Key duy nhất cho phiên form này
+    function generateUUID() {
+      if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+        return crypto.randomUUID();
+      }
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+        const r = (Math.random() * 16) | 0;
+        return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+      });
+    }
+
+    let currentIdempotencyKey = generateUUID();
+
+    const form = document.getElementById("highLoadForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const btnText = document.getElementById("btnText");
+    const btnSpinner = document.getElementById("btnSpinner");
+    const alertSuccess = document.getElementById("alertSuccess");
+    const alertDanger = document.getElementById("alertDanger");
+
+    // Xóa thông báo
+    function clearAlerts() {
+      alertSuccess.style.display = "none";
+      alertDanger.style.display = "none";
+    }
+
+    // 2. Chặn Double Click và kích hoạt UI Loading ngay tức khắc
+    function setSubmittingState(isSubmitting) {
+      submitBtn.disabled = isSubmitting;
+      // Khóa toàn bộ các input để người dùng không chỉnh sửa trong lúc gửi
+      Array.from(form.elements).forEach(el => {
+        if (el !== submitBtn) el.disabled = isSubmitting;
+      });
+
+      if (isSubmitting) {
+        btnText.textContent = "Hệ thống đang tiếp nhận…";
+        btnSpinner.style.display = "inline-block";
+      } else {
+        btnText.textContent = "Gửi Đăng Ký Ngay";
+        btnSpinner.style.display = "none";
+      }
+    }
+
+    // 3. Xử lý gửi Form bất đồng bộ
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearAlerts();
+
+      // KHÓA NÚT NGAY LẬP TỨC (0ms)
+      setSubmittingState(true);
+
+      const payload = {
+        fullName: document.getElementById("fullName").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        category: document.getElementById("category").value,
+        idempotencyKey: currentIdempotencyKey,
+      };
+
+      try {
+        const response = await fetch("/api/submit-form", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Idempotency-Key": currentIdempotencyKey,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await response.json();
+
+        if (response.status === 202 && data.success) {
+          // THÀNH CÔNG: Tiếp nhận vào Queue
+          alertSuccess.innerHTML = `
+            <b>✓ Đã tiếp nhận đăng ký thành công!</b><br>
+            Hồ sơ của bạn đã được xếp vào hàng đợi xử lý ngầm an toàn.<br>
+            Mã định danh (Tracking ID): <span class="tracking-code">${data.trackingId}</span>
+          `;
+          alertSuccess.style.display = "block";
+
+          // Reset form và sinh key mới cho lần gửi tiếp theo
+          form.reset();
+          currentIdempotencyKey = generateUUID();
+
+          // Theo dõi trạng thái ngầm (Polling status)
+          pollJobStatus(data.trackingId);
+        } else {
+          throw new Error(data.error || "Có lỗi xảy ra khi gửi dữ liệu.");
+        }
+      } catch (err) {
+        alertDanger.innerHTML = `⚠️ <b>Lỗi kết nối:</b> ${err.message}<br>Mã giao dịch được giữ nguyên an toàn, bạn có thể bấm gửi lại.`;
+        alertDanger.style.display = "block";
+      } finally {
+        setSubmittingState(false);
+      }
+    });
+
+    // 4. Polling trạng thái ngầm từ Worker (Tùy chọn)
+    async function pollJobStatus(jobId) {
+      let attempts = 0;
+      const interval = setInterval(async () => {
+        attempts++;
+        if (attempts > 10) clearInterval(interval);
+
+        try {
+          const res = await fetch(`/api/form-status/${jobId}`);
+          const json = await res.json();
+          if (json.state === "completed") {
+            clearInterval(interval);
+            console.log(`[Status Tracker] Job ${jobId} đã được ghi vào Database hoàn tất!`);
+          }
+        } catch {}
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
