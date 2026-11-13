@@ -73,7 +73,18 @@ export default function NavBar() {
     <div className="topbar-wrap">
       <nav className="topbar" aria-label="Điều hướng chính">
         {/* Brand logo: Cyan rounded icon with black QR + OCOP Passport text */}
-        <Link className="brand" href="/" title="OCOP Passport">
+        <Link
+          className="brand"
+          href="/"
+          title="OCOP Passport"
+          aria-label="OCOP Passport — Trang chính"
+          onClick={(event) => {
+            if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || path === "/") return;
+            navigationFallbackRef.current = setTimeout(() => {
+              if (window.location.pathname !== "/") window.location.assign("/");
+            }, 1400);
+          }}
+        >
           <span className="brand-qr-box" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F172A" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="6" height="6" rx="1.5" />
