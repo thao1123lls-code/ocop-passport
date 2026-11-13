@@ -396,16 +396,19 @@ function repairVietnameseEncoding(value) {
 
 const normalizedTranslationMap = translationMap
   .map(([source, target]) => [repairVietnameseEncoding(source), target])
+  .filter(([source]) => source.length > 0)
   .sort(([a], [b]) => b.length - a.length);
+const translationLookup = new Map(normalizedTranslationMap);
+const translationPattern = new RegExp(
+  normalizedTranslationMap.map(([source]) => source.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"),
+  "g"
+);
 
 export function translateUI(value, lang) {
   if (!value) return value;
-  let result = repairVietnameseEncoding(value);
+  const result = repairVietnameseEncoding(value);
   if (lang !== "en") return result;
-  for (const [source, target] of normalizedTranslationMap) {
-    if (result.includes(source)) result = result.split(source).join(target);
-  }
-  return result;
+  return result.replace(translationPattern, (source) => translationLookup.get(source) ?? source);
 }
 
 function translateNode(node, lang) {

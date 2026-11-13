@@ -1,10 +1,12 @@
-const C = "ocop-v6";
-self.addEventListener("install", () => self.skipWaiting());
+const C = "ocop-v7";
+self.addEventListener("install", (e) =>
+  e.waitUntil(caches.open(C).then((cache) => cache.add("/offline.html")).then(() => self.skipWaiting()))
+);
 self.addEventListener("activate", (e) =>
   e.waitUntil(
     caches
       .keys()
-      .then((k) => Promise.all(k.map((x) => caches.delete(x))))
+      .then((k) => Promise.all(k.filter((x) => x.startsWith("ocop-v") && x !== C).map((x) => caches.delete(x))))
       .then(() => self.clients.claim())
   )
 );
@@ -20,10 +22,21 @@ self.addEventListener("fetch", (e) => {
   e.respondWith(
     fetch(r)
       .then((x) => {
-        const c = x.clone();
-        caches.open(C).then((h) => h.put(r, c));
+        if (x.ok && x.type === "basic" && !x.headers.get("Cache-Control")?.includes("no-store")) {
+          const c = x.clone();
+          e.waitUntil(caches.open(C).then((h) => h.put(r, c)).catch(() => {}));
+        }
         return x;
       })
-      .catch(() => caches.match(r).then((m) => m || caches.match("/diary")))
+      .catch(async () => {
+        const cache = await caches.open(C);
+        const cachedPage = await cache.match(r);
+        if (cachedPage) return cachedPage;
+        if (r.mode === "navigate") {
+          const offlinePage = await cache.match("/offline.html");
+          if (offlinePage) return offlinePage;
+        }
+        return Response.error();
+      })
   );
 });
