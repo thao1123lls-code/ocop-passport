@@ -1,0 +1,22 @@
+{
+  "name": "ocop-passport",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "db:seed": "node scripts/seed.mjs",
+    "db:gen-sql": "node scripts/gen-seed-sql.mjs",
+    "db:create-admin": "node scripts/create-admin.mjs",
+    "test:checkout": "node scripts/test-checkout.mjs"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "pg": "^8.23.1",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "0.128.0"
+  }
+}
