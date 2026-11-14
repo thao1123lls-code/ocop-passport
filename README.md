@@ -2,318 +2,318 @@
 
 **Hộ chiếu số giúp nông sản Đồng Nai minh bạch nguồn gốc, kể chuyện sản phẩm và bán được trên sàn thương mại điện tử.**
 
-Dự án dự thi **“Hành trình Vườn ươm ý tưởng số” TP. Đồng Nai 2026**, Bảng Sinh viên, chủ đề *Đô thị thông minh, kinh tế số Đồng Nai*.
+Dự án dự thi **“Hành trình Vườn ươm ý tưởng số” Tỉnh Đồng Nai 2026**, Bảng Sinh viên, chủ đề *Đô thị thông minh, kinh tế số Đồng Nai*.
 
 - **Nhóm tác giả:** Hoàng Phương Thảo, Trịnh Trần Thảo Nguyên, Bùi Kim Ngân
-- **Trường:** Đại học Công nghệ Đồng Nai
+- **Trường:** Đại học Công nghệ Đồng Nai (DNTU)
 
 ---
 
 ## Mục lục
-1. [Giới thiệu](#giới-thiệu)
-2. [Tính năng](#tính-năng)
-3. [Công nghệ](#công-nghệ)
-4. [Bắt đầu nhanh](#bắt-đầu-nhanh)
-5. [Biến môi trường](#biến-môi-trường)
-6. [Hướng dẫn dùng thử](#hướng-dẫn-dùng-thử)
-7. [Cấu trúc thư mục](#cấu-trúc-thư-mục)
-8. [Cách hệ thống hoạt động](#cách-hệ-thống-hoạt-động)
-9. [Sơ đồ hệ thống](#sơ-đồ-hệ-thống)
-10. [Triển khai lên Vercel](#triển-khai-lên-vercel)
-11. [Giới hạn hiện tại](#giới-hạn-hiện-tại)
-12. [Lộ trình phát triển](#lộ-trình-phát-triển)
-13. [Làm việc nhóm](#làm-việc-nhóm)
-14. [Xử lý sự cố](#xử-lý-sự-cố)
+1. [Giới thiệu](#1-giới-thiệu)
+2. [Tính năng chính](#2-tính-năng-chính)
+3. [Công nghệ sử dụng](#3-công-nghệ-sử-dụng)
+4. [Bắt đầu nhanh](#4-bắt-đầu-nhanh)
+5. [Cấu hình biến môi trường (.env.local)](#5-cấu-hình-biến-môi-trường-envlocal)
+6. [Tài khoản Demo & 20 Khách hàng mẫu](#6-tài-khoản-demo--20-khách-hàng-mẫu)
+7. [Phân quyền & Bảo mật hệ thống](#7-phân-quyền--bảo-mật-hệ-thống)
+8. [Sơ đồ kiến trúc hệ thống](#8-sơ-đồ-kiến-trúc-hệ-thống)
+9. [Cấu trúc thư mục](#9-cấu-trúc-thư-mục)
+10. [Hướng dẫn dùng thử (Kịch bản Demo)](#10-hướng-dẫn-dùng-thử-kịch-bản-demo)
+11. [Triển khai lên Vercel & Supabase](#11-triển-khai-lên-vercel--supabase)
+12. [Làm việc nhóm & Xử lý sự cố](#12-làm-việc-nhóm--xử-lý-sự-cố)
 
 ---
 
-## Giới thiệu
+## 1. Giới thiệu
 
-Hợp tác xã, cơ sở sản xuất OCOP và nông hộ nhỏ ở Đồng Nai đang vướng ba điểm nghẽn khi bán online: người mua thiếu niềm tin vào nguồn gốc, chủ cơ sở khó tự làm nội dung bán hàng, và dữ liệu sản xuất rời rạc. OCOP Passport giải quyết cả ba trong một quy trình, chạy ngay trên trình duyệt điện thoại, không cần cài đặt:
+Hợp tác xã, cơ sở sản xuất OCOP và nông hộ nhỏ ở Đồng Nai đang vướng ba điểm nghẽn khi bán hàng trực tuyến: người mua thiếu niềm tin vào nguồn gốc, chủ cơ sở khó tự làm nội dung bán hàng đa kênh, và dữ liệu sản xuất rời rạc. **OCOP Passport** giải quyết cả ba trong một quy trình khép kín, chạy ngay trên trình duyệt điện thoại mà không cần cài đặt ứng dụng:
 
-1. **Ghi nhật ký sản xuất** bằng ảnh và giọng nói.
-2. **Tạo hộ chiếu số** gắn mã QR in trên bao bì để người mua quét xem hành trình sản phẩm.
-3. **Soạn nội dung bán hàng bằng AI** từ chính dữ liệu thật trong nhật ký.
+1. **Ghi nhật ký sản xuất** bằng ảnh thực địa (tự động nén) và giọng nói tiếng Việt kèm tọa độ GPS.
+2. **Tạo hộ chiếu số động** gắn mã QR in trên bao bì để người mua quét xem trọn hành trình từ vườn đến bàn ăn.
+3. **Soạn nội dung bán hàng & dựng video bằng AI** từ chính dữ liệu thật trong nhật ký, có bộ lọc kiểm duyệt chống thổi phồng công dụng.
+4. **Đặt mua trực tiếp tận vườn** (kèm tính năng tự đóng Hộp quà OCOP tổ ong 7 món) với cơ chế bảo vệ chống tạo đơn trùng lặp (`Idempotency-Key`).
 
-Điểm khác biệt: không dừng ở “truy xuất”, mà **biến dữ liệu truy xuất thành lợi thế bán hàng**.
+Điểm khác biệt cốt lõi: Không dừng lại ở “truy xuất nguồn gốc”, mà **biến dữ liệu truy xuất thành lợi thế thương mại điện tử**.
 
-## Tính năng
+---
 
-| Phân hệ | Đường dẫn | Chức năng |
+## 2. Tính năng chính
+
+| Phân hệ | Đường dẫn | Chức năng chi tiết |
 |---|---|---|
-| Giới thiệu | `/` | Trang chủ có quả ca cao 3D, thẻ hộ chiếu mẫu nghiêng theo chuột, hiệu ứng cuộn |
-| Nhật ký số | `/diary` | Chọn 6 mốc (Gieo trồng, Chăm sóc, Thu hoạch, Sơ chế, Đóng gói, Xuất bán); chụp/chọn ảnh (tự nén); nhập giọng nói tiếng Việt; tự gắn thời gian và vị trí GPS; chế độ tình nguyện viên nhập hộ; bản ghi chỉ thêm, không sửa; dùng được khi mất mạng; quản lý hồ sơ sản phẩm |
-| Hộ chiếu số | `/p/[id]` | Trang công khai: dòng thời gian có ảnh, bản đồ vùng trồng (OpenStreetMap), chứng nhận, câu chuyện, thông tin sản phẩm, nút mua hàng, chia sẻ, song ngữ Việt - Anh, mã QR tải về |
-| Trợ lý bán hàng AI | `/studio` | Soạn mô tả sàn TMĐT, bài đăng mạng xã hội, kịch bản livestream 10 phút, bản tiếng Anh, hashtag và gợi ý giờ đăng; luôn là bản nháp chờ duyệt |
-| Bảng điều khiển | `/dashboard` | Số cơ sở, sản phẩm, mốc nhật ký; thanh tiến độ hoàn thiện; danh sách cơ sở cần hỗ trợ; xác minh hộ chiếu; xuất dữ liệu JSON |
+| **Gian hàng & Giới thiệu** | `/` | Cảnh 3D quả ca cao, thẻ hộ chiếu lật 2 mặt (Flip Card), gian hàng đặc sản Đồng Nai, đóng **Hộp quà OCOP tự chọn (7 ô lục giác)**, giỏ hàng tính phí ship tự động, chuyển đổi song ngữ Việt - Anh. |
+| **Nhật ký số sản xuất** | `/diary` | Chọn 6 công đoạn (*Gieo trồng, Chăm sóc, Thu hoạch, Sơ chế, Đóng gói, Xuất bán*); chụp ảnh (tự nén ≤ 800px); thu âm giọng nói nông hộ & nhận diện văn bản tiếng Việt; tự gắn giờ và tọa độ GPS; chế độ tình nguyện viên nhập hộ; **bản ghi chỉ thêm, không sửa (Immutable)**; lưu hàng đợi ngoại tuyến khi mất mạng. |
+| **Hộ chiếu số công khai** | `/p/[id]` | Dòng thời gian sản xuất có ảnh & file ghi âm giọng nói nông dân, biểu đồ 6 chiều hương vị (`FlavorRadar`), bản đồ vùng trồng (OpenStreetMap), chứng nhận OCOP, câu chuyện nhà vườn, tải mã QR độ nét cao để in tem. |
+| **Trợ lý bán hàng AI** | `/studio` | Tự động soạn mô tả sàn TMĐT, bài đăng Facebook/Zalo/TikTok, kịch bản livestream 10 phút, bản dịch tiếng Anh, hashtag; tích hợp trình dựng **Video quảng cáo dọc 9:16 (.webm)** có chèn sẵn mã QR và giá bán. |
+| **Đăng nhập & Tài khoản** | `/login` | Đăng nhập, đăng ký tài khoản (Chủ cơ sở, Tình nguyện viên, Khách hàng), đổi mật khẩu, tích hợp nút chọn nhanh tài khoản Demo 1 chạm. |
+| **Bảng điều khiển Admin** | `/dashboard` | Thống kê số HTX, sản phẩm, mốc nhật ký, tỷ lệ xác minh; thanh tiến độ hoàn thiện hồ sơ số; phát hiện cơ sở cần hỗ trợ; duyệt/bỏ xác minh hộ chiếu; chỉnh sửa giá nhanh; xuất bản sao lưu JSON. |
+| **Quản lý người dùng** | `/dashboard/users` | Quản lý danh sách tài khoản & 20+ khách hàng; lọc theo vai trò; duyệt tình nguyện viên chờ duyệt; đổi vai trò; khóa tài khoản; gán chủ sở hữu cho từng sản phẩm OCOP. |
 
-### Nguyên tắc kiểm soát nội dung AI
-- AI **chỉ viết dựa trên dữ liệu đã nhập**, không tự thêm công dụng, chứng nhận hay số liệu.
-- Mọi nội dung là **bản nháp**; chủ cơ sở xem và bấm **Duyệt** mới lưu.
-- Bộ lọc (`lib/guard.js`) cảnh báo cụm từ thổi phồng hoặc tuyên bố y tế (ví dụ “chữa bệnh”, “tốt nhất”, “100% an toàn”) và **khóa nút Duyệt** cho đến khi sửa.
+---
 
-## Công nghệ
+## 3. Công nghệ sử dụng
 
-- **Next.js 15** (App Router) và **React 19**
-- **three.js 0.128.0** cho hiệu ứng 3D (nạp lười, chỉ ở trang chủ)
-- **qrcode** để tạo mã QR (nạp lười, chỉ ở trang hộ chiếu)
-- **Anthropic API** (tùy chọn) cho trợ lý AI, gọi qua route phía máy chủ
-- **Web Speech API** nhận dạng giọng nói, **Geolocation API** lấy vị trí
-- **PWA**: manifest và service worker để dùng ngoại tuyến
-- Lưu trữ hiện tại: `localStorage` của trình duyệt
+- **Frontend:** Next.js 15 (App Router), React 19, Three.js 0.128.0 (đồ họa 3D), `qrcode` (tạo mã QR động).
+- **Backend & Database:** Next.js Route Handlers (`/api/*`), **Supabase (PostgreSQL Pool + REST API Fallback)**, giao dịch ACID & Row-Level Locking.
+- **Xác thực & Bảo mật:** Phiên đăng nhập Cookie `httpOnly` ký HMAC-SHA256, băm mật khẩu chuẩn `scrypt` (`node:crypto`), chống CSRF (kiểm tra `Origin`/`Host`), Rate Limiting chống brute-force.
+- **Trí tuệ nhân tạo & Đa phương tiện:** Anthropic Claude API (`claude-sonnet-5-5` kèm mẫu câu dự phòng), Web Speech API (nhận dạng giọng nói tiếng Việt), MediaRecorder API (ghi âm & kết xuất video `.webm` trên Canvas), Geolocation API.
+- **PWA & Offline-First:** Service Worker (`public/sw.js`), Web App Manifest, hàng đợi đồng bộ `localStorage` (`ocop-outbox-v1`) tự động đẩy dữ liệu lên Supabase khi có mạng trở lại.
 
-## Bắt đầu nhanh
+---
 
-**Yêu cầu:** Node.js 18.18 trở lên (khuyến nghị bản LTS 20+), npm.
+## 4. Bắt đầu nhanh
+
+**Yêu cầu hệ thống:** Node.js 18.18 trở lên (khuyến nghị Node.js 20 LTS), npm.
 
 ```bash
-git clone https://github.com/thao1123lls-code/ocop-passport.git
+# 1. Clone dự án từ GitHub
+git clone [https://github.com/thao1123lls-code/ocop-passport.git](https://github.com/thao1123lls-code/ocop-passport.git)
 cd ocop-passport
+
+# 2. Cài đặt thư viện
 npm install
-cp .env.example .env.local     # Windows CMD: copy .env.example .env.local
+
+# 3. Tạo file biến môi trường
+cp .env.example .env.local     # Trên Windows CMD: copy .env.example .env.local
+
+# 4. (Tùy chọn) Khởi tạo bảng & nạp dữ liệu mẫu lên PostgreSQL / Supabase
+npm run db:seed
+
+# 5. Chạy máy chủ phát triển
 npm run dev
 ```
 
-Mở http://localhost:3000.
+Mở trình duyệt tại: **http://localhost:3000**
 
 | Lệnh | Tác dụng |
 |---|---|
-| `npm run dev` | Chạy chế độ phát triển, tự tải lại khi sửa code |
-| `npm run build` | Build bản tối ưu (cần Internet để tải font lần đầu) |
-| `npm start` | Chạy bản đã build; chỉ ở chế độ này service worker mới bật |
+| `npm run dev` | Chạy chế độ phát triển (Hot Reload) tại `http://localhost:3000` |
+| `npm run build` | Đóng gói bản tối ưu cho môi trường Production |
+| `npm start` | Chạy bản Production (kích hoạt đầy đủ PWA Service Worker) |
+| `npm run db:seed` | Tạo bảng (`schema.sql`) và nạp 10 sản phẩm + 24 tài khoản + 8 đơn hàng mẫu |
+| `npm run db:gen-sql` | Sinh file `db/seed.sql` để dán trực tiếp vào Supabase SQL Editor |
+| `npm run db:create-admin` | Tạo nhanh hoặc đặt lại mật khẩu tài khoản Quản trị viên |
+| `npm run test:checkout` | Chạy bộ kiểm thử tự động logic đặt hàng & chống trừ tiền trùng (Idempotency) |
 
-## Biến môi trường
+---
 
-Tạo file `.env.local` (đã được `.gitignore` loại trừ, **không bao giờ commit file này**):
+## 5. Cấu hình biến môi trường (`.env.local`)
 
-| Biến | Bắt buộc | Mô tả |
-|---|---|---|
-| `ANTHROPIC_API_KEY` | Không | Khóa API để dùng AI thật. Bỏ trống thì trợ lý dùng mẫu câu có sẵn |
-| `ANTHROPIC_MODEL` | Không | Tên mô hình, mặc định `claude-sonnet-5-5` |
+Tạo file `.env.local` ở thư mục gốc của dự án (file này đã nằm trong `.gitignore`, tuyệt đối không commit lên Git):
 
-## Hướng dẫn dùng thử
+```env
+# 1. Kết nối Supabase (REST API & PostgreSQL)
+NEXT_PUBLIC_SUPABASE_URL=[https://ymymfizxwtgsujiopmnh.supabase.co](https://ymymfizxwtgsujiopmnh.supabase.co)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
-1. Vào **Nhật ký số**, chọn mốc “Thu hoạch”, gõ hoặc bấm **Nói bằng giọng nói**, thêm ảnh, bấm **Lưu**.
-2. Mở **Hồ sơ sản phẩm** để điền khối lượng, thành phần, chứng nhận, câu chuyện, link gian hàng.
-3. Bấm **Xem hộ chiếu số và mã QR**: chuyển song ngữ, tải mã QR về in tem.
-4. Vào **Trợ lý bán hàng**, bấm **Soạn nội dung từ nhật ký**, chỉnh sửa rồi **Duyệt**.
-5. Vào **Bảng điều khiển**, bấm **Xác minh hộ chiếu** để bỏ cảnh báo “chờ xác minh”.
+# Chuỗi kết nối PostgreSQL trực tiếp (Tùy chọn - nếu để trống hệ thống tự động dùng Supabase REST API + Bộ nhớ dự phòng)
+DATABASE_URL=postgresql://postgres.ymymfizxwtgsujiopmnh:[YOUR-DB-PASSWORD]@[aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres](https://aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres)
+DATABASE_SSL=true
 
-> Micro và GPS chỉ hoạt động trên `localhost` hoặc HTTPS. Nhận dạng giọng nói cần Chrome hoặc Edge.
+# 2. Bảo mật phiên đăng nhập (Tối thiểu 16 ký tự)
+SESSION_SECRET=ocop-passport-supabase-secret-key-2026-dongnai
+CHECKOUT_REQUIRE_LOGIN=false
 
-## Cấu trúc thư mục
-
+# 3. Trợ lý AI Anthropic (Tùy chọn - bỏ trống hệ thống tự dùng mẫu câu chuẩn)
+ANTHROPIC_API_KEY=
+ANTHROPIC_MODEL=claude-sonnet-5-5
 ```
-ocop-passport/
+
+---
+
+## 6. Tài khoản Demo & 20 Khách hàng mẫu
+
+Hệ thống đã tích hợp sẵn **4 tài khoản Demo theo từng vai trò** và **20 tài khoản Khách hàng mẫu** (hoạt động ngay cả khi chạy chế độ dự phòng hoặc trên Supabase):
+
+### 6.1. 4 Tài khoản Demo chính (Mật khẩu chung: `Demo@12345`)
+
+| Vai trò | Email đăng nhập | Mật khẩu | Đường dẫn sử dụng | Quyền hạn |
+|---|---|---|---|---|
+| **Quản trị viên (`admin`)** | `admin@ocop.vn` | `Demo@12345` | `/dashboard` & `/dashboard/users` | Toàn quyền xác minh OCOP, sửa giá, duyệt/khóa tài khoản, gán chủ sở hữu. |
+| **Chủ cơ sở (`owner`)** | `owner@ocop.vn` | `Demo@12345` | `/login` → `/diary`, `/studio` | Tạo sản phẩm mới, ghi nhật ký, sửa sản phẩm của mình, duyệt bài AI. |
+| **Tình nguyện viên (`volunteer`)** | `volunteer@ocop.vn` | `Demo@12345` | `/login` → `/diary` | Ghi nhật ký sản xuất hộ nông dân cho mọi sản phẩm (gắn nhãn Đoàn viên). |
+| **Khách hàng Demo** | `demo@ocop.vn` | `Demo@12345` | `/login` hoặc `/dashboard` | Trải nghiệm đặt hàng, đóng hộp quà, tra cứu QR và xem bảng điều khiển. |
+
+### 6.2. 20 Tài khoản Khách hàng mẫu (Mật khẩu chung: `Khachhang@123`)
+- **Danh sách Email:** Từ `nguyenvanan01@gmail.com` đến `baongoc.phan20@gmail.com` (xem chi tiết toàn bộ họ tên, số điện thoại, địa chỉ tại trang `/dashboard/users` hoặc trong `lib/db.js`).
+- **Mật khẩu chung:** `Khachhang@123`
+
+---
+
+## 7. Phân quyền & Bảo mật hệ thống
+
+### 7.1. Ma trận phân quyền theo vai trò
+
+| Thao tác trên hệ thống | Khách | `volunteer` | `owner` | `admin` |
+|---|:---:|:---:|:---:|:---:|
+| Xem gian hàng, hộ chiếu số, quét QR, đặt mua COD | ✓ | ✓ | ✓ | ✓ |
+| Thêm mốc nhật ký sản xuất (kèm ảnh, ghi âm, GPS) | | ✓ *(mọi SP)* | ✓ *(SP của mình)* | ✓ |
+| Tạo sản phẩm OCOP mới | | | ✓ | ✓ |
+| Sửa thông tin, xóa sản phẩm, soạn & duyệt nội dung AI | | | ✓ *(SP của mình)* | ✓ |
+| Xác minh / Bỏ xác minh chuẩn OCOP trên hộ chiếu | | | | ✓ |
+| Quản lý người dùng, duyệt tình nguyện viên, gán chủ sở hữu | | | | ✓ |
+
+### 7.2. Nguyên tắc bảo vệ dữ liệu, đơn hàng & nội dung AI
+- **Nhật ký bất biến (Append-Only):** Bảng `diary_entries` có Trigger PostgreSQL (`forbid_entry_update`) chặn mọi lệnh `UPDATE` sửa đổi nội dung nhật ký cũ, đảm bảo tính minh bạch tuyệt đối khi truy xuất.
+- **Tính tiền phía Máy chủ & Chống tạo đơn trùng (`Idempotency-Key`):**
+  - `POST /api/checkout` bỏ qua mọi mức giá do trình duyệt gửi lên và tự truy vấn lại bảng `products` để tính tổng tiền chính xác.
+  - Bắt buộc đính kèm `Idempotency-Key` (UUID v4). Nếu mạng chập chờn khiến người mua bấm gửi lặp lại cùng một giỏ hàng, hệ thống trả về lại đúng mã đơn cũ (`isDuplicatePrevented: true`) mà không tạo đơn thứ 2.
+- **Kiểm soát nội dung AI (`lib/guard.js`):**
+  - AI chỉ được phép viết dựa trên dữ kiện thật có trong nhật ký sản xuất.
+  - Tự động quét và cảnh báo các cụm từ thổi phồng hoặc tuyên bố y tế trái phép (ví dụ: *“chữa khỏi”, “thần dược”, “tốt nhất”, “số 1”, “100% an toàn”*) và **khóa nút Duyệt** cho đến khi chủ cơ sở chỉnh sửa hợp lệ.
+
+---
+
+## 8. Sơ đồ kiến trúc hệ thống
+
+### 8.1. Kiến trúc tổng thể Full-Stack (Next.js + Supabase + AI)
+
+```mermaid
+flowchart LR
+  U1["Chủ cơ sở & Tình nguyện viên"] --> D["Nhật ký số (/diary)"]
+  U1 --> S["Trợ lý AI (/studio)"]
+  U2["Người mua hàng"] --> HOME["Gian hàng & Hộp quà (/)"]
+  U2 --> P["Hộ chiếu số (/p/[id])"]
+  U3["Quản trị viên OCOP"] --> B["Bảng điều khiển (/dashboard)"]
+
+  D --> STORE["lib/store.js (Offline Queue + Sync)"]
+  HOME --> CK["POST /api/checkout (Idempotent)"]
+  S --> GEN["POST /api/generate"]
+  B --> ADM["/api/admin/users & /orders"]
+
+  STORE --> API["/api/products & /entries"]
+  API --> DB[("Supabase PostgreSQL / REST")]
+  CK --> DB
+  ADM --> DB
+  GEN --> GUARD["Bộ lọc từ cấm (lib/guard.js)"]
+  GEN --> CLAUDE["Anthropic Claude API / Mẫu câu"]
+```
+
+### 8.2. Luồng hoạt động từ vườn trồng đến tay người tiêu dùng
+
+```mermaid
+sequenceDiagram
+  participant CS as Chủ cơ sở / TNV
+  participant ND as Nhật ký số (/diary)
+  participant DB as Supabase DB
+  participant AI as Trợ lý AI (/studio)
+  participant AD as Quản trị OCOP (/dashboard)
+  participant NM as Người mua
+
+  CS->>ND: Chụp ảnh, thu âm giọng nói, gắn GPS tại vườn
+  ND->>DB: Lưu mốc nhật ký (Append-only)
+  CS->>AI: Yêu cầu tạo bài đăng & video quảng cáo 9:16
+  AI->>CS: Trả bản nháp (đã qua bộ lọc từ cấm)
+  CS->>DB: Duyệt và lưu nội dung bán hàng
+  AD->>DB: Kiểm tra hồ sơ & Xác minh Hộ chiếu OCOP
+  CS->>ND: Tải mã QR in lên bao bì sản phẩm
+  NM->>DB: Quét mã QR xem Hộ chiếu số & Đặt mua tận vườn
+```
+
+---
+
+## 9. Cấu trúc thư mục
+
+```text
+ocop-passport-main/
 ├── app/
-│   ├── layout.jsx            # Khung chung, font, metadata SEO, thanh điều hướng
-│   ├── globals.css           # Giao diện (tự đổi sáng/tối)
-│   ├── page.jsx              # Trang chủ
-│   ├── diary/page.jsx        # Nhật ký số
-│   ├── p/[id]/page.jsx       # Hộ chiếu số công khai
-│   ├── studio/page.jsx       # Trợ lý bán hàng AI
-│   ├── dashboard/page.jsx    # Bảng điều khiển
-│   └── api/generate/route.js # API soạn nội dung (gọi Anthropic hoặc dùng mẫu câu)
+│   ├── layout.jsx                     # Khung giao diện chung, SEO, NavBar, Widgets
+│   ├── globals.css                    # Hệ thống thiết kế Dark Cyber Slate
+│   ├── page.jsx                       # Trang chủ (Hero 3D, Gian hàng, Hộp quà, Công cụ)
+│   ├── login/page.jsx                 # Trang đăng nhập, đăng ký & chọn nhanh Demo
+│   ├── diary/page.jsx                 # Nhật ký sản xuất số (Ảnh, Giọng nói, GPS)
+│   ├── p/[id]/page.jsx                # Trang Hộ chiếu số công khai & Bản đồ hương vị
+│   ├── studio/page.jsx                # Trợ lý bán hàng AI & Tạo video quảng cáo 9:16
+│   ├── dashboard/
+│   │   ├── page.jsx                   # Bảng điều khiển quản trị & Xác minh OCOP
+│   │   └── users/page.jsx             # Quản lý người dùng, 20 khách hàng & Gán chủ SP
+│   └── api/
+│       ├── auth/{login,register,logout,me,password}/route.js
+│       ├── products/route.js          # GET/POST danh sách sản phẩm
+│       ├── products/[id]/route.js     # GET/PATCH/DELETE sản phẩm
+│       ├── products/[id]/entries/route.js # POST thêm mốc nhật ký
+│       ├── checkout/route.js          # POST đặt hàng chống trùng lặp (Idempotent)
+│       ├── generate/route.js          # POST soạn nội dung AI
+│       └── admin/{users,orders}/route.js
 ├── components/
-│   ├── Hero.jsx              # Phần đầu trang chủ và thẻ hộ chiếu nghiêng 3D
-│   ├── Hero3D.jsx            # Cảnh three.js (quả ca cao, hạt bay)
-│   └── PWA.jsx               # Đăng ký service worker, thanh tiến trình, hiệu ứng cuộn
+│   ├── Hero.jsx & Hero3D.jsx          # Banner 3D & Thẻ hộ chiếu lật 2 mặt
+│   ├── StorefrontHome.jsx             # Gian hàng, bộ lọc, Modal chi tiết & QR
+│   ├── GiftBoxBuilder.jsx             # Đóng hộp quà OCOP lục giác 7 món
+│   ├── CartDrawer.jsx                 # Giỏ hàng trượt & Thanh tiến trình Freeship
+│   ├── VoiceReactiveDotLoader.jsx     # Bộ thu âm giọng nói phản hồi sóng âm
+│   ├── VideoCreator.jsx               # Dựng video quảng cáo 9:16 (.webm)
+│   ├── FlavorRadar.jsx                # Biểu đồ 6 chiều hương vị sản phẩm
+│   └── JourneyShowcase.jsx            # Trình chiếu 6 chặng hành trình sản xuất
+├── db/
+│   ├── schema.sql                     # Cấu trúc bảng PostgreSQL / Supabase
+│   ├── seed-data.mjs                  # Dữ liệu mẫu (10 sản phẩm, 24 user, 8 đơn hàng)
+│   └── seed.sql                       # File SQL tổng hợp để chạy trên Supabase
 ├── lib/
-│   ├── store.js              # Lưu trữ dữ liệu, hằng số mốc sản xuất, mã hóa link QR
-│   └── guard.js              # Bộ lọc cụm từ quảng cáo vi phạm
-├── public/                   # manifest, service worker, biểu tượng
+│   ├── db.js                          # Kết nối Dual-Mode (PG Pool + Supabase REST + Fallback)
+│   ├── auth.js & auth-client.js       # Quản lý phiên đăng nhập HMAC & Hook useAuth()
+│   ├── password.mjs                   # Mã hóa và kiểm tra mật khẩu scrypt
+│   ├── checkout.mjs & idempotency.mjs # Nghiệp vụ tính tiền server & chống trùng đơn
+│   ├── store.js                       # Đồng bộ dữ liệu & hàng đợi ngoại tuyến
+│   ├── guard.js                       # Bộ lọc từ ngữ quảng cáo vi phạm
+│   └── i18n.js                        # Từ điển song ngữ Việt - Anh
+├── scripts/
+│   ├── seed.mjs                       # Script nạp dữ liệu tự động vào DB
+│   ├── create-admin.mjs               # Script tạo tài khoản Admin từ CLI
+│   └── test-checkout.mjs              # Kiểm thử tự động hệ thống thanh toán
+├── high-concurrency-form/             # Phân hệ mở rộng: Web Form chịu tải cao (BullMQ + Redis)
+├── public/                            # Hình ảnh sản phẩm, icon, manifest, service worker
 ├── .env.example
 └── package.json
 ```
 
-## Cách hệ thống hoạt động
+---
 
-- **Mã QR không cần máy chủ.** Link trong QR chứa bản rút gọn của hồ sơ (không kèm ảnh), mã hóa trong tham số `?d=`. Vì vậy quét trên bất kỳ máy nào cũng mở được hộ chiếu. Khi có cơ sở dữ liệu thật, link sẽ chỉ cần mã sản phẩm và tem in sẵn vẫn dùng được.
-- **Bản ghi chỉ thêm, không sửa.** Mỗi mốc lưu kèm giờ, vị trí và người nhập (chủ cơ sở hay tình nguyện viên) để hạn chế chỉnh dữ liệu về sau.
-- **Ngoại tuyến.** Service worker lưu đệm các trang đã mở; dữ liệu nhập khi mất mạng nằm sẵn trên máy.
-- **Hiệu năng.** Ảnh nén còn tối đa 800 px; three.js và qrcode chỉ tải khi cần; cảnh 3D tạm dừng khi cuộn khỏi màn hình và tắt khi người dùng bật “giảm chuyển động”.
-- **Bảo mật.** Khóa API chỉ nằm ở máy chủ (`/api/generate`), không lộ ra trình duyệt. Link mua hàng chỉ chấp nhận `http(s)://`.
-- **Quyền riêng tư.** Hệ thống chưa thu thập thông tin cá nhân của người dùng; vị trí chỉ lấy khi bấm lưu và là tùy chọn.
+## 10. Hướng dẫn dùng thử (Kịch bản Demo)
 
-## Sơ đồ hệ thống
+1. **Đăng nhập Quản trị viên:** Mở `/dashboard`, nhập `admin@ocop.vn` / `Demo@12345` để xem thống kê toàn tỉnh, bấm **“Quản lý người dùng”** (`/dashboard/users`) để kiểm tra danh sách 24 tài khoản (4 Demo + 20 Khách hàng).
+2. **Ghi nhật ký bằng giọng nói & ảnh:** Mở `/diary`, chọn sản phẩm *“Bột Ca cao nguyên chất Trọng Đức”*, chọn công đoạn *“Thu hoạch”*, bấm nút Micro nói vài câu tiếng Việt, tải ảnh lên và bấm **“Lưu vào nhật ký”**.
+3. **Quét QR & Xem Hộ chiếu số:** Bấm **“Mở hộ chiếu số”** (`/p/bot-ca-cao-nguyen-chat-trong-duc`), nghe lại đoạn ghi âm vừa nói, xem biểu đồ hương vị 6 chiều, chuyển thử sang Tiếng Anh (`EN`) ở góc trên phải và tải mã QR về máy.
+4. **Tạo nội dung & Video quảng cáo AI:** Mở `/studio`, bấm **“Soạn nội dung từ nhật ký”**, kiểm tra bộ lọc từ cấm và bấm **“Duyệt nội dung”**. Cuộn xuống mục **AI Dựng Video (9:16)**, bấm **“Tạo video quảng cáo ngay (.webm)”** để xem và tải video.
+5. **Đóng hộp quà & Đặt hàng chống trùng:** Về trang chủ `/`, cuộn xuống mục **“Tự tay đóng hộp quà”**, chọn 7 món đặc sản vào tổ ong, viết lời chúc và thêm vào giỏ. Mở giỏ hàng và đặt mua để nhận mã đơn hàng bảo vệ bởi `Idempotency-Key`.
 
-> Các sơ đồ dưới đây dùng Mermaid, GitHub tự hiển thị khi xem README trên web.
+---
 
-### 1. Kiến trúc hiện tại
+## 11. Triển khai lên Vercel & Supabase
 
-```mermaid
-flowchart LR
-  U1["Chủ cơ sở và tình nguyện viên"] --> D["Nhật ký số"]
-  U1 --> S["Trợ lý bán hàng AI"]
-  D --> ST["Kho dữ liệu localStorage"]
-  ST --> P["Hộ chiếu số"]
-  ST --> S
-  ST --> B["Bảng điều khiển"]
-  S --> API["API soạn nội dung"]
-  API --> G["Bộ lọc cảnh báo"]
-  API --> AI["Anthropic API"]
-  API --> TP["Mẫu câu dự phòng"]
-  U2["Người mua quét QR"] --> P
-  U3["Đoàn xã, phường"] --> B
-```
+1. **Trên Supabase (`https://supabase.com`):**
+   - Mở **SQL Editor**, dán nội dung file `db/schema.sql` và `db/seed.sql` vào rồi bấm **Run**.
+   - Lấy `Project URL`, `anon public key` (trong *Project Settings → API*) và `Connection string URI` (trong *Project Settings → Database*).
+2. **Trên Vercel (`https://vercel.com`):**
+   - Đăng nhập bằng GitHub, chọn **Add New → Project** và import repository `ocop-passport`.
+   - Tại mục **Environment Variables**, thêm các biến: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `DATABASE_URL`, `DATABASE_SSL=true`, `SESSION_SECRET`, và `ANTHROPIC_API_KEY` (nếu có).
+   - Bấm **Deploy**. Vercel sẽ cấp tên miền có sẵn HTTPS giúp Micro và định vị GPS hoạt động hoàn hảo trên mọi thiết bị di động.
 
-### 2. Luồng sử dụng từ vườn đến người mua
+---
 
-```mermaid
-sequenceDiagram
-  participant CS as Chủ cơ sở
-  participant ND as Nhật ký số
-  participant HC as Hộ chiếu số
-  participant AI as Trợ lý AI
-  participant DM as Đoàn xác minh
-  participant NM as Người mua
-  CS->>ND: Chọn mốc, chụp ảnh, nói vài câu
-  ND->>HC: Cập nhật dòng thời gian
-  CS->>AI: Yêu cầu soạn nội dung
-  AI->>CS: Trả bản nháp
-  CS->>AI: Chỉnh sửa và duyệt
-  DM->>HC: Xác minh hộ chiếu
-  CS->>HC: Tải mã QR và in lên bao bì
-  NM->>HC: Quét mã QR
-  HC->>NM: Hành trình, bản đồ, chứng nhận
-```
+## 12. Làm việc nhóm & Xử lý sự cố
 
-### 3. Kiểm soát nội dung AI
-
-```mermaid
-flowchart TD
-  A["Nhật ký và hồ sơ sản phẩm"] --> B{"Có khóa API"}
-  B -->|"Có"| C["AI soạn, chỉ dùng dữ kiện đã nhập"]
-  B -->|"Không"| D["Soạn bằng mẫu câu"]
-  C --> E["Bộ lọc cụm từ thổi phồng"]
-  D --> E
-  E --> F["Bản nháp chờ duyệt"]
-  F --> G{"Còn cảnh báo"}
-  G -->|"Còn"| H["Khóa nút Duyệt, sửa lại"]
-  H --> E
-  G -->|"Hết"| I["Chủ cơ sở bấm Duyệt"]
-  I --> J["Lưu Đã duyệt và cho sao chép"]
-```
-
-### 4. Vòng đời của một hộ chiếu số
-
-```mermaid
-flowchart LR
-  A["Mới tạo, chưa có nhật ký"] -->|"Lưu mốc đầu tiên"| B["Đang ghi nhật ký, chờ xác minh"]
-  B -->|"Đoàn bấm Xác minh"| C["Đã xác minh"]
-  C -->|"Bỏ xác minh"| B
-```
-
-### 5. Kiến trúc mục tiêu khi có máy chủ (lộ trình)
-
-```mermaid
-flowchart LR
-  F1["Nông hộ, tình nguyện viên"] --> W["Next.js trên Vercel"]
-  F2["Người mua"] --> W
-  F3["Đơn vị quản lý"] --> W
-  W --> AU["Supabase Auth, phân quyền"]
-  W --> DB["PostgreSQL: sản phẩm, nhật ký, xác minh, lượt quét"]
-  W --> SG["Storage: ảnh, video"]
-  W --> LLM["Anthropic API"]
-```
-
-## Triển khai lên Vercel
-
-1. Đẩy mã lên GitHub.
-2. Vào vercel.com, đăng nhập bằng GitHub, chọn **Add New → Project** và chọn repo này.
-3. Thêm biến `ANTHROPIC_API_KEY` ở mục **Environment Variables** (nếu muốn dùng AI thật).
-4. Bấm **Deploy**. Từ đó mỗi lần `git push` trang tự cập nhật, và có HTTPS để dùng micro, GPS trên điện thoại.
-
-## Đặt hàng (checkout) và trợ lý AI: cách bảo vệ
-
-- **`POST /api/checkout`**: tạo đơn trong PostgreSQL (bảng `orders`, `order_items`). **Giá và tổng tiền do server tính** từ bảng `products`, giá client gửi lên bị bỏ qua; nếu tổng khác hệ thống thì trả 409 kèm `serverTotal`. Hộp quà tự chọn gửi kèm `contents` (danh sách id sản phẩm) để server tính giá.
-- **Chống tạo đơn trùng**: bắt buộc header `Idempotency-Key`. Cùng key + cùng giỏ hàng thì trả lại đơn cũ (`isDuplicatePrevented: true`); cùng key nhưng giỏ khác thì 422; lỗi giữa chừng thì rollback và có thể gửi lại cùng key.
-- **Danh tính** lấy từ cookie phiên, không tin header client. Mặc định cho phép khách vãng lai đặt hàng; đặt `CHECKOUT_REQUIRE_LOGIN=true` để bắt buộc đăng nhập.
-- **Chưa tích hợp cổng thanh toán**: đơn ở trạng thái `pending`, thu tiền khi giao (COD). Admin xem đơn qua `GET /api/admin/orders`.
-- **`POST /api/generate`** chỉ cho chủ cơ sở / admin đang hoạt động, tối đa 20 lần mỗi giờ mỗi tài khoản.
-- Chạy `npm run db:seed` để tạo thêm các bảng mới. Kiểm thử logic đặt hàng không cần DB: `npm run test:checkout`.
-- Lưu ý: giới hạn số lần gọi (`tooMany`) lưu trong RAM của từng instance, khi chạy nhiều instance/serverless nên chuyển sang Redis.
-
-## Giới hạn hiện tại
-
-Đây là bản chạy được các chức năng cốt lõi, **chưa có máy chủ lưu trữ**:
-
-- Dữ liệu sản phẩm và nhật ký lưu ở PostgreSQL (xem mục “Cơ sở dữ liệu PostgreSQL và đăng nhập”); ảnh và ghi âm hiện còn lưu dạng base64 trong DB, nên khi nhiều dữ liệu cần chuyển sang Storage.
-- Bảng điều khiển chỉ thấy dữ liệu trên thiết bị đang dùng, chưa đếm được lượt quét mã.
-- Ảnh chỉ hiện trên máy đã chụp; mã QR chỉ mang dữ liệu chữ. Dung lượng lưu ảnh bị giới hạn bởi trình duyệt.
-- Chưa có nhận dạng giọng nói khi trình duyệt không hỗ trợ (vẫn nhập tay được).
-- Bản tiếng Anh khi chưa có API key chỉ dịch tên các mốc, không dịch lời kể.
-- Nút xác minh hiện ai cũng bấm được; cần phân quyền để chỉ đơn vị có thẩm quyền xác minh.
-
-## Lộ trình phát triển
-
-- [ ] Thay `lib/store.js` bằng **Supabase**: đăng nhập, phân quyền theo vai trò, bảng dữ liệu dùng chung
-- [ ] Lưu ảnh trên máy chủ và hiển thị ảnh trên hộ chiếu với mọi người xem
-- [ ] Đếm lượt quét mã, thống kê theo thời gian cho bảng điều khiển
-- [ ] Lịch sử chỉnh sửa và băm dữ liệu để chống sửa số liệu
-- [ ] Quy trình xác minh có chữ ký của Đoàn xã, phường hoặc đơn vị hỗ trợ OCOP
-- [ ] Soạn nội dung theo chuẩn riêng từng sàn (Shopee, TikTok Shop, Zalo)
-- [ ] Mã QR động trỏ về mã sản phẩm (không nhúng dữ liệu vào link)
-- [ ] Biểu tượng ứng dụng PNG để cài lên màn hình chính điện thoại
-
-## Làm việc nhóm
-
+### Quy trình Git cho nhóm
 ```bash
-git pull                         # lấy code mới nhất
-git checkout -b ten-tinh-nang    # mỗi người một nhánh riêng
-git add . && git commit -m "Mo ta thay doi"
-git push -u origin ten-tinh-nang # rồi tạo Pull Request trên GitHub
+git pull origin main                   # Lấy code mới nhất về máy
+git checkout -b feat/ten-tinh-nang     # Tạo nhánh riêng khi phát triển tính năng mới
+git add .
+git commit -m "feat: mo ta thay doi"
+git push -u origin feat/ten-tinh-nang
 ```
 
-Không commit `.env.local`, `node_modules/`, `.next/`.
+### Bảng xử lý sự cố nhanh
 
-## Xử lý sự cố
-
-| Vấn đề | Cách xử lý |
+| Vấn đề gặp phải | Cách khắc phục |
 |---|---|
-| `npm` không nhận diện | Cài Node.js, đóng hẳn rồi mở lại VS Code |
-| Cổng 3000 đang bận | `npm run dev -- -p 3001` |
-| Micro hoặc GPS không hoạt động | Dùng `localhost` hoặc HTTPS; cho phép quyền trong trình duyệt |
-| Không thấy hiệu ứng 3D | Trình duyệt tắt WebGL hoặc bật “giảm chuyển động” (thiết kế có chủ đích) |
-| Trợ lý AI báo “mẫu câu” | Chưa điền `ANTHROPIC_API_KEY` hoặc key không hợp lệ; trang vẫn chạy bằng mẫu câu |
-| Mất dữ liệu demo | Dữ liệu lưu trong trình duyệt; xóa dữ liệu trang hoặc dùng cửa sổ ẩn danh sẽ về mặc định |
-| `npm run build` lỗi tải font | Cần kết nối Internet lúc build |
+| Báo lỗi khi đăng nhập trên máy mới | Đảm bảo đã cập nhật `lib/db.js`, `lib/auth.js` và `app/api/auth/login/route.js` bản mới nhất (tích hợp sẵn 24 tài khoản dự phòng). Ở trang `/dashboard` nhớ dùng `admin@ocop.vn` / `Demo@12345`. |
+| Cổng 3000 đang bị ứng dụng khác chiếm | Chạy lệnh `npm run dev -- -p 3001` để mở ở cổng 3001. |
+| Micro hoặc GPS không hoạt động | Chỉ hoạt động trên `http://localhost` hoặc tên miền có `https://`. Hãy cấp quyền Micro/Vị trí cho trình duyệt (khuyến nghị dùng Chrome hoặc Edge). |
+| Git báo lỗi `Filename too long` trên Windows | Mở PowerShell chạy `git config --global core.longpaths true`. |
+| Trợ lý AI báo “Soạn bằng mẫu câu” | Bạn chưa điền `ANTHROPIC_API_KEY` trong `.env.local` — hệ thống tự động chuyển sang bộ mẫu câu thông minh để không làm gián đoạn trải nghiệm. |
 
-## Giấy phép
+---
 
-Chưa chọn giấy phép. Vui lòng liên hệ nhóm tác giả trước khi sử dụng lại mã nguồn.
-## Cơ sở dữ liệu PostgreSQL và đăng nhập (backend)
+## Bản quyền
 
-```bash
-npm install
-cp .env.example .env.local      # điền DATABASE_URL và SESSION_SECRET
-npm run db:seed                 # tạo bảng + nạp 10 sản phẩm mẫu (chạy lại nhiều lần vẫn an toàn)
-npm run db:create-admin -- admin@ocop.vn "MatKhauDai123" "Quản trị"   # tài khoản quản trị đầu tiên
-npm run dev
-```
-
-Frontend (`lib/store.js`) giờ đọc và ghi qua API. Khi mất mạng, thay đổi nằm trong hàng đợi trên máy và tự gửi lại khi có mạng. Nếu chưa cấu hình DB, trang vẫn chạy bằng dữ liệu mẫu có sẵn nhưng không lưu lên máy chủ.
-
-**Vai trò và quyền**
-
-| Thao tác | Khách | `volunteer` | `owner` | `admin` |
-|---|:-:|:-:|:-:|:-:|
-| Xem sản phẩm, hộ chiếu số, quét QR | ✓ | ✓ | ✓ | ✓ |
-| Thêm mốc nhật ký | | ✓ (mọi sản phẩm, gắn nhãn "tình nguyện viên") | ✓ (sản phẩm của mình) | ✓ |
-| Tạo sản phẩm | | | ✓ | ✓ |
-| Sửa, xóa, duyệt nội dung AI | | | ✓ (sản phẩm của mình) | ✓ |
-| Xác minh hộ chiếu | | | | ✓ |
-| Gán chủ sở hữu, duyệt/khóa tài khoản, đổi vai trò (`/dashboard/users`) | | | | ✓ |
-
-**Trạng thái tài khoản:** `active` (hoạt động), `pending` (chờ duyệt), `disabled` (đã khóa).
-- Chủ cơ sở đăng ký xong dùng được ngay. **Tình nguyện viên đăng ký xong ở trạng thái chờ duyệt**, admin duyệt mới ghi được nhật ký.
-- Tài khoản bị khóa mất hiệu lực ngay (kể cả phiên đang đăng nhập). Admin không tự hạ quyền hay tự khóa mình, và hệ thống luôn giữ ít nhất một admin hoạt động.
-- `admin` chỉ tạo bằng `npm run db:create-admin`. Sản phẩm mẫu chưa có chủ nên chỉ admin sửa được, cho tới khi admin gán chủ sở hữu ở `/dashboard/users`.
-
-**Tệp chính**
-- `db/schema.sql`: bảng `users`, `products`, `diary_entries` (nhật ký chỉ thêm, trigger chặn UPDATE nội dung).
-- `db/seed-data.mjs`: dữ liệu mẫu. Sửa/thêm sản phẩm ở đây rồi chạy lại `npm run db:seed`. `npm run db:gen-sql` sinh `db/seed.sql` để dán vào Supabase SQL Editor.
-- `lib/auth.js`, `lib/password.mjs`: phiên đăng nhập (cookie httpOnly ký HMAC, 7 ngày), băm mật khẩu scrypt, chặn gọi chéo trang, giới hạn số lần đăng nhập sai.
-- API: `/api/auth/{register,login,logout,me,password}`, `GET/POST /api/products`, `GET/PATCH/DELETE /api/products/[id]`, `POST /api/products/[id]/entries`, `GET /api/admin/users`, `PATCH /api/admin/users/[id]`.
-
-**Khi triển khai thật:** đặt `SESSION_SECRET` ngẫu nhiên từ 16 ký tự (bắt buộc ở production), bật `DATABASE_SSL=true` nếu dùng Supabase/Neon.
+© 2026 Nhóm tác giả **Hoàng Phương Thảo, Trịnh Trần Thảo Nguyên, Bùi Kim Ngân** — Trường Đại học Công nghệ Đồng Nai (DNTU). Vui lòng liên hệ nhóm tác giả trước khi sử dụng lại mã nguồn cho mục đích thương mại.
