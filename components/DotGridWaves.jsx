@@ -69,7 +69,7 @@ export default function DotGridWaves({
     };
 
     const draw = (now) => {
-      const idle = "rgba(255, 255, 255, 0.18)";
+      const idle = "rgba(147, 197, 253, 0.5)";
       cx.clearRect(0, 0, W, H);
 
       waves = waves.filter((w) => now - w.t < 2600);
@@ -88,13 +88,13 @@ export default function DotGridWaves({
 
         const m = Math.max(-1, Math.min(1.6, h));
         const r = 1.6 + Math.max(0, m) * 3.4;
-        const hue = 230 - Math.max(0, m) * 110;
+        const hue = 215 - Math.max(0, m) * 35;
         const calm = Math.abs(m) < 0.04;
 
         cx.globalAlpha = calm ? 0.45 : 1;
         cx.fillStyle = calm
           ? idle
-          : `hsl(${hue.toFixed(0)} 85% ${(58 - Math.min(0, m) * 10).toFixed(0)}%)`;
+          : `hsl(${hue.toFixed(0)} 70% ${(72 - Math.min(0, m) * 6).toFixed(0)}%)`;
 
         cx.beginPath();
         cx.arc(d[0], d[1] - m * 3, r, 0, 6.2832);

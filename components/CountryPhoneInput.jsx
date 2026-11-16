@@ -136,71 +136,71 @@ export default function CountryPhoneInput({
       <style jsx>{`
         .u209 {
           position: relative;
-          color: var(--ux-ink, #0F172A);
-          --ux-page: var(--bg, #F0F7FC);
-          --ux-surface: var(--panel, #FFFFFF);
-          --ux-surface-2: var(--blue-soft, #E6F5FD);
-          --ux-surface-3: #E0F2FE;
-          --ux-ink: var(--ink, #0F172A);
-          --ux-ink-2: var(--ink-2, #334155);
-          --ux-ink-3: var(--mute, #64748B);
-          --ux-line: var(--line, #E2E8F0);
-          --ux-line-2: var(--line-strong, #CBD5E1);
-          --ux-accent: var(--blue, #0297DE);
-          --ux-accent-2: var(--blue, #0284C7);
-          --ux-accent-soft: rgba(2, 151, 222, 0.12);
-          --ux-accent-ink: #FFFFFF;
-          --ux-mint: var(--ok, #0D9488);
-          --ux-warn: #D97706;
-          --ux-danger: #EF4444;
-          --ux-glass: rgba(255, 255, 255, 0.85);
-          --ux-glass-line: rgba(255, 255, 255, 0.95);
-          --ux-shadow: rgba(15, 23, 42, 0.08);
-          --ux-shadow-strong: rgba(2, 120, 179, 0.22);
+          color: var(--ux-ink, #17324D);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-accent-ink: #17324D;
+          --ux-mint: #93C5FD;
+          --ux-warn: #1E40AF;
+          --ux-danger: #1E40AF;
+          --ux-glass: rgba(255, 255, 255, 0.9);
+          --ux-glass-line: rgba(29, 78, 216, 0.2);
+          --ux-shadow: rgba(52, 112, 153, 0.1);
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
         }
 
         @media (prefers-color-scheme: dark) {
           :global(:root:not([data-theme="light"])) .u209 {
-            --ux-page: #0B1120;
-            --ux-surface: #1E293B;
-            --ux-surface-2: #0F172A;
-            --ux-surface-3: #334155;
-            --ux-ink: #F8FAFC;
-            --ux-ink-2: #CBD5E1;
-            --ux-ink-3: #94A3B8;
-            --ux-line: rgba(255, 255, 255, 0.1);
-            --ux-line-2: rgba(255, 255, 255, 0.18);
-            --ux-accent: #38BDF8;
-            --ux-accent-2: #60A5FA;
-            --ux-accent-soft: rgba(56, 189, 248, 0.15);
-            --ux-accent-ink: #0F172A;
-            --ux-mint: #34D399;
-            --ux-warn: #FBBF24;
-            --ux-danger: #F87171;
-            --ux-shadow: rgba(0, 0, 0, 0.4);
-            --ux-shadow-strong: rgba(0, 0, 0, 0.7);
+            --ux-page: #EFF6FF;
+            --ux-surface: #FFFFFF;
+            --ux-surface-2: #F7FAFF;
+            --ux-surface-3: #EAF2FF;
+            --ux-ink: #17324D;
+            --ux-ink-2: #35536E;
+            --ux-ink-3: #577189;
+            --ux-line: rgba(29, 78, 216, 0.14);
+            --ux-line-2: rgba(29, 78, 216, 0.24);
+            --ux-accent: #93C5FD;
+            --ux-accent-2: #1E40AF;
+            --ux-accent-soft: rgba(147, 197, 253, 0.18);
+            --ux-accent-ink: #17324D;
+            --ux-mint: #93C5FD;
+            --ux-warn: #1E40AF;
+            --ux-danger: #1E40AF;
+            --ux-shadow: rgba(52, 112, 153, 0.1);
+            --ux-shadow-strong: rgba(52, 112, 153, 0.16);
           }
         }
 
         :global(:root[data-theme="dark"]) .u209 {
-          --ux-page: #0B1120;
-          --ux-surface: #1E293B;
-          --ux-surface-2: #0F172A;
-          --ux-surface-3: #334155;
-          --ux-ink: #F8FAFC;
-          --ux-ink-2: #CBD5E1;
-          --ux-ink-3: #94A3B8;
-          --ux-line: rgba(255, 255, 255, 0.1);
-          --ux-line-2: rgba(255, 255, 255, 0.18);
-          --ux-accent: #38BDF8;
-          --ux-accent-2: #60A5FA;
-          --ux-accent-soft: rgba(56, 189, 248, 0.15);
-          --ux-accent-ink: #0F172A;
-          --ux-mint: #34D399;
-          --ux-warn: #FBBF24;
-          --ux-danger: #F87171;
-          --ux-shadow: rgba(0, 0, 0, 0.4);
-          --ux-shadow-strong: rgba(0, 0, 0, 0.7);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-accent-ink: #17324D;
+          --ux-mint: #93C5FD;
+          --ux-warn: #1E40AF;
+          --ux-danger: #1E40AF;
+          --ux-shadow: rgba(52, 112, 153, 0.1);
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
         }
 
         /* Standalone gallery card mode */
@@ -260,11 +260,11 @@ export default function CountryPhoneInput({
         }
 
         .u209.is-ok .u209-fd {
-          box-shadow: inset 0 0 0 2px #10B981;
+          box-shadow: inset 0 0 0 2px #93C5FD;
         }
 
         .u209.is-bad .u209-fd {
-          box-shadow: inset 0 0 0 2px #F59E0B;
+          box-shadow: inset 0 0 0 2px #3B82F6;
         }
 
         .u209-cc {
@@ -348,7 +348,7 @@ export default function CountryPhoneInput({
         }
 
         .u209-ck circle {
-          fill: #10B981;
+          fill: #3B82F6;
           transform: scale(0);
           transform-origin: center;
           transform-box: fill-box;
@@ -357,7 +357,7 @@ export default function CountryPhoneInput({
 
         .u209-ck path {
           fill: none;
-          stroke: #fff;
+          stroke: #17324D;
           stroke-width: 2.2;
           stroke-linecap: round;
           stroke-linejoin: round;
@@ -379,7 +379,7 @@ export default function CountryPhoneInput({
           overflow: hidden;
           font-size: 11px;
           font-weight: 700;
-          color: #B45309;
+          color: #1E40AF;
           transition: height 0.25s, margin 0.25s;
         }
 
@@ -485,7 +485,7 @@ export default function CountryPhoneInput({
           border: 0;
           border-radius: 13px;
           background: var(--ux-accent);
-          color: #fff;
+          color: #17324D;
           font: inherit;
           font-size: 13.5px;
           font-weight: 850;

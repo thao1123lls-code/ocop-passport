@@ -79,7 +79,7 @@ function LoginInner() {
           <input type="password" placeholder={mode === "login" ? "Mật khẩu" : "Mật khẩu (từ 8 ký tự)"} value={f.password} onChange={set("password")} required minLength={mode === "login" ? undefined : 8} autoComplete={mode === "login" ? "current-password" : "new-password"} />
           <button className="btn" type="submit" disabled={busy}>{busy ? "Đang xử lý…" : mode === "login" ? "Đăng nhập" : "Đăng ký"}</button>
         </form>
-        {msg && <p role="alert" style={{ color: "#F87171", marginTop: 12 }}>{msg}</p>}
+        {msg && <p role="alert" style={{ color: "#1E40AF", marginTop: 12 }}>{msg}</p>}
         <p style={{ marginTop: 16 }}>
           {mode === "login" ? "Chưa có tài khoản? " : "Đã có tài khoản? "}
           <button type="button" className="alt btn" onClick={() => { setMode(mode === "login" ? "register" : "login"); setMsg(""); }}>

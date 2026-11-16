@@ -63,16 +63,16 @@ export default function StretchingPagination({
     <div className="ux u043" aria-label="Phân trang danh mục sản phẩm">
       <style jsx>{`
         .u043 {
-          --ux-page: #0F172A;
-          --ux-surface: #1E293B;
-          --ux-surface-2: #131D2E;
-          --ux-surface-3: rgba(255, 255, 255, 0.08);
-          --ux-ink: #38BDF8;
-          --ux-ink-2: #F8FAFC;
-          --ux-ink-3: #94A3B8;
-          --ux-line: rgba(255, 255, 255, 0.08);
-          --ux-accent: #38BDF8;
-          --ux-shadow-strong: rgba(0, 0, 0, 0.5);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-accent: #93C5FD;
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
           --ux-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
           --ux-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
 
@@ -95,8 +95,8 @@ export default function StretchingPagination({
           gap: 6px;
           padding: 6px 10px;
           border-radius: 999px;
-          background: #1E293B;
-          border: 1.5px solid rgba(255, 255, 255, 0.12);
+          background: #FFFFFF;
+          border: 1.5px solid rgba(29, 78, 216, 0.2);
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
           width: fit-content;
           margin: 0 auto;
@@ -115,7 +115,7 @@ export default function StretchingPagination({
           background: transparent;
           font-size: 14.5px;
           font-weight: 750;
-          color: #CBD5E1;
+          color: #35536E;
           font-variant-numeric: tabular-nums;
           transition: background-color 0.2s, color 0.2s, transform 0.15s;
           cursor: pointer;
@@ -124,18 +124,18 @@ export default function StretchingPagination({
         }
 
         .u043-pg:hover:not([aria-current="page"]) {
-          background: rgba(56, 189, 248, 0.15);
-          color: #38BDF8;
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
           transform: scale(1.08);
         }
 
         /* Khi chọn: Có hình tròn màu xanh bao quanh số, số màu xanh đen đậm siêu rõ */
         .u043-pg[aria-current="page"] {
-          background: #38BDF8 !important;
-          color: #0F172A !important;
+          background: #93C5FD !important;
+          color: #17324D !important;
           font-weight: 900;
           border-radius: 50%;
-          box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+          box-shadow: 0 0 14px rgba(147, 197, 253, 0.6);
           transform: scale(1.06);
         }
 
@@ -148,9 +148,9 @@ export default function StretchingPagination({
           border: 0;
           padding: 0;
           border-radius: 50%;
-          background: #131D2E;
-          color: #38BDF8;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #F7FAFF;
+          color: #1E40AF;
+          border: 1px solid rgba(29, 78, 216, 0.14);
           display: grid;
           place-items: center;
           transition: transform 0.2s, background-color 0.15s, opacity 0.2s;
@@ -158,9 +158,9 @@ export default function StretchingPagination({
         }
 
         .u043-ar:hover:not([aria-disabled="true"]) {
-          background: rgba(56, 189, 248, 0.2);
+          background: rgba(147, 197, 253, 0.2);
           transform: scale(1.08);
-          color: #7DD3FC;
+          color: #1E40AF;
         }
 
         .u043-ar:active {
@@ -185,7 +185,7 @@ export default function StretchingPagination({
 
         .u043-pg:focus-visible,
         .u043-ar:focus-visible {
-          outline: 2px solid #0284C7;
+          outline: 2px solid #3B82F6;
           outline-offset: 2px;
         }
 

@@ -133,20 +133,20 @@ export default function TiltingValueBubbleSlider({
     >
       <style jsx>{`
         .u017 {
-          --ux-page: var(--bg, #F8FAFC);
-          --ux-surface: var(--panel, #FFFFFF);
-          --ux-surface-2: var(--blue-soft, #F0F9FF);
-          --ux-surface-3: var(--line, #E2E8F0);
-          --ux-ink: var(--ink, #0F172A);
-          --ux-ink-2: var(--ink-2, #334155);
-          --ux-ink-3: var(--mute, #64748B);
-          --ux-line: var(--line, #E2E8F0);
-          --ux-line-2: var(--line-strong, #CBD5E1);
-          --ux-accent: var(--blue, #0284C7);
-          --ux-accent-2: #0297DE;
-          --ux-accent-soft: rgba(2, 132, 199, 0.12);
-          --ux-accent-ink: #FFFFFF;
-          --ux-shadow-strong: rgba(15, 23, 42, 0.28);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-accent-ink: #17324D;
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
           --ux-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
           --ux-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
 
@@ -198,7 +198,7 @@ export default function TiltingValueBubbleSlider({
           bottom: 0;
           width: calc(var(--v) * 100%);
           border-radius: inherit;
-          background: linear-gradient(90deg, #0284C7, #0297DE 60%, #38BDF8);
+          background: linear-gradient(90deg, #93C5FD, #93C5FD 60%, #93C5FD);
         }
 
         .u017-fill::after {
@@ -219,7 +219,7 @@ export default function TiltingValueBubbleSlider({
           border-radius: 50%;
           background: #ffffff;
           cursor: grab;
-          box-shadow: 0 0 0 3px #0284C7, 0 8px 18px -6px rgba(2, 132, 199, 0.5);
+          box-shadow: 0 0 0 3px #3B82F6, 0 8px 18px -6px rgba(29, 78, 216, 0.5);
           transition: transform 0.35s var(--ux-spring), box-shadow 0.3s var(--ux-ease);
         }
 
@@ -230,12 +230,12 @@ export default function TiltingValueBubbleSlider({
         .u017.is-drag .u017-thumb {
           cursor: grabbing;
           transform: scale(1.15);
-          box-shadow: 0 0 0 3px #0284C7, 0 0 0 10px rgba(2, 132, 199, 0.18), 0 8px 18px -6px rgba(2, 132, 199, 0.5);
+          box-shadow: 0 0 0 3px #3B82F6, 0 0 0 10px rgba(29, 78, 216, 0.18), 0 8px 18px -6px rgba(29, 78, 216, 0.5);
         }
 
         .u017-thumb:focus-visible {
           outline: none;
-          box-shadow: 0 0 0 3px #0284C7, 0 0 0 8px rgba(2, 132, 199, 0.35);
+          box-shadow: 0 0 0 3px #3B82F6, 0 0 0 8px rgba(29, 78, 216, 0.35);
         }
 
         .u017-bub {
@@ -258,7 +258,7 @@ export default function TiltingValueBubbleSlider({
           padding: 8px 14px;
           border-radius: 14px;
           background: var(--ux-ink);
-          color: #ffffff;
+          color: #17324D;
           font-size: 15px;
           font-weight: 750;
           letter-spacing: -0.02em;

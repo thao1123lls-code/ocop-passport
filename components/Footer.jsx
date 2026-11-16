@@ -14,7 +14,7 @@ export default function Footer() {
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <path
             d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"
-            fill="#FBBF24"
+            fill="#1D4ED8"
             opacity="0.85"
           />
         </svg>
@@ -23,7 +23,7 @@ export default function Footer() {
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
           <path
             d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"
-            fill="#FDE68A"
+            fill="#DBEAFE"
             opacity="0.75"
           />
         </svg>
@@ -41,7 +41,7 @@ export default function Footer() {
                   height="18"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#070B14"
+                  stroke="#EFF6FF"
                   strokeWidth="2.4"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -49,9 +49,9 @@ export default function Footer() {
                   <rect x="3" y="3" width="7" height="7" rx="1.5" />
                   <rect x="14" y="3" width="7" height="7" rx="1.5" />
                   <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                  <path d="M14 14h3v3h-3z" fill="#070B14" />
-                  <path d="M17 17h4v4h-4z" fill="#070B14" />
-                  <path d="M14 20h3v1h-3z" fill="#070B14" />
+                  <path d="M14 14h3v3h-3z" fill="#EFF6FF" />
+                  <path d="M17 17h4v4h-4z" fill="#EFF6FF" />
+                  <path d="M14 20h3v1h-3z" fill="#EFF6FF" />
                 </svg>
               </div>
               <span className="logo-text">
@@ -145,7 +145,7 @@ export default function Footer() {
                     height="17"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#00E5FF"
+                    stroke="#93C5FD"
                     strokeWidth="2.1"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -165,7 +165,7 @@ export default function Footer() {
                     height="17"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#00E5FF"
+                    stroke="#93C5FD"
                     strokeWidth="2.1"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -200,12 +200,12 @@ export default function Footer() {
         .site-custom-footer {
           position: relative;
           width: 100%;
-          background-color: #070B14;
+          background-color: #EFF6FF;
           background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
           background-size: 28px 28px;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(29, 78, 216, 0.14);
           padding: 38px 36px 24px;
-          color: #94A3B8;
+          color: #577189;
           font-size: 14px;
           overflow: hidden;
         }
@@ -274,28 +274,28 @@ export default function Footer() {
           width: 32px;
           height: 32px;
           border-radius: 8px;
-          background: #00E5FF;
+          background: #93C5FD;
           display: grid;
           place-items: center;
-          box-shadow: 0 0 14px rgba(0, 229, 255, 0.5);
+          box-shadow: 0 0 14px rgba(147, 197, 253, 0.5);
           flex-shrink: 0;
         }
 
         .logo-text {
           font-size: 17px;
           font-weight: 850;
-          color: #FFFFFF;
+          color: #17324D;
           letter-spacing: -0.01em;
         }
 
         .logo-accent {
-          color: #00E5FF;
+          color: #1E40AF;
         }
 
         .footer-desc {
           margin: 0;
           line-height: 1.6;
-          color: #94A3B8;
+          color: #577189;
           font-size: 13.5px;
           max-width: 440px;
         }
@@ -310,9 +310,9 @@ export default function Footer() {
           width: 36px;
           height: 36px;
           border-radius: 9px;
-          background: #101726;
+          background: #EFF6FF;
           border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #94A3B8;
+          color: #577189;
           display: grid;
           place-items: center;
           text-decoration: none;
@@ -320,18 +320,18 @@ export default function Footer() {
         }
 
         .social-btn:hover {
-          background: #162033;
-          border-color: rgba(0, 229, 255, 0.4);
-          color: #00E5FF;
+          background: #F7FAFF;
+          border-color: rgba(147, 197, 253, 0.4);
+          color: #1E40AF;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+          box-shadow: 0 4px 12px rgba(147, 197, 253, 0.2);
         }
 
         /* Column Titles */
         .col-title {
           font-size: 13.5px;
           font-weight: 850;
-          color: #FFFFFF;
+          color: #17324D;
           letter-spacing: 0.05em;
           text-transform: uppercase;
           margin: 0 0 18px;
@@ -347,7 +347,7 @@ export default function Footer() {
         }
 
         .col-links li a {
-          color: #94A3B8;
+          color: #577189;
           text-decoration: none;
           font-size: 13.5px;
           transition: color 0.2s ease;
@@ -355,7 +355,7 @@ export default function Footer() {
         }
 
         .col-links li a:hover {
-          color: #00E5FF;
+          color: #1E40AF;
         }
 
         /* Column 4: Contact */
@@ -382,7 +382,7 @@ export default function Footer() {
         }
 
         .contact-text {
-          color: #94A3B8;
+          color: #577189;
           font-size: 13.5px;
           line-height: 1.55;
         }
@@ -391,7 +391,7 @@ export default function Footer() {
         .footer-bottom {
           margin-top: 30px;
           padding-top: 18px;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(29, 78, 216, 0.14);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -422,7 +422,7 @@ export default function Footer() {
         }
 
         .policy-link:hover {
-          color: #00E5FF;
+          color: #1E40AF;
         }
 
         /* Responsive Breakpoints */

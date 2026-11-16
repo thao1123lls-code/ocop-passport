@@ -43,16 +43,16 @@ export default function ScrollToTop() {
           width: 48px;
           height: 48px;
           border-radius: 50%;
-          border: 1.5px solid rgba(2, 151, 222, 0.28);
+          border: 1.5px solid rgba(29, 78, 216, 0.28);
           background: rgba(255, 255, 255, 0.94);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          color: var(--blue, #0297DE);
+          color: var(--blue-dark, #1E40AF);
           display: grid;
           place-items: center;
           cursor: pointer;
           box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.12),
-                      0 4px 12px rgba(2, 151, 222, 0.14);
+                      0 4px 12px rgba(29, 78, 216, 0.14);
           opacity: 0;
           pointer-events: none;
           transform: translateY(14px) scale(0.85);
@@ -71,11 +71,11 @@ export default function ScrollToTop() {
         }
 
         .scroll-to-top-btn:hover {
-          background: var(--blue, #0297DE);
-          color: #ffffff;
-          border-color: var(--blue, #0297DE);
+          background: var(--blue, #93C5FD);
+          color: #17324D;
+          border-color: var(--blue, #3B82F6);
           transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 14px 30px -4px rgba(2, 132, 199, 0.35);
+          box-shadow: 0 14px 30px -4px rgba(29, 78, 216, 0.35);
         }
 
         .scroll-to-top-btn:active {
@@ -83,7 +83,7 @@ export default function ScrollToTop() {
         }
 
         .scroll-to-top-btn:focus-visible {
-          outline: 2px solid var(--blue, #0297DE);
+          outline: 2px solid var(--blue, #3B82F6);
           outline-offset: 3px;
         }
 
@@ -93,6 +93,13 @@ export default function ScrollToTop() {
             right: 80px;
             width: 44px;
             height: 44px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .scroll-to-top-btn {
+            bottom: calc(76px + env(safe-area-inset-bottom));
+            right: 80px;
           }
         }
 

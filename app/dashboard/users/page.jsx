@@ -64,7 +64,7 @@ export default function UsersAdmin() {
       {msg && <p role="status" style={{ margin: "0 0 12px" }}>{msg}</p>}
 
       <div className="card" style={{ overflowX: "auto" }}>
-        <h3 style={{ marginTop: 0 }}>Tài khoản ({users.length}){pending > 0 && <span style={{ color: "#FBBF24" }}> · {pending} chờ duyệt</span>}</h3>
+        <h3 style={{ marginTop: 0 }}>Tài khoản ({users.length}){pending > 0 && <span style={{ color: "#1E40AF" }}> · {pending} chờ duyệt</span>}</h3>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr><th style={th}>Họ tên</th><th style={th}>Email</th><th style={th}>Vai trò</th><th style={th}>Trạng thái</th><th style={th}>Sản phẩm / Mốc</th><th style={th}></th></tr>
@@ -81,7 +81,7 @@ export default function UsersAdmin() {
                       {Object.entries(ROLE_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                     </select>
                   </td>
-                  <td style={{ ...td, color: u.status === "active" ? "#34D399" : u.status === "pending" ? "#FBBF24" : "#F87171" }}>{STATUS_LABEL[u.status]}</td>
+                  <td style={{ ...td, color: u.status === "active" ? "#1E40AF" : u.status === "pending" ? "#1E40AF" : "#1E40AF" }}>{STATUS_LABEL[u.status]}</td>
                   <td style={td}>{u.products} / {u.entries}</td>
                   <td style={{ ...td, whiteSpace: "nowrap" }}>
                     {u.status !== "active" && <button className="btn" onClick={() => patch(`/api/admin/users/${u.id}`, { status: "active" }, u.status === "pending" ? "Đã duyệt tài khoản." : "Đã mở khóa.")}>{u.status === "pending" ? "Duyệt" : "Mở khóa"}</button>}

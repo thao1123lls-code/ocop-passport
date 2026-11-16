@@ -176,73 +176,73 @@ export default function SupportChatBubble() {
           bottom: 24px;
           right: 24px;
           z-index: 55;
-          --ux-page: var(--bg, #F0F7FC);
-          --ux-surface: var(--panel, #FFFFFF);
-          --ux-surface-2: var(--blue-soft, #E6F5FD);
-          --ux-surface-3: #E0F2FE;
-          --ux-ink: var(--ink, #0F172A);
-          --ux-ink-2: var(--ink-2, #334155);
-          --ux-ink-3: var(--mute, #64748B);
-          --ux-line: var(--line, #E2E8F0);
-          --ux-line-2: var(--line-strong, #CBD5E1);
-          --ux-accent: var(--blue, #0297DE);
-          --ux-accent-2: var(--blue, #0284C7);
-          --ux-accent-soft: rgba(2, 151, 222, 0.12);
-          --ux-accent-ink: #FFFFFF;
-          --ux-mint: var(--ok, #0D9488);
-          --ux-warn: #D97706;
-          --ux-danger: #EF4444;
-          --ux-glass: rgba(255, 255, 255, 0.75);
-          --ux-glass-line: rgba(255, 255, 255, 0.9);
-          --ux-shadow: rgba(15, 23, 42, 0.14);
-          --ux-shadow-strong: rgba(2, 120, 179, 0.28);
-          --ux-grad: linear-gradient(135deg, #0297DE, #0284C7 55%, #0D9488);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-accent-ink: #17324D;
+          --ux-mint: #93C5FD;
+          --ux-warn: #1E40AF;
+          --ux-danger: #1E40AF;
+          --ux-glass: rgba(255, 255, 255, 0.9);
+          --ux-glass-line: rgba(29, 78, 216, 0.2);
+          --ux-shadow: rgba(52, 112, 153, 0.1);
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
+          --ux-grad: linear-gradient(135deg, #DBEAFE, #93C5FD 55%, #EFF6FF);
         }
 
         @media (prefers-color-scheme: dark) {
           :global(:root:not([data-theme="light"])) .u215-container {
-            --ux-page: #0B1120;
-            --ux-surface: #1E293B;
-            --ux-surface-2: #0F172A;
-            --ux-surface-3: #334155;
-            --ux-ink: #F8FAFC;
-            --ux-ink-2: #CBD5E1;
-            --ux-ink-3: #94A3B8;
-            --ux-line: rgba(255, 255, 255, 0.1);
-            --ux-line-2: rgba(255, 255, 255, 0.18);
-            --ux-accent: #38BDF8;
-            --ux-accent-2: #60A5FA;
-            --ux-accent-soft: rgba(56, 189, 248, 0.15);
-            --ux-accent-ink: #0F172A;
-            --ux-mint: #34D399;
-            --ux-warn: #FBBF24;
-            --ux-danger: #F87171;
-            --ux-shadow: rgba(0, 0, 0, 0.45);
-            --ux-shadow-strong: rgba(0, 0, 0, 0.72);
-            --ux-grad: linear-gradient(135deg, #38BDF8, #60A5FA 55%, #34D399);
+            --ux-page: #EFF6FF;
+            --ux-surface: #FFFFFF;
+            --ux-surface-2: #F7FAFF;
+            --ux-surface-3: #EAF2FF;
+            --ux-ink: #17324D;
+            --ux-ink-2: #35536E;
+            --ux-ink-3: #577189;
+            --ux-line: rgba(29, 78, 216, 0.14);
+            --ux-line-2: rgba(29, 78, 216, 0.24);
+            --ux-accent: #93C5FD;
+            --ux-accent-2: #1E40AF;
+            --ux-accent-soft: rgba(147, 197, 253, 0.18);
+            --ux-accent-ink: #17324D;
+            --ux-mint: #93C5FD;
+            --ux-warn: #1E40AF;
+            --ux-danger: #1E40AF;
+            --ux-shadow: rgba(52, 112, 153, 0.1);
+            --ux-shadow-strong: rgba(52, 112, 153, 0.16);
+            --ux-grad: linear-gradient(135deg, #DBEAFE, #93C5FD 55%, #EFF6FF);
           }
         }
 
         :global(:root[data-theme="dark"]) .u215-container {
-          --ux-page: #0B1120;
-          --ux-surface: #1E293B;
-          --ux-surface-2: #0F172A;
-          --ux-surface-3: #334155;
-          --ux-ink: #F8FAFC;
-          --ux-ink-2: #CBD5E1;
-          --ux-ink-3: #94A3B8;
-          --ux-line: rgba(255, 255, 255, 0.1);
-          --ux-line-2: rgba(255, 255, 255, 0.18);
-          --ux-accent: #38BDF8;
-          --ux-accent-2: #60A5FA;
-          --ux-accent-soft: rgba(56, 189, 248, 0.15);
-          --ux-accent-ink: #0F172A;
-          --ux-mint: #34D399;
-          --ux-warn: #FBBF24;
-          --ux-danger: #F87171;
-          --ux-shadow: rgba(0, 0, 0, 0.45);
-          --ux-shadow-strong: rgba(0, 0, 0, 0.72);
-          --ux-grad: linear-gradient(135deg, #38BDF8, #60A5FA 55%, #34D399);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-accent-ink: #17324D;
+          --ux-mint: #93C5FD;
+          --ux-warn: #1E40AF;
+          --ux-danger: #1E40AF;
+          --ux-shadow: rgba(52, 112, 153, 0.1);
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
+          --ux-grad: linear-gradient(135deg, #DBEAFE, #93C5FD 55%, #EFF6FF);
         }
 
         /* Launcher Floating Bubble */
@@ -254,12 +254,12 @@ export default function SupportChatBubble() {
           border: 0;
           border-radius: 50%;
           background: var(--ux-accent);
-          color: #fff;
+          color: #17324D;
           display: grid;
           place-items: center;
           padding: 0;
           cursor: pointer;
-          box-shadow: 0 12px 28px -6px rgba(2, 132, 199, 0.45);
+          box-shadow: 0 12px 28px -6px rgba(29, 78, 216, 0.45);
           transition: transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
         }
 
@@ -328,7 +328,7 @@ export default function SupportChatBubble() {
         .u215-wh {
           padding: 16px 16px 14px;
           background: var(--ux-grad);
-          color: #fff;
+          color: #17324D;
         }
 
         .u215-fs {
@@ -346,7 +346,7 @@ export default function SupportChatBubble() {
           font-style: normal;
           font-size: 11px;
           font-weight: 850;
-          color: #fff;
+          color: #17324D;
         }
 
         .u215-wh b {
@@ -372,8 +372,8 @@ export default function SupportChatBubble() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #4ADE80;
-          box-shadow: 0 0 8px #4ADE80;
+          background: #3B82F6;
+          box-shadow: 0 0 8px #93C5FD;
         }
 
         /* Message Stream */
@@ -418,7 +418,7 @@ export default function SupportChatBubble() {
         .u215-b.me {
           align-self: flex-end;
           background: var(--ux-accent);
-          color: #fff;
+          color: #17324D;
           border-bottom-right-radius: 4px;
         }
 
@@ -480,10 +480,10 @@ export default function SupportChatBubble() {
           width: 30px;
           height: 30px;
           border-radius: 8px;
-          background: linear-gradient(135deg, #38BDF8, #0284C7);
+          background: linear-gradient(135deg, #93C5FD, #93C5FD);
           display: grid;
           place-items: center;
-          color: #fff;
+          color: #17324D;
           font-size: 13px;
         }
 
@@ -509,7 +509,7 @@ export default function SupportChatBubble() {
           background: var(--ux-surface-2);
           font-size: 10px;
           font-weight: 800;
-          color: var(--ux-accent);
+          color: var(--ux-accent-2);
           animation: u215-in 0.35s backwards;
         }
 
@@ -528,8 +528,8 @@ export default function SupportChatBubble() {
           border: 0;
           border-radius: 999px;
           background: var(--ux-surface);
-          box-shadow: inset 0 0 0 1.5px rgba(2, 151, 222, 0.45);
-          color: var(--ux-accent);
+          box-shadow: inset 0 0 0 1.5px rgba(29, 78, 216, 0.45);
+          color: var(--ux-accent-2);
           font: inherit;
           font-size: 11px;
           font-weight: 800;
@@ -581,7 +581,7 @@ export default function SupportChatBubble() {
           border: 0;
           border-radius: 10px;
           background: var(--ux-accent);
-          color: #fff;
+          color: #17324D;
           display: grid;
           place-items: center;
           cursor: pointer;
@@ -604,6 +604,20 @@ export default function SupportChatBubble() {
             right: 0;
             width: calc(100vw - 32px);
             height: 430px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .u215-container {
+            bottom: calc(76px + env(safe-area-inset-bottom));
+            right: 16px;
+          }
+
+          .u215-wg {
+            bottom: 12px;
+            width: min(340px, calc(100vw - 24px));
+            height: min(430px, calc(100dvh - 110px));
+            max-height: calc(100dvh - 110px);
           }
         }
 
@@ -630,9 +644,9 @@ export default function SupportChatBubble() {
       >
         <div className="u215-wh">
           <div className="u215-fs" aria-hidden="true">
-            <i style={{ background: "#0284C7" }} title="Phương Thảo">T</i>
-            <i style={{ background: "#38BDF8" }} title="Thảo Nguyên">N</i>
-            <i style={{ background: "#0D9488" }} title="Kim Ngân">K</i>
+            <i style={{ background: "#93C5FD" }} title="Phương Thảo">T</i>
+            <i style={{ background: "#93C5FD" }} title="Thảo Nguyên">N</i>
+            <i style={{ background: "#93C5FD" }} title="Kim Ngân">K</i>
           </div>
           <b>Trợ lý số OCOP Đồng Nai</b>
           <small>Thường phản hồi trong 1 phút</small>

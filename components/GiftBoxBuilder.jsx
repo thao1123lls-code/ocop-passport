@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useDB, fmtVND } from "@/lib/store";
 import { useLang } from "@/lib/i18n";
 
-const PALETTE = ["#0297DE", "#0284C7", "#0278B3", "#0369A1", "#0EA5E9", "#38BDF8"];
+const PALETTE = ["#DBEAFE", "#D9F0FC", "#A9DDF6", "#EAF7FD", "#93C5FD", "#D9F0FC"];
 
 function HexSlot({ item, onClick }) {
   return (
@@ -18,9 +18,9 @@ function HexSlot({ item, onClick }) {
         padding: 6,
         border: 0,
         background: item
-          ? `linear-gradient(135deg, ${item.color}, #0297DE)`
-          : "rgba(2, 151, 222, 0.08)",
-        color: item ? "#FFFFFF" : "var(--blue)",
+          ? `linear-gradient(135deg, ${item.color}, #D9F0FC)`
+          : "rgba(29, 78, 216, 0.08)",
+        color: item ? "#17324D" : "var(--blue-dark)",
         clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
         display: "flex",
         flexDirection: "column",
@@ -31,7 +31,7 @@ function HexSlot({ item, onClick }) {
         fontWeight: 700,
         lineHeight: 1.2,
         cursor: item ? "pointer" : "default",
-        boxShadow: item ? "0 8px 20px rgba(2, 151, 222, 0.25)" : "none",
+        boxShadow: item ? "0 8px 20px rgba(29, 78, 216, 0.25)" : "none",
         transition: "transform 0.15s ease",
       }}
     >
@@ -147,8 +147,8 @@ export default function GiftBoxBuilder({ onAddBox }) {
         className="card"
         style={{
           padding: "26px 24px",
-          background: "linear-gradient(135deg, rgba(2, 151, 222, 0.05), rgba(56, 189, 248, 0.08))",
-          borderColor: "rgba(2, 151, 222, 0.22)",
+          background: "linear-gradient(135deg, rgba(29, 78, 216, 0.05), rgba(147, 197, 253, 0.08))",
+          borderColor: "rgba(29, 78, 216, 0.22)",
         }}
       >
         <div className="grid-2" style={{ gap: 28, alignItems: "center" }}>
@@ -184,10 +184,10 @@ export default function GiftBoxBuilder({ onAddBox }) {
                 transform: "rotate(-1.5deg)",
               }}
             >
-              <p style={{ margin: "0 0 6px", fontStyle: "italic", color: "#0F172A", fontWeight: 600, fontSize: 14, lineHeight: 1.5, opacity: 1 }}>
+              <p style={{ margin: "0 0 6px", fontStyle: "italic", color: "#17324D", fontWeight: 600, fontSize: 14, lineHeight: 1.5, opacity: 1 }}>
                 {note || (isEn ? "Wishing you joy with Dong Nai specialties." : "Chúc bạn nhiều niềm vui và trọn vị đặc sản Đồng Nai.")}
               </p>
-              <strong style={{ fontSize: 12, color: "#0284C7" }}>OCOP Passport Đồng Nai</strong>
+              <strong style={{ fontSize: 12, color: "#1E40AF" }}>OCOP Passport Đồng Nai</strong>
             </div>
           </div>
 
@@ -313,9 +313,9 @@ export default function GiftBoxBuilder({ onAddBox }) {
                     disabled={count >= 7}
                     onClick={() => pickItem(item)}
                     style={{
-                      background: "#131D2E",
+                      background: "#F7FAFF",
                       color: "var(--ink)",
-                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      border: "1px solid rgba(29, 78, 216, 0.2)",
                       borderRadius: 12,
                       padding: "9px 12px",
                       justifyContent: "flex-start",
@@ -330,7 +330,7 @@ export default function GiftBoxBuilder({ onAddBox }) {
                         height: 28,
                         borderRadius: 8,
                         background: item.color,
-                        color: "#fff",
+                        color: "#17324D",
                         display: "grid",
                         placeItems: "center",
                         fontSize: 11,

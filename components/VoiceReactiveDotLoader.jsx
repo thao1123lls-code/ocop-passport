@@ -366,17 +366,17 @@ export default function VoiceReactiveDotLoader({
     >
       <style jsx>{`
         .u084 {
-          --ux-page: #FFFFFF;
-          --ux-surface: var(--panel, #FFFFFF);
-          --ux-surface-2: var(--blue-soft, #F0F9FF);
-          --ux-surface-3: var(--line, #E2E8F0);
-          --ux-ink: var(--ink, #0F172A);
-          --ux-ink-2: var(--ink-2, #334155);
-          --ux-ink-3: var(--mute, #64748B);
-          --ux-line: var(--line, #E2E8F0);
-          --ux-accent: var(--blue, #0284C7);
-          --ux-danger: #EF4444;
-          --ux-shadow-strong: rgba(15, 23, 42, 0.16);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-accent: #93C5FD;
+          --ux-danger: #1E40AF;
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
           --ux-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
           --ux-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 
@@ -411,7 +411,7 @@ export default function VoiceReactiveDotLoader({
         }
 
         .u084[data-s="think"] .u084-lab {
-          color: var(--ux-accent);
+          color: #1E40AF;
         }
 
         .u084-dots {
@@ -431,11 +431,11 @@ export default function VoiceReactiveDotLoader({
           transition: height 0.1s linear;
         }
 
-        .u084-dots i:nth-child(1) { --c1: #22C3A6; --c2: #0EA5E9; }
-        .u084-dots i:nth-child(2) { --c1: #3D8BFF; --c2: #7B61FF; }
-        .u084-dots i:nth-child(3) { --c1: #7B61FF; --c2: #B04FD0; }
-        .u084-dots i:nth-child(4) { --c1: #FF6B8B; --c2: #E5484D; }
-        .u084-dots i:nth-child(5) { --c1: #FFB547; --c2: #FF7A45; }
+        .u084-dots i:nth-child(1) { --c1: #93C5FD; --c2: #93C5FD; }
+        .u084-dots i:nth-child(2) { --c1: #93C5FD; --c2: #3B82F6; }
+        .u084-dots i:nth-child(3) { --c1: #3B82F6; --c2: #3B82F6; }
+        .u084-dots i:nth-child(4) { --c1: #3B82F6; --c2: #3B82F6; }
+        .u084-dots i:nth-child(5) { --c1: #DBEAFE; --c2: #93C5FD; }
 
         .u084[data-s="idle"] .u084-dots i {
           animation: u084-breath 2.4s ease-in-out infinite;
@@ -500,13 +500,14 @@ export default function VoiceReactiveDotLoader({
           width: 72px;
           height: 72px;
           margin-top: auto;
-          border: 0;
+          border: 1.5px solid rgba(59, 130, 246, 0.32);
           padding: 0;
           border-radius: 50%;
           display: grid;
           place-items: center;
-          background: var(--ux-ink);
-          color: #ffffff;
+          background: #FFFFFF;
+          color: #1E40AF;
+          box-shadow: 0 4px 16px rgba(59, 130, 246, 0.18);
           touch-action: none;
           user-select: none;
           -webkit-user-select: none;
@@ -535,8 +536,9 @@ export default function VoiceReactiveDotLoader({
         }
 
         .u084[data-s="listen"] .u084-mic {
-          background: var(--ux-danger);
-          color: #ffffff;
+          background: #1E40AF;
+          color: #FFFFFF;
+          border-color: #1E40AF;
           transform: scale(1.08);
         }
 
@@ -570,23 +572,23 @@ export default function VoiceReactiveDotLoader({
           align-items: center;
           justify-content: center;
           gap: 8px;
-          background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-          color: #FFFFFF;
+          background: linear-gradient(135deg, #D9F0FC 0%, #93C5FD 100%);
+          color: #17324D;
           border: none;
           padding: 10px 22px;
           border-radius: 999px;
           font-size: 14px;
           font-weight: 800;
           cursor: pointer;
-          box-shadow: 0 4px 16px rgba(239, 68, 68, 0.45);
+          box-shadow: 0 4px 16px rgba(147, 197, 253, 0.45);
           transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
           letter-spacing: -0.01em;
         }
 
         .u084-finish-btn:hover {
-          background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+          background: linear-gradient(135deg, #D9F0FC 0%, #93C5FD 100%);
           transform: translateY(-2px) scale(1.03);
-          box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+          box-shadow: 0 6px 20px rgba(147, 197, 253, 0.6);
         }
 
         .u084-finish-btn:active {
@@ -605,8 +607,8 @@ export default function VoiceReactiveDotLoader({
         .u084-playback-box {
           margin-top: 16px;
           width: 100%;
-          background: var(--ux-surface-2, #F0F9FF);
-          border: 1.5px solid var(--ux-accent, #0284C7);
+          background: var(--ux-surface-2, #EFF6FF);
+          border: 1.5px solid var(--ux-accent, #3B82F6);
           border-radius: 16px;
           padding: 12px 14px;
           display: flex;
@@ -627,7 +629,7 @@ export default function VoiceReactiveDotLoader({
           justify-content: space-between;
           font-size: 12px;
           font-weight: 700;
-          color: var(--ux-accent, #0284C7);
+          color: var(--ux-accent, #1E40AF);
         }
 
         .u084-playback-title-row {
@@ -640,8 +642,8 @@ export default function VoiceReactiveDotLoader({
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #10B981;
-          box-shadow: 0 0 6px #10B981;
+          background: #3B82F6;
+          box-shadow: 0 0 6px #93C5FD;
         }
 
         .u084-playback-controls {
@@ -656,8 +658,8 @@ export default function VoiceReactiveDotLoader({
           align-items: center;
           justify-content: center;
           gap: 8px;
-          background: var(--ux-accent, #0284C7);
-          color: #FFFFFF;
+          background: var(--ux-accent, #93C5FD);
+          color: #17324D;
           border: none;
           padding: 9px 16px;
           border-radius: 10px;
@@ -665,11 +667,11 @@ export default function VoiceReactiveDotLoader({
           font-weight: 800;
           cursor: pointer;
           transition: all 0.2s;
-          box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+          box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3);
         }
 
         .u084-play-btn:hover {
-          background: #0369A1;
+          background: #93C5FD;
           transform: translateY(-1px);
         }
 
@@ -689,7 +691,7 @@ export default function VoiceReactiveDotLoader({
         }
 
         .u084-rerecord-btn:hover {
-          background: #F8FAFC;
+          background: #F7FAFF;
         }
 
         @media (prefers-reduced-motion: reduce) {

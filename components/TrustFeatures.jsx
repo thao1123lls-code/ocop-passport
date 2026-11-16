@@ -7,7 +7,7 @@ function Sparkle({ size = 16, style = {} }) {
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="#FDE047"
+      fill="#93C5FD"
       style={{
         filter: "drop-shadow(0 0 6px rgba(253, 224, 71, 0.85))",
         pointerEvents: "none",
@@ -51,7 +51,7 @@ export default function TrustFeatures() {
               <Sparkle size={10} style={{ position: "absolute", top: 32, right: -42, transform: "rotate(35deg)" }} />
 
               <div className="trust-circle-media">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="9" y="2" width="6" height="12" rx="3" />
                   <path d="M5 10a7 7 0 0 0 14 0" />
                   <line x1="12" y1="17" x2="12" y2="21" />
@@ -70,21 +70,21 @@ export default function TrustFeatures() {
               {/* Sao lấp lánh xung quanh cột 2 & nối sang cột 3 */}
               <Sparkle size={11} style={{ position: "absolute", top: 22, left: -24, transform: "rotate(45deg)" }} />
               <Sparkle size={9} style={{ position: "absolute", bottom: -2, right: -12, transform: "rotate(10deg)" }} />
-              <span style={{ position: "absolute", bottom: -8, right: -28, width: 4, height: 4, borderRadius: "50%", background: "#FDE047", boxShadow: "0 0 6px #FACC15" }} />
+              <span style={{ position: "absolute", bottom: -8, right: -28, width: 4, height: 4, borderRadius: "50%", background: "#93C5FD", boxShadow: "0 0 6px #93C5FD" }} />
               <Sparkle size={10} style={{ position: "absolute", bottom: 8, right: -48, transform: "rotate(25deg)" }} />
 
               <div className="trust-circle-media">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="3" y="3" width="7" height="7" rx="2" />
-                  <circle cx="6.5" cy="6.5" r="1.2" fill="#38BDF8" stroke="none" />
+                  <circle cx="6.5" cy="6.5" r="1.2" fill="#93C5FD" stroke="none" />
                   <rect x="14" y="3" width="7" height="7" rx="2" />
-                  <circle cx="17.5" cy="6.5" r="1.2" fill="#38BDF8" stroke="none" />
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="#93C5FD" stroke="none" />
                   <rect x="3" y="14" width="7" height="7" rx="2" />
-                  <circle cx="6.5" cy="17.5" r="1.2" fill="#38BDF8" stroke="none" />
-                  <circle cx="15" cy="15" r="1.2" fill="#38BDF8" stroke="none" />
-                  <circle cx="19" cy="15" r="1.2" fill="#38BDF8" stroke="none" />
-                  <circle cx="15" cy="19" r="1.2" fill="#38BDF8" stroke="none" />
-                  <circle cx="19" cy="19" r="1.2" fill="#38BDF8" stroke="none" />
+                  <circle cx="6.5" cy="17.5" r="1.2" fill="#93C5FD" stroke="none" />
+                  <circle cx="15" cy="15" r="1.2" fill="#93C5FD" stroke="none" />
+                  <circle cx="19" cy="15" r="1.2" fill="#93C5FD" stroke="none" />
+                  <circle cx="15" cy="19" r="1.2" fill="#93C5FD" stroke="none" />
+                  <circle cx="19" cy="19" r="1.2" fill="#93C5FD" stroke="none" />
                 </svg>
               </div>
             </div>
@@ -101,9 +101,9 @@ export default function TrustFeatures() {
               <Sparkle size={10} style={{ position: "absolute", bottom: 10, left: -16, transform: "rotate(15deg)" }} />
 
               <div className="trust-circle-media">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="9" cy="20" r="1.6" fill="#38BDF8" />
-                  <circle cx="18" cy="20" r="1.6" fill="#38BDF8" />
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="9" cy="20" r="1.6" fill="#93C5FD" />
+                  <circle cx="18" cy="20" r="1.6" fill="#93C5FD" />
                   <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L22 6H6" />
                 </svg>
               </div>
@@ -119,9 +119,9 @@ export default function TrustFeatures() {
       <style jsx>{`
         .trust-block {
           width: 100%;
-          background: linear-gradient(180deg, #131E31 0%, #0F172A 100%);
-          border-top: 1.5px solid rgba(56, 189, 248, 0.28);
-          border-bottom: 1.5px solid rgba(56, 189, 248, 0.28);
+          background: linear-gradient(180deg, #F7FAFF 0%, #EFF6FF 100%);
+          border-top: 1.5px solid rgba(147, 197, 253, 0.28);
+          border-bottom: 1.5px solid rgba(147, 197, 253, 0.28);
           border-left: none;
           border-right: none;
           border-radius: 0;
@@ -139,7 +139,7 @@ export default function TrustFeatures() {
           left: 0;
           right: 0;
           height: 2px;
-          background: linear-gradient(90deg, transparent, #38BDF8, #C084FC, #2DD4BF, transparent);
+          background: linear-gradient(90deg, transparent, #93C5FD, #BFDBFE, #3B82F6, transparent);
         }
 
         .trust-inner {
@@ -158,9 +158,9 @@ export default function TrustFeatures() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          background: rgba(56, 189, 248, 0.12);
-          border: 1px solid rgba(56, 189, 248, 0.35);
-          color: #38BDF8;
+          background: rgba(147, 197, 253, 0.12);
+          border: 1px solid rgba(147, 197, 253, 0.35);
+          color: #1E40AF;
           padding: 3px 12px;
           border-radius: 99px;
           font-size: 11px;
@@ -173,14 +173,14 @@ export default function TrustFeatures() {
           width: 5px;
           height: 5px;
           border-radius: 50%;
-          background: #2DD4BF;
-          box-shadow: 0 0 6px #2DD4BF;
+          background: #3B82F6;
+          box-shadow: 0 0 6px #93C5FD;
         }
 
         .trust-main-title {
           font-size: clamp(20px, 2.2vw, 28px);
           font-weight: 850;
-          color: #F8FAFC;
+          color: #17324D;
           line-height: 1.25;
           margin: 0 0 6px;
           letter-spacing: -0.01em;
@@ -194,7 +194,7 @@ export default function TrustFeatures() {
 
         .trust-sub-desc {
           font-size: 13.5px;
-          color: #94A3B8;
+          color: #577189;
           line-height: 1.5;
           margin: 0 auto;
           max-width: 640px;
@@ -224,13 +224,13 @@ export default function TrustFeatures() {
           width: 92px;
           height: 92px;
           border-radius: 50%;
-          border: 2px solid rgba(56, 189, 248, 0.45);
+          border: 1.5px solid rgba(59, 130, 246, 0.4);
           padding: 4px;
           display: grid;
           place-items: center;
           margin-bottom: 14px;
-          box-shadow: 0 0 20px rgba(56, 189, 248, 0.2), inset 0 0 0 3px #0F172A;
-          background: linear-gradient(145deg, #131D2E 0%, #0F172A 100%);
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.18);
+          background: linear-gradient(145deg, #F7FAFF 0%, #EFF6FF 100%);
           transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
           position: relative;
           overflow: visible;
@@ -238,8 +238,8 @@ export default function TrustFeatures() {
 
         .trust-col-item:hover .trust-circle-outer {
           transform: scale(1.06);
-          border-color: #38BDF8;
-          box-shadow: 0 0 28px rgba(56, 189, 248, 0.45), inset 0 0 0 3px #0F172A;
+          border-color: #3B82F6;
+          box-shadow: 0 0 28px rgba(59, 130, 246, 0.3);
         }
 
         .trust-circle-media {
@@ -249,27 +249,27 @@ export default function TrustFeatures() {
           overflow: hidden;
           display: grid;
           place-items: center;
-          background: radial-gradient(circle at 45% 40%, #1E293B 0%, #0B1120 100%);
-          border: 1px solid rgba(56, 189, 248, 0.25);
+          background: radial-gradient(circle at 45% 40%, #FFFFFF 0%, #FFFFFF 100%);
+          border: 1px solid rgba(147, 197, 253, 0.25);
         }
 
         /* Tiêu đề & mô tả căn giữa nhỏ gọn */
         .trust-col-title {
           font-size: 16.5px;
           font-weight: 800;
-          color: #F8FAFC;
+          color: #17324D;
           margin: 0 0 6px;
           line-height: 1.35;
           transition: color 0.2s ease;
         }
 
         .trust-col-item:hover .trust-col-title {
-          color: #38BDF8;
+          color: #1E40AF;
         }
 
         .trust-col-desc {
           font-size: 13px;
-          color: #94A3B8;
+          color: #577189;
           line-height: 1.55;
           margin: 0 auto;
           max-width: 340px;

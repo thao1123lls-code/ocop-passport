@@ -121,7 +121,7 @@ export default function StorefrontHome() {
 
   const products = db?.products || [];
 
-  const PAGE_SIZE = 8;
+  const PAGE_SIZE = 12;
   const [page, setPage] = useState(0);
 
   const filtered = useMemo(() => {
@@ -402,8 +402,16 @@ export default function StorefrontHome() {
                       className="pcard-btn-add"
                       onClick={() => addToBag(p)}
                       title={storeT.addBag}
+                      aria-label={justAdded === p.id ? storeT.added : storeT.addBag}
                     >
-                      {justAdded === p.id ? storeT.added : storeT.addBag}
+                      <span className="pcard-add-icon" aria-hidden="true">
+                        <b className="pcard-add-plus">+</b>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M2 3h2l2.4 12a2 2 0 0 0 2 1.6h9a2 2 0 0 0 1.9-1.4L22 8H5" />
+                          <circle cx="10" cy="20" r="1.5" />
+                          <circle cx="18" cy="20" r="1.5" />
+                        </svg>
+                      </span>
                     </button>
                   )}
 
@@ -480,7 +488,7 @@ export default function StorefrontHome() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(15, 23, 42, 0.65)",
+            background: "rgba(60, 112, 148, 0.65)",
             backdropFilter: "blur(6px)",
             WebkitBackdropFilter: "blur(6px)",
             zIndex: 9999,
@@ -492,13 +500,13 @@ export default function StorefrontHome() {
         >
           <div
             style={{
-              background: "#1E293B",
+              background: "#FFFFFF",
               borderRadius: 20,
               maxWidth: 420,
               width: "100%",
               padding: "28px 24px",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 24px rgba(56, 189, 248, 0.25)",
-              border: "1.5px solid rgba(56, 189, 248, 0.35)",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 24px rgba(147, 197, 253, 0.25)",
+              border: "1.5px solid rgba(147, 197, 253, 0.35)",
               textAlign: "center",
               position: "relative",
             }}
@@ -511,14 +519,14 @@ export default function StorefrontHome() {
                 position: "absolute",
                 top: 14,
                 right: 14,
-                background: "#0F172A",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
+                background: "#EFF6FF",
+                border: "1px solid rgba(29, 78, 216, 0.2)",
                 borderRadius: "50%",
                 width: 32,
                 height: 32,
                 padding: 0,
                 cursor: "pointer",
-                color: "#94A3B8",
+                color: "#577189",
                 display: "grid",
                 placeItems: "center",
               }}
@@ -533,10 +541,10 @@ export default function StorefrontHome() {
               <span className="pcard-ocop-badge">✓ OCOP {qrModalProduct.certs || (lang === "en" ? "4-star" : "4 sao")}</span>
               <span className="pcard-lot-text">{storeT.lot} {qrModalProduct.lot || "CDQ-2026"}</span>
             </div>
-            <h3 style={{ margin: "4px 0 10px", fontSize: 18.5, fontWeight: 800, color: "#F8FAFC" }}>
+            <h3 style={{ margin: "4px 0 10px", fontSize: 18.5, fontWeight: 800, color: "#17324D" }}>
               {qrModalProduct.name}
             </h3>
-            <p style={{ margin: "0 0 18px", fontSize: 13, color: "#94A3B8" }}>
+            <p style={{ margin: "0 0 18px", fontSize: 13, color: "#577189" }}>
               {storeT.qrModalTitle} · {storeT.qrModalDesc}
             </p>
             <div style={{ display: "grid", placeItems: "center", margin: "16px 0", background: "#FFFFFF", padding: 14, borderRadius: 14 }}>
@@ -758,8 +766,8 @@ export default function StorefrontHome() {
       <style jsx>{`
         /* Section Header Phân tách phần trên và dưới */
         .store-intro-banner {
-          background: #1E293B;
-          border: 1.5px solid rgba(56, 189, 248, 0.22);
+          background: #FFFFFF !important;
+          border: 1.5px solid rgba(147, 197, 253, 0.22);
           border-radius: 20px;
           padding: 24px 32px;
           margin-bottom: 22px;
@@ -767,7 +775,7 @@ export default function StorefrontHome() {
           align-items: center;
           justify-content: space-between;
           gap: 24px;
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+          box-shadow: 0 8px 30px rgba(29, 78, 216, 0.18);
           position: relative;
           overflow: hidden;
         }
@@ -779,7 +787,7 @@ export default function StorefrontHome() {
           left: 0;
           right: 0;
           height: 2px;
-          background: linear-gradient(90deg, transparent, #38BDF8, #C084FC, transparent);
+          background: linear-gradient(90deg, transparent, #93C5FD, #BFDBFE, transparent);
         }
 
         .store-intro-main {
@@ -791,13 +799,13 @@ export default function StorefrontHome() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: rgba(56, 189, 248, 0.12);
-          border: 1px solid rgba(56, 189, 248, 0.35);
+          background: rgba(147, 197, 253, 0.12);
+          border: 1px solid rgba(147, 197, 253, 0.35);
           border-radius: 99px;
           padding: 4px 12px;
           font-size: 11.5px;
           font-weight: 800;
-          color: #38BDF8;
+          color: #1E40AF;
           letter-spacing: 0.04em;
           margin-bottom: 8px;
         }
@@ -806,14 +814,14 @@ export default function StorefrontHome() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #2DD4BF;
-          box-shadow: 0 0 8px #2DD4BF;
+          background: #3B82F6;
+          box-shadow: 0 0 8px #93C5FD;
         }
 
         .store-intro-title {
           font-size: clamp(22px, 3vw, 28px);
           font-weight: 850;
-          color: #F8FAFC;
+          color: #17324D;
           line-height: 1.25;
           margin: 0 0 8px;
         }
@@ -821,7 +829,7 @@ export default function StorefrontHome() {
         .store-intro-desc {
           margin: 0;
           font-size: 14px;
-          color: #94A3B8;
+          color: #577189;
           line-height: 1.55;
         }
 
@@ -832,8 +840,8 @@ export default function StorefrontHome() {
         }
 
         .store-perk-item {
-          background: #131D2E;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #F7FAFF;
+          border: 1px solid rgba(29, 78, 216, 0.14);
           border-radius: 12px;
           padding: 10px 14px;
           display: flex;
@@ -843,39 +851,40 @@ export default function StorefrontHome() {
 
         .perk-icon {
           font-size: 18px;
-          color: #38BDF8;
+          color: #1E40AF;
         }
 
         .store-perk-item b {
           display: block;
           font-size: 12.5px;
-          color: #F8FAFC;
+          color: #17324D;
         }
 
         .store-perk-item span {
           display: block;
           font-size: 11px;
-          color: #94A3B8;
+          color: #577189;
         }
 
         .product-grid-v2 {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+          align-items: stretch;
           gap: 20px;
           margin: 16px 0 28px;
         }
 
         @media (max-width: 1080px) {
           .product-grid-v2 {
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
             gap: 16px;
           }
         }
 
         .pcard-v2 {
-          background: #1E293B;
+          background: #FFFFFF !important;
           border-radius: 18px;
-          border: 1.5px solid rgba(255, 255, 255, 0.08);
+          border: 1.5px solid rgba(29, 78, 216, 0.14);
           overflow: hidden;
           display: flex;
           flex-direction: column;
@@ -885,20 +894,20 @@ export default function StorefrontHome() {
 
         .pcard-v2:hover {
           transform: translateY(-4px);
-          border-color: #38BDF8;
-          box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 0 22px rgba(56, 189, 248, 0.25);
+          border-color: #93C5FD;
+          box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 0 22px rgba(147, 197, 253, 0.25);
         }
 
         .pcard-photo-wrap {
           position: relative;
           width: 100%;
           height: 280px;
-          background: linear-gradient(145deg, #131D2E 0%, #0F172A 100%);
+          background: linear-gradient(145deg, #F7FAFF 0%, #EFF6FF 100%);
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(29, 78, 216, 0.14);
         }
 
         .pcard-photo-link {
@@ -943,9 +952,9 @@ export default function StorefrontHome() {
         }
 
         .pcard-badge-pill-dark {
-          background: rgba(15, 23, 42, 0.9);
-          color: #F8FAFC;
-          border: 1px solid rgba(255, 255, 255, 0.14);
+          background: rgba(147, 197, 253, 0.34);
+          color: #1E40AF;
+          border: 1px solid rgba(59, 130, 246, 0.38);
           font-size: 11px;
           font-weight: 750;
           padding: 4px 10px;
@@ -962,14 +971,14 @@ export default function StorefrontHome() {
         }
 
         .pcard-badge-pill-green {
-          background: rgba(45, 212, 191, 0.2);
-          color: #2DD4BF;
-          border: 1px solid rgba(45, 212, 191, 0.45);
+          background: rgba(147, 197, 253, 0.2);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.45);
           font-size: 11.5px;
           font-weight: 750;
           padding: 4px 12px;
           border-radius: 99px;
-          box-shadow: 0 0 12px rgba(45, 212, 191, 0.25);
+          box-shadow: 0 0 12px rgba(147, 197, 253, 0.25);
           letter-spacing: 0.02em;
         }
 
@@ -988,9 +997,9 @@ export default function StorefrontHome() {
         }
 
         .pcard-ocop-badge {
-          background: rgba(45, 212, 191, 0.15);
-          color: #2DD4BF;
-          border: 1px solid rgba(45, 212, 191, 0.35);
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.35);
           font-size: 11.5px;
           font-weight: 750;
           padding: 2.5px 8px;
@@ -1003,13 +1012,13 @@ export default function StorefrontHome() {
         .pcard-lot-text {
           font-size: 12px;
           font-weight: 600;
-          color: #94A3B8;
+          color: #577189;
         }
 
         .pcard-name {
           font-size: 17.5px;
           font-weight: 800;
-          color: #F8FAFC;
+          color: #17324D;
           margin: 8px 0 6px;
           line-height: 1.35;
         }
@@ -1020,7 +1029,7 @@ export default function StorefrontHome() {
         }
 
         .pcard-name-link:hover {
-          color: #38BDF8;
+          color: #1E40AF;
           text-decoration: underline;
         }
 
@@ -1034,7 +1043,7 @@ export default function StorefrontHome() {
 
         .pcard-farm-text {
           font-size: 12.5px;
-          color: #94A3B8;
+          color: #577189;
           margin: 0;
           white-space: nowrap;
           overflow: hidden;
@@ -1045,7 +1054,7 @@ export default function StorefrontHome() {
         .pcard-price-text {
           font-size: 18px;
           font-weight: 800;
-          color: #38BDF8;
+          color: #1E40AF;
           white-space: nowrap;
         }
 
@@ -1058,8 +1067,8 @@ export default function StorefrontHome() {
 
         .pcard-btn-add {
           flex: 1;
-          background: #38BDF8;
-          color: #0F172A;
+          background: #93C5FD;
+          color: #17324D;
           border: none;
           border-radius: 10px;
           padding: 10px 14px;
@@ -1068,22 +1077,36 @@ export default function StorefrontHome() {
           cursor: pointer;
           transition: all 0.18s ease;
           display: inline-flex;
+          flex-direction: row;
           align-items: center;
           justify-content: center;
-          gap: 6px;
-          box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+          gap: 0;
+          min-height: 48px;
+          box-shadow: 0 0 14px rgba(147, 197, 253, 0.35);
+        }
+
+        .pcard-add-icon {
+          display: inline-flex;
+          align-items: center;
+          gap: 1px;
+          line-height: 1;
+        }
+
+        .pcard-add-plus {
+          font-size: 17px;
+          line-height: 1;
         }
 
         .pcard-btn-add:hover {
-          background: #7DD3FC;
-          box-shadow: 0 0 20px rgba(56, 189, 248, 0.55);
+          background: #DBEAFE;
+          box-shadow: 0 0 20px rgba(147, 197, 253, 0.55);
           transform: translateY(-1px);
         }
 
         .pcard-btn-qr {
-          background: rgba(30, 41, 59, 0.8);
-          color: #38BDF8;
-          border: 1.5px solid #38BDF8;
+          background: rgba(255, 255, 255, 0.8);
+          color: #1E40AF;
+          border: 1.5px solid #93C5FD;
           border-radius: 10px;
           padding: 8.5px 12px;
           font-size: 13px;
@@ -1094,14 +1117,14 @@ export default function StorefrontHome() {
         }
 
         .pcard-btn-qr:hover {
-          background: rgba(56, 189, 248, 0.15);
-          color: #7DD3FC;
-          box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
+          box-shadow: 0 0 12px rgba(147, 197, 253, 0.3);
         }
 
         .pcard-btn-detail {
-          background: #131D2E;
-          color: #CBD5E1;
+          background: #F7FAFF;
+          color: #35536E;
           border: 1px solid rgba(255, 255, 255, 0.15);
           border-radius: 10px;
           padding: 8.5px 11px;
@@ -1115,9 +1138,9 @@ export default function StorefrontHome() {
         }
 
         .pcard-btn-detail:hover {
-          background: #1E293B;
-          color: #FFFFFF;
-          border-color: #38BDF8;
+          background: #FFFFFF;
+          color: #17324D;
+          border-color: #93C5FD;
           text-decoration: none;
         }
 
@@ -1129,9 +1152,9 @@ export default function StorefrontHome() {
         }
 
         .pcard-btn-inbag {
-          background: rgba(56, 189, 248, 0.15);
-          color: #38BDF8;
-          border: 1px solid rgba(56, 189, 248, 0.35);
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.35);
           border-radius: 8px;
           padding: 6px 10px;
           font-size: 12px;
@@ -1142,19 +1165,51 @@ export default function StorefrontHome() {
         @media (max-width: 900px) {
           .store-intro-banner {
             flex-direction: column;
-            align-items: flex-start;
+            align-items: stretch;
+            gap: 18px;
+            padding: 20px;
+          }
+          .store-intro-main {
+            width: 100%;
+            max-width: none;
           }
           .store-intro-perks {
             width: 100%;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            flex-shrink: 1;
           }
           .store-perk-item {
-            flex: 1;
-            min-width: 140px;
+            width: 100%;
+            min-width: 0;
           }
         }
 
         @media (max-width: 640px) {
+          .store-intro-banner {
+            padding: 16px;
+            border-radius: 16px;
+          }
+          .store-intro-badge {
+            max-width: 100%;
+            white-space: normal;
+            line-height: 1.4;
+          }
+          .store-intro-title {
+            font-size: clamp(22px, 6vw, 28px);
+            overflow-wrap: normal;
+            word-break: normal;
+          }
+          .store-intro-desc {
+            font-size: 14px;
+          }
+          .store-intro-perks {
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: 10px;
+          }
+          .store-perk-item {
+            padding: 10px 12px;
+          }
           .product-grid-v2 {
             grid-template-columns: 1fr;
           }
@@ -1167,7 +1222,7 @@ export default function StorefrontHome() {
         .dm-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(15, 23, 42, 0.75);
+          background: rgba(216, 239, 241, 0.94);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
           z-index: 99999;
@@ -1178,17 +1233,17 @@ export default function StorefrontHome() {
         }
 
         .dm-card {
-          background: #1E293B;
+          background: #FFFFFF;
           border-radius: 24px;
-          border: 1.5px solid rgba(56, 189, 248, 0.35);
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.2);
+          border: 1.5px solid rgba(147, 197, 253, 0.35);
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(147, 197, 253, 0.2);
           max-width: 920px;
           width: 100%;
           max-height: 90vh;
           overflow-y: auto;
           padding: 24px 28px 28px;
           position: relative;
-          color: #F8FAFC;
+          color: #17324D;
         }
 
         .dm-header {
@@ -1196,7 +1251,7 @@ export default function StorefrontHome() {
           justify-content: space-between;
           align-items: center;
           padding-bottom: 14px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(29, 78, 216, 0.14);
           margin-bottom: 22px;
         }
 
@@ -1209,7 +1264,7 @@ export default function StorefrontHome() {
         }
 
         .dm-bc-mute {
-          color: #94A3B8;
+          color: #577189;
         }
 
         .dm-bc-sep {
@@ -1217,14 +1272,14 @@ export default function StorefrontHome() {
         }
 
         .dm-bc-cur {
-          color: #38BDF8;
+          color: #1E40AF;
           font-weight: 700;
         }
 
         .dm-close-btn {
-          background: #0F172A;
+          background: #EFF6FF;
           border: 1px solid rgba(255, 255, 255, 0.14);
-          color: #94A3B8;
+          color: #577189;
           border-radius: 50%;
           width: 32px;
           height: 32px;
@@ -1236,9 +1291,9 @@ export default function StorefrontHome() {
         }
 
         .dm-close-btn:hover {
-          color: #FFF;
-          border-color: #38BDF8;
-          background: #1E293B;
+          color: #17324D;
+          border-color: #93C5FD;
+          background: #FFFFFF;
         }
 
         /* Hero 2 cột Hình 4 */
@@ -1254,7 +1309,7 @@ export default function StorefrontHome() {
           position: relative;
           width: 100%;
           height: 280px;
-          background: #131D2E;
+          background: #F7FAFF;
           border-radius: 18px;
           border: 1px solid rgba(255, 255, 255, 0.1);
           overflow: hidden;
@@ -1274,19 +1329,19 @@ export default function StorefrontHome() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          color: #94A3B8;
+          color: #577189;
         }
 
         .dm-farm {
           font-size: 12.5px;
-          color: #94A3B8;
+          color: #577189;
           margin: 0 0 4px;
         }
 
         .dm-title {
           font-size: 22px;
           font-weight: 850;
-          color: #F8FAFC;
+          color: #17324D;
           margin: 0 0 12px;
           line-height: 1.3;
         }
@@ -1302,15 +1357,15 @@ export default function StorefrontHome() {
         .dm-price {
           font-size: 22px;
           font-weight: 900;
-          color: #38BDF8;
+          color: #1E40AF;
         }
 
         .dm-stock {
           font-size: 11.5px;
           font-weight: 750;
-          background: rgba(45, 212, 191, 0.15);
-          color: #2DD4BF;
-          border: 1px solid rgba(45, 212, 191, 0.35);
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.35);
           border-radius: 99px;
           padding: 3px 10px;
         }
@@ -1318,9 +1373,9 @@ export default function StorefrontHome() {
         .dm-lot {
           font-size: 11.5px;
           font-weight: 700;
-          color: #94A3B8;
-          background: #131D2E;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: #577189;
+          background: #F7FAFF;
+          border: 1px solid rgba(29, 78, 216, 0.14);
           border-radius: 99px;
           padding: 3px 10px;
         }
@@ -1332,8 +1387,8 @@ export default function StorefrontHome() {
         }
 
         .dm-btn-buy {
-          background: #0284C7;
-          color: #FFF;
+          background: #93C5FD;
+          color: #17324D;
           font-weight: 800;
           border: none;
           border-radius: 12px;
@@ -1341,17 +1396,17 @@ export default function StorefrontHome() {
           font-size: 14px;
           cursor: pointer;
           transition: all 0.15s ease;
-          box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+          box-shadow: 0 4px 14px rgba(29, 78, 216, 0.4);
         }
 
         .dm-btn-buy:hover {
-          background: #0369A1;
+          background: #93C5FD;
           transform: translateY(-1px);
         }
 
         .dm-btn-call {
           background: transparent;
-          color: #F8FAFC;
+          color: #17324D;
           font-weight: 700;
           border: 1.5px solid rgba(255, 255, 255, 0.22);
           border-radius: 12px;
@@ -1365,15 +1420,15 @@ export default function StorefrontHome() {
         }
 
         .dm-btn-call:hover {
-          border-color: #38BDF8;
-          color: #38BDF8;
-          background: rgba(56, 189, 248, 0.08);
+          border-color: #93C5FD;
+          color: #1E40AF;
+          background: rgba(147, 197, 253, 0.08);
         }
 
         /* 4 Ô Chi tiết chuẩn Hình 4 */
         .dm-specs-section {
-          background: #131D2E;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #F7FAFF;
+          border: 1px solid rgba(29, 78, 216, 0.14);
           border-radius: 18px;
           padding: 22px 24px;
           margin-bottom: 24px;
@@ -1382,7 +1437,7 @@ export default function StorefrontHome() {
         .dm-specs-title {
           font-size: 17px;
           font-weight: 800;
-          color: #F8FAFC;
+          color: #17324D;
           margin: 0 0 16px;
           display: flex;
           align-items: center;
@@ -1396,7 +1451,7 @@ export default function StorefrontHome() {
         }
 
         .dm-spec-card {
-          background: #1E293B;
+          background: #FFFFFF;
           border: 1px solid rgba(255, 255, 255, 0.09);
           border-radius: 14px;
           padding: 14px 16px;
@@ -1414,14 +1469,14 @@ export default function StorefrontHome() {
         .dm-spec-label {
           font-size: 11px;
           font-weight: 800;
-          color: #38BDF8;
+          color: #1E40AF;
           letter-spacing: 0.05em;
           margin-bottom: 3px;
         }
 
         .dm-spec-value {
           font-size: 13px;
-          color: #CBD5E1;
+          color: #35536E;
           line-height: 1.45;
         }
 
@@ -1433,7 +1488,7 @@ export default function StorefrontHome() {
         .dm-related-title {
           font-size: 16px;
           font-weight: 800;
-          color: #F8FAFC;
+          color: #17324D;
           margin: 0 0 12px;
         }
 
@@ -1444,8 +1499,8 @@ export default function StorefrontHome() {
         }
 
         .dm-rel-item {
-          background: #131D2E;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #F7FAFF;
+          border: 1px solid rgba(29, 78, 216, 0.14);
           border-radius: 12px;
           padding: 10px;
           cursor: pointer;
@@ -1453,7 +1508,7 @@ export default function StorefrontHome() {
         }
 
         .dm-rel-item:hover {
-          border-color: #38BDF8;
+          border-color: #93C5FD;
           transform: translateY(-2px);
         }
 
@@ -1462,7 +1517,7 @@ export default function StorefrontHome() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #0F172A;
+          background: #EFF6FF;
           border-radius: 8px;
           overflow: hidden;
           margin-bottom: 8px;
@@ -1475,14 +1530,14 @@ export default function StorefrontHome() {
 
         .dm-rel-farm {
           font-size: 10.5px;
-          color: #94A3B8;
+          color: #577189;
           display: block;
         }
 
         .dm-rel-name {
           font-size: 12.5px;
           font-weight: 750;
-          color: #F8FAFC;
+          color: #17324D;
           margin: 2px 0 4px;
           white-space: nowrap;
           overflow: hidden;
@@ -1491,7 +1546,7 @@ export default function StorefrontHome() {
 
         .dm-rel-price {
           font-size: 13px;
-          color: #38BDF8;
+          color: #1E40AF;
           font-weight: 800;
         }
 
@@ -1502,14 +1557,14 @@ export default function StorefrontHome() {
           align-items: center;
           gap: 12px;
           padding-top: 16px;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(29, 78, 216, 0.14);
           flex-wrap: wrap;
         }
 
         .dm-btn-back {
           background: transparent;
           border: none;
-          color: #94A3B8;
+          color: #577189;
           font-weight: 700;
           font-size: 13px;
           cursor: pointer;
@@ -1517,11 +1572,11 @@ export default function StorefrontHome() {
         }
 
         .dm-btn-back:hover {
-          color: #38BDF8;
+          color: #1E40AF;
         }
 
         .dm-btn-full {
-          color: #38BDF8;
+          color: #1E40AF;
           font-weight: 750;
           font-size: 13px;
           text-decoration: none;

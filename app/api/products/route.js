@@ -1,62 +1,101 @@
-// app/api/auth/login/route.js
 import { NextResponse } from "next/server";
-import { pool } from "@/lib/db";
-import { hashPassword, verifyPassword } from "@/lib/password.mjs";
-import { startSession, publicUser, tooMany, clientIp } from "@/lib/auth";
+import { pool, toProduct, safeUrl } from "@/lib/db";
+import { guard } from "@/lib/auth";
+import { products as seedProducts } from "@/db/seed-data.mjs";
 
-const DEMO_FALLBACKS = {
-  "admin@ocop.vn": { id: 1, email: "admin@ocop.vn", name: "Quản trị viên OCOP (Demo)", role: "admin", status: "active", pw: "Demo@12345" },
-  "owner@ocop.vn": { id: 2, email: "owner@ocop.vn", name: "HTX Ca cao Trọng Đức (Demo)", role: "owner", status: "active", pw: "Demo@12345" },
-  "volunteer@ocop.vn": { id: 3, email: "volunteer@ocop.vn", name: "Đoàn viên Tình nguyện số (Demo)", role: "volunteer", status: "active", pw: "Demo@12345" },
-  "demo@ocop.vn": { id: 4, email: "demo@ocop.vn", name: "Khách hàng Trải nghiệm (Demo)", role: "owner", status: "active", pw: "Demo@12345" },
-};
+export const dynamic = "force-dynamic";
 
-let dummy;
+function getSeedProducts() {
+  const now = Date.now();
+  return seedProducts.map((product) => ({
+    ...product,
+    ownerId: null,
+    entries: (product.entries || []).map((entry) => ({
+      id: entry.id,
+      stage: entry.stage,
+      text: entry.text,
+      photo: entry.photo || undefined,
+      audio: entry.audio || undefined,
+      geo: entry.geo || undefined,
+      by: "owner",
+      ts: now - (Number(entry.daysAgo) || 0) * 864e5,
+    })),
+  }));
+}
+
+function mergeSeedProducts(databaseProducts) {
+  const seeds = getSeedProducts();
+  const databaseById = new Map(databaseProducts.map((product) => [String(product.id), product]));
+  const seedIds = new Set(seeds.map((product) => String(product.id)));
+
+  return [
+    ...seeds.map((product) => databaseById.get(String(product.id)) || product),
+    ...databaseProducts.filter((product) => !seedIds.has(String(product.id))),
+  ];
+}
+
+export async function GET() {
+  try {
+    const result = await pool.query("SELECT * FROM products ORDER BY created_at ASC");
+    if (result.rows.length) {
+      const entries = await pool.query("SELECT * FROM diary_entries ORDER BY ts ASC");
+      const byProduct = new Map();
+      for (const entry of entries.rows) {
+        const list = byProduct.get(entry.product_id) || [];
+        list.push(entry);
+        byProduct.set(entry.product_id, list);
+      }
+      const databaseProducts = result.rows.map((product) =>
+        toProduct(product, byProduct.get(product.id) || []),
+      );
+      return NextResponse.json({
+        success: true,
+        data: mergeSeedProducts(databaseProducts),
+      });
+    }
+  } catch (error) {
+    console.error("[GET /api/products] Database unavailable; serving seed data:", error.message);
+  }
+
+  return NextResponse.json({ success: true, data: getSeedProducts(), source: "seed" });
+}
 
 export async function POST(request) {
-  const b = await request.json().catch(() => ({}));
-  const email = String(b.email || "").trim().toLowerCase();
-  const password = String(b.password || "").trim();
+  const auth = await guard(request, ["owner", "admin"]);
+  if (auth.error) return auth.error;
 
-  if (tooMany(`login:${clientIp(request)}:${email}`, 20)) {
-    return NextResponse.json({ success: false, error: "Đăng nhập sai quá nhiều lần, vui lòng đợi ít phút." }, { status: 429 });
+  const body = await request.json().catch(() => ({}));
+  const id = String(body.id || "").trim().slice(0, 128);
+  const name = String(body.name || "").trim().slice(0, 255);
+  if (!id || !name) {
+    return NextResponse.json({ success: false, error: "Cần có mã và tên sản phẩm." }, { status: 400 });
+  }
+  if (body.shop && !safeUrl(body.shop)) {
+    return NextResponse.json({ success: false, error: "Link gian hàng phải bắt đầu bằng http(s)://" }, { status: 400 });
   }
 
   try {
-    const r = await pool.query("SELECT id, email, name, role, status, password_hash FROM users WHERE email = $1", [email]);
-    let u = r.rows[0];
+    const result = await pool.query(
+      `INSERT INTO products
+        (id, name, category, price, promo, farm, lot, weight, ingredients, expiry, storage, certs, story, shop, photo, verified, content, owner_id)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17::jsonb,$18)
+       ON CONFLICT (id) DO NOTHING
+       RETURNING *`,
+      [
+        id, name, body.category || null, Math.max(0, parseInt(body.price, 10) || 0), body.promo || null,
+        body.farm || null, body.lot || null, body.weight || null, body.ingredients || null,
+        body.expiry || null, body.storage || null, body.certs || null, body.story || null,
+        body.shop || null, body.photo || null, auth.user.role === "admin" && !!body.verified,
+        body.content == null ? null : JSON.stringify(body.content), auth.user.id,
+      ],
+    );
 
-    // Nếu DB chưa có tài khoản Demo này, tự động kiểm tra và khởi tạo luôn vào DB
-    if (!u && DEMO_FALLBACKS[email] && password === DEMO_FALLBACKS[email].pw) {
-      const fb = DEMO_FALLBACKS[email];
-      const hashed = await hashPassword(fb.pw);
-      try {
-        const ins = await pool.query(
-          "INSERT INTO users (email, name, password_hash, role, status) VALUES ($1,$2,$3,$4,$5) ON CONFLICT (email) DO NOTHING RETURNING id, email, name, role, status, password_hash",
-          [fb.email, fb.name, hashed, fb.role, fb.status]
-        );
-        u = ins.rows[0] || { ...fb, password_hash: hashed };
-      } catch {
-        u = { ...fb, password_hash: hashed };
-      }
+    if (!result.rows[0]) {
+      return NextResponse.json({ success: false, error: "Mã sản phẩm đã tồn tại hoặc database chưa được kết nối." }, { status: 409 });
     }
-
-    dummy ||= await hashPassword("dummy-password");
-    const ok =
-      (DEMO_FALLBACKS[email] && password === DEMO_FALLBACKS[email].pw) ||
-      (await verifyPassword(password, u ? u.password_hash : dummy));
-
-    if (!u || !ok) {
-      return NextResponse.json({ success: false, error: "Email hoặc mật khẩu chưa đúng." }, { status: 401 });
-    }
-    if (u.status === "disabled") {
-      return NextResponse.json({ success: false, error: "Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên." }, { status: 403 });
-    }
-
-    await startSession(u.id);
-    return NextResponse.json({ success: true, user: publicUser(u) });
-  } catch (err) {
-    console.error("[login]", err);
-    return NextResponse.json({ success: false, error: "Lỗi máy chủ." }, { status: 500 });
+    return NextResponse.json({ success: true, data: toProduct(result.rows[0]) }, { status: 201 });
+  } catch (error) {
+    console.error("[POST /api/products]", error);
+    return NextResponse.json({ success: false, error: "Không lưu được sản phẩm. Kiểm tra kết nối database." }, { status: 503 });
   }
 }

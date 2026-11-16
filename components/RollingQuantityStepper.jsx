@@ -90,21 +90,21 @@ export default function RollingQuantityStepper({
     <div className={`ux u018 ${compact ? "u018-compact" : ""}`}>
       <style jsx>{`
         .u018 {
-          --ux-page: var(--bg, #F8FAFC);
-          --ux-surface: var(--panel, #FFFFFF);
-          --ux-surface-2: var(--blue-soft, #F0F9FF);
-          --ux-surface-3: var(--blue-subtle, #E0F2FE);
-          --ux-ink: var(--ink, #0F172A);
-          --ux-ink-2: var(--ink-2, #334155);
-          --ux-ink-3: var(--mute, #64748B);
-          --ux-line: var(--line, #E2E8F0);
-          --ux-line-2: var(--line-strong, #CBD5E1);
-          --ux-accent: var(--blue, #0284C7);
-          --ux-accent-2: var(--blue-dark, #0369A1);
-          --ux-accent-soft: rgba(2, 132, 199, 0.12);
-          --ux-accent-ink: #FFFFFF;
-          --ux-shadow: rgba(15, 23, 42, 0.08);
-          --ux-shadow-strong: rgba(15, 23, 42, 0.2);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-accent-ink: #17324D;
+          --ux-shadow: rgba(52, 112, 153, 0.1);
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
           --ux-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
           --ux-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
           display: flex;
@@ -131,7 +131,7 @@ export default function RollingQuantityStepper({
         }
 
         .u018-step:focus-within {
-          box-shadow: 0 0 0 2px var(--ux-accent), 0 8px 24px -8px rgba(2, 132, 199, 0.25);
+          box-shadow: 0 0 0 2px var(--ux-accent), 0 8px 24px -8px rgba(29, 78, 216, 0.25);
         }
 
         .u018-step.is-shake {
@@ -194,11 +194,11 @@ export default function RollingQuantityStepper({
 
         .u018-b.pl {
           background: var(--ux-accent);
-          color: #ffffff;
+          color: #17324D;
         }
 
         .u018-b.pl:hover:not([aria-disabled="true"]) {
-          background: var(--ux-accent-2);
+          background: var(--ux-accent-soft);
         }
 
         /* Rolling Odometer Number */

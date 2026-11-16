@@ -117,12 +117,12 @@ export default function FlavorRadar({ product, lang = "vi" }) {
           <svg viewBox="0 0 300 290" width="290" height="280" role="img" aria-label="Biểu đồ 6 chiều hương vị">
             <defs>
               <linearGradient id="radarFill" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#0297DE" stopOpacity="0.45" />
-                <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.25" />
+                <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#93C5FD" stopOpacity="0.25" />
               </linearGradient>
               <linearGradient id="radarStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#0297DE" />
-                <stop offset="100%" stopColor="#0284C7" />
+                <stop offset="0%" stopColor="#3B82F6" />
+                <stop offset="100%" stopColor="#3B82F6" />
               </linearGradient>
             </defs>
 
@@ -151,7 +151,7 @@ export default function FlavorRadar({ product, lang = "vi" }) {
 
             {current.vals.map((v, i) => {
               const [x, y] = pt(i, (Math.max(10, Math.min(100, v)) / 100) * maxR);
-              return <circle key={i} cx={x} cy={y} r="4" fill="#0284C7" stroke="#FFFFFF" strokeWidth="1.5" />;
+              return <circle key={i} cx={x} cy={y} r="4" fill="#3B82F6" stroke="#FFFFFF" strokeWidth="1.5" />;
             })}
 
             {profile.axes.map(([vi, en], i) => {
@@ -165,7 +165,7 @@ export default function FlavorRadar({ product, lang = "vi" }) {
                   textAnchor={anchor}
                   fontSize="12.5"
                   fontWeight="700"
-                  fill="#334155"
+                  fill="#E0F2FB"
                 >
                   {lang === "vi" ? vi : en}
                 </text>

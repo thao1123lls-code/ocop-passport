@@ -205,7 +205,7 @@ export default function ProductDetailPage() {
                   background: "transparent",
                   border: "none",
                   padding: "4px 0 0",
-                  color: "var(--blue)",
+                  color: "var(--blue-dark)",
                   fontSize: 12,
                   fontWeight: 700,
                   cursor: "pointer",
@@ -261,9 +261,9 @@ export default function ProductDetailPage() {
                     style={{
                       fontSize: 12,
                       fontWeight: 750,
-                      color: "var(--blue)",
-                      background: "rgba(56, 189, 248, 0.12)",
-                      border: "1px solid rgba(56, 189, 248, 0.3)",
+                      color: "var(--blue-dark)",
+                      background: "rgba(147, 197, 253, 0.12)",
+                      border: "1px solid rgba(147, 197, 253, 0.3)",
                       padding: "3px 8px",
                       borderRadius: 6,
                       display: "inline-flex",
@@ -276,7 +276,7 @@ export default function ProductDetailPage() {
 )}
                 </button>
                 {priceSaved && (
-                  <span style={{ fontSize: 12.5, color: "#34D399", fontWeight: 700 }}>
+                  <span style={{ fontSize: 12.5, color: "#1E40AF", fontWeight: 700 }}>
                     ✓ Đã lưu giá mới!
                   </span>
                 )}
@@ -300,14 +300,14 @@ export default function ProductDetailPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  background: "#070B14",
+                  background: "#EFF6FF",
                   padding: "6px 12px",
                   borderRadius: 10,
-                  border: "1px solid rgba(0, 229, 255, 0.4)",
-                  boxShadow: "0 0 14px rgba(0, 229, 255, 0.25)",
+                  border: "1px solid rgba(147, 197, 253, 0.4)",
+                  boxShadow: "0 0 14px rgba(147, 197, 253, 0.25)",
                 }}
               >
-                <span style={{ fontSize: 13, color: "#94A3B8", fontWeight: 700 }}>Giá:</span>
+                <span style={{ fontSize: 13, color: "#577189", fontWeight: 700 }}>Giá:</span>
                 <input
                   type="number"
                   step="5000"
@@ -318,21 +318,21 @@ export default function ProductDetailPage() {
                   style={{
                     width: 130,
                     padding: "5px 8px",
-                    background: "#1E293B",
+                    background: "#FFFFFF",
                     border: "1px solid var(--line-cyber)",
                     borderRadius: 6,
-                    color: "#FFFFFF",
+                    color: "#17324D",
                     fontSize: 15,
                     fontWeight: 800,
                   }}
                 />
-                <span style={{ fontSize: 12, color: "#94A3B8" }}>đ</span>
+                <span style={{ fontSize: 12, color: "#577189" }}>đ</span>
                 <button
                   type="submit"
                   style={{
                     padding: "5px 12px",
-                    background: "#00E5FF",
-                    color: "#070B14",
+                    background: "#93C5FD",
+                    color: "#17324D",
                     border: "none",
                     borderRadius: 6,
                     fontWeight: 800,
@@ -348,7 +348,7 @@ export default function ProductDetailPage() {
                   style={{
                     padding: "5px 10px",
                     background: "rgba(255,255,255,0.08)",
-                    color: "#CBD5E1",
+                    color: "#35536E",
                     border: "1px solid rgba(255,255,255,0.15)",
                     borderRadius: 6,
                     fontWeight: 700,
@@ -613,7 +613,7 @@ export default function ProductDetailPage() {
         }
 
         .bc-link {
-          color: var(--blue);
+          color: var(--blue-dark);
           text-decoration: none;
           font-weight: 600;
         }
@@ -623,7 +623,7 @@ export default function ProductDetailPage() {
         }
 
         .bc-sep {
-          color: #94A3B8;
+          color: #577189;
         }
 
         .bc-cat {
@@ -642,15 +642,15 @@ export default function ProductDetailPage() {
           font-weight: 700;
           font-size: 13px;
           padding: 6px 14px;
-          background: #1E293B;
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: #FFFFFF;
+          border: 1px solid rgba(29, 78, 216, 0.2);
           border-radius: 8px;
           transition: all 0.15s ease;
         }
 
         .bc-back-btn:hover {
-          background: #243447;
-          color: var(--blue);
+          background: #EAF2FF;
+          color: var(--blue-dark);
           border-color: var(--blue);
         }
 
@@ -671,9 +671,9 @@ export default function ProductDetailPage() {
           position: relative;
           width: 100%;
           min-height: 420px;
-          background: linear-gradient(145deg, #131D2E 0%, #0F172A 100%);
+          background: linear-gradient(145deg, #F7FAFF 0%, #EFF6FF 100%);
           border-radius: 20px;
-          border: 1.5px solid rgba(255, 255, 255, 0.08);
+          border: 1.5px solid rgba(29, 78, 216, 0.14);
           overflow: hidden;
           display: flex;
           align-items: center;
@@ -713,18 +713,18 @@ export default function ProductDetailPage() {
           width: 28px;
           height: 28px;
           border-radius: 8px;
-          background: #0F172A;
-          color: #38BDF8;
-          border: 1px solid rgba(56, 189, 248, 0.4);
+          background: #EFF6FF;
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.4);
           display: grid;
           place-items: center;
           font-size: 14px;
-          box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+          box-shadow: 0 0 10px rgba(147, 197, 253, 0.3);
         }
 
         .detail-badge-pill-dark {
-          background: rgba(15, 23, 42, 0.9);
-          color: #F8FAFC;
+          background: rgba(60, 112, 148, 0.9);
+          color: #17324D;
           border: 1px solid rgba(255, 255, 255, 0.15);
           font-size: 11px;
           font-weight: 750;
@@ -741,19 +741,19 @@ export default function ProductDetailPage() {
         }
 
         .detail-badge-pill-green {
-          background: rgba(45, 212, 191, 0.2);
-          color: #2DD4BF;
-          border: 1px solid rgba(45, 212, 191, 0.45);
+          background: rgba(147, 197, 253, 0.2);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.45);
           font-size: 11.5px;
           font-weight: 750;
           padding: 4px 12px;
           border-radius: 99px;
-          box-shadow: 0 0 12px rgba(45, 212, 191, 0.25);
+          box-shadow: 0 0 12px rgba(147, 197, 253, 0.25);
         }
 
         .detail-mini-qr-box {
-          background: #1E293B;
-          border: 1.5px solid rgba(255, 255, 255, 0.08);
+          background: #FFFFFF;
+          border: 1.5px solid rgba(29, 78, 216, 0.14);
           border-radius: 14px;
           padding: 14px 16px;
           display: flex;
@@ -770,7 +770,7 @@ export default function ProductDetailPage() {
         .detail-producer-name {
           font-size: 13px;
           font-weight: 750;
-          color: #94A3B8;
+          color: #577189;
           margin: 0 0 6px;
           text-transform: uppercase;
           letter-spacing: 0.03em;
@@ -779,7 +779,7 @@ export default function ProductDetailPage() {
         .detail-product-title {
           font-size: clamp(22px, 3vw, 32px);
           font-weight: 850;
-          color: #F8FAFC;
+          color: #17324D;
           line-height: 1.25;
           margin: 0 0 12px;
         }
@@ -795,13 +795,13 @@ export default function ProductDetailPage() {
         .detail-price-val {
           font-size: 28px;
           font-weight: 850;
-          color: #38BDF8;
+          color: #1E40AF;
         }
 
         .detail-stock-badge {
-          background: rgba(45, 212, 191, 0.15);
-          color: #2DD4BF;
-          border: 1px solid rgba(45, 212, 191, 0.35);
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.35);
           font-size: 12px;
           font-weight: 750;
           padding: 3px 10px;
@@ -811,9 +811,9 @@ export default function ProductDetailPage() {
         .detail-lot-badge {
           font-size: 12px;
           font-weight: 600;
-          color: #94A3B8;
-          background: #131D2E;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: #577189;
+          background: #F7FAFF;
+          border: 1px solid rgba(29, 78, 216, 0.14);
           padding: 3px 10px;
           border-radius: 99px;
         }
@@ -828,8 +828,8 @@ export default function ProductDetailPage() {
         .detail-btn-buy {
           flex: 1.2;
           min-width: 180px;
-          background: #38BDF8;
-          color: #0F172A;
+          background: #93C5FD;
+          color: #17324D;
           border: none;
           border-radius: 12px;
           padding: 13px 22px;
@@ -841,21 +841,21 @@ export default function ProductDetailPage() {
           align-items: center;
           justify-content: center;
           gap: 8px;
-          box-shadow: 0 0 18px rgba(56, 189, 248, 0.4);
+          box-shadow: 0 0 18px rgba(147, 197, 253, 0.4);
         }
 
         .detail-btn-buy:hover {
-          background: #7DD3FC;
-          box-shadow: 0 0 24px rgba(56, 189, 248, 0.6);
+          background: #DBEAFE;
+          box-shadow: 0 0 24px rgba(147, 197, 253, 0.6);
           transform: translateY(-1px);
         }
 
         .detail-btn-call {
           flex: 1;
           min-width: 180px;
-          background: rgba(30, 41, 59, 0.8);
-          color: #38BDF8;
-          border: 1.5px solid #38BDF8;
+          background: rgba(255, 255, 255, 0.8);
+          color: #1E40AF;
+          border: 1.5px solid #93C5FD;
           border-radius: 12px;
           padding: 12px 18px;
           font-size: 14.5px;
@@ -869,15 +869,15 @@ export default function ProductDetailPage() {
         }
 
         .detail-btn-call:hover {
-          background: rgba(56, 189, 248, 0.15);
-          color: #7DD3FC;
-          box-shadow: 0 0 14px rgba(56, 189, 248, 0.3);
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
+          box-shadow: 0 0 14px rgba(147, 197, 253, 0.3);
           transform: translateY(-1px);
         }
 
         .detail-specs-box {
-          background: #1E293B;
-          border: 1.5px solid rgba(255, 255, 255, 0.08);
+          background: #FFFFFF;
+          border: 1.5px solid rgba(29, 78, 216, 0.14);
           border-radius: 18px;
           padding: 22px 24px;
           margin-bottom: 20px;
@@ -888,7 +888,7 @@ export default function ProductDetailPage() {
           margin: 0 0 16px;
           font-size: 13.5px;
           font-weight: 850;
-          color: #F8FAFC;
+          color: #17324D;
           letter-spacing: 0.04em;
         }
 
@@ -897,7 +897,7 @@ export default function ProductDetailPage() {
           grid-template-columns: repeat(2, 1fr);
           gap: 16px;
           padding-bottom: 16px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(29, 78, 216, 0.14);
         }
 
         .detail-spec-item {
@@ -910,9 +910,9 @@ export default function ProductDetailPage() {
           width: 36px;
           height: 36px;
           border-radius: 10px;
-          background: #131D2E;
-          border: 1px solid rgba(56, 189, 248, 0.25);
-          color: #38BDF8;
+          background: #F7FAFF;
+          border: 1px solid rgba(147, 197, 253, 0.25);
+          color: #1E40AF;
           display: grid;
           place-items: center;
           font-size: 17px;
@@ -922,14 +922,14 @@ export default function ProductDetailPage() {
         .detail-spec-label {
           font-size: 11px;
           font-weight: 750;
-          color: #94A3B8;
+          color: #577189;
           letter-spacing: 0.03em;
         }
 
         .detail-spec-value {
           font-size: 13.5px;
           font-weight: 700;
-          color: #F8FAFC;
+          color: #17324D;
           margin-top: 2px;
           line-height: 1.35;
         }
@@ -940,7 +940,7 @@ export default function ProductDetailPage() {
           flex-direction: column;
           gap: 6px;
           font-size: 12.5px;
-          color: #94A3B8;
+          color: #577189;
         }
 
         .policy-note-line {
@@ -950,13 +950,13 @@ export default function ProductDetailPage() {
         }
 
         .policy-check {
-          color: #2DD4BF;
+          color: #1E40AF;
           font-weight: 800;
         }
 
         .detail-story-box {
-          background: #131D2E;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #F7FAFF;
+          border: 1px solid rgba(29, 78, 216, 0.14);
           border-radius: 14px;
           padding: 16px 18px;
         }
@@ -964,7 +964,7 @@ export default function ProductDetailPage() {
         .detail-related-section {
           margin-top: 48px;
           padding-top: 28px;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(29, 78, 216, 0.14);
         }
 
         .related-head {
@@ -975,7 +975,7 @@ export default function ProductDetailPage() {
         }
 
         .related-all-link {
-          color: var(--blue);
+          color: var(--blue-dark);
           font-size: 13.5px;
           font-weight: 700;
           text-decoration: none;
@@ -992,8 +992,8 @@ export default function ProductDetailPage() {
         }
 
         .rel-card {
-          background: #1E293B;
-          border: 1.5px solid rgba(255, 255, 255, 0.08);
+          background: #FFFFFF;
+          border: 1.5px solid rgba(29, 78, 216, 0.14);
           border-radius: 16px;
           overflow: hidden;
           display: flex;
@@ -1003,19 +1003,19 @@ export default function ProductDetailPage() {
 
         .rel-card:hover {
           transform: translateY(-3px);
-          border-color: #38BDF8;
-          box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.7), 0 0 16px rgba(56, 189, 248, 0.25);
+          border-color: #93C5FD;
+          box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.7), 0 0 16px rgba(147, 197, 253, 0.25);
         }
 
         .rel-photo-box {
           position: relative;
           width: 100%;
           height: 220px;
-          background: linear-gradient(145deg, #131D2E, #0F172A);
+          background: linear-gradient(145deg, #F7FAFF, #EFF6FF);
           display: flex;
           align-items: center;
           justify-content: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(29, 78, 216, 0.14);
         }
 
         .rel-photo-link {
@@ -1044,7 +1044,7 @@ export default function ProductDetailPage() {
         .rel-title {
           font-size: 15.5px;
           font-weight: 800;
-          color: #F8FAFC;
+          color: #17324D;
           margin: 4px 0 2px;
           line-height: 1.35;
         }
@@ -1055,13 +1055,13 @@ export default function ProductDetailPage() {
         }
 
         .rel-title a:hover {
-          color: var(--blue);
+          color: var(--blue-dark);
         }
 
         .rel-price {
           font-size: 16.5px;
           font-weight: 800;
-          color: #38BDF8;
+          color: #1E40AF;
           margin: 4px 0 12px;
         }
 

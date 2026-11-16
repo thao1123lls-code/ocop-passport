@@ -17,7 +17,7 @@ export default function KineticMarquee() {
   return (
     <section className="kinetic-marquee-section" id="gian-hang" aria-label="Thanh chạy thông điệp số hóa">
       <div className="kinetic-marquee-container">
-        {/* ROW 1: Heavy uppercase scrolling left in Electric Cyber Cyan (#00E5FF) */}
+        {/* ROW 1: Heavy uppercase scrolling left in Electric Cyber Cyan (#93C5FD) */}
         <div className="marquee-track-wrapper track-row-1">
           <div className="marquee-content-track scroll-left" aria-hidden="true">
             <span className="marquee-text-primary">{row1Text}</span>
@@ -46,12 +46,12 @@ export default function KineticMarquee() {
         .kinetic-marquee-section {
           width: 100%;
           overflow: hidden;
-          background: #060A12;
+          background: #1D4ED8;
           padding: 24px 0 26px;
           margin: 16px 0 24px;
           position: relative;
-          border-top: 2px solid #00E5FF;
-          border-bottom: 2px solid #00E5FF;
+          border-top: 2px solid #3B82F6;
+          border-bottom: 2px solid #3B82F6;
           transform: skewY(-2deg);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
           -webkit-user-select: none;
@@ -94,10 +94,10 @@ export default function KineticMarquee() {
           user-select: none;
         }
 
-        /* ROW 1: Cyber Neon Cyan (#00E5FF) - Phông chữ chuẩn nét tiếng Việt, đồng nhất chiều cao */
+        /* ROW 1: Cyber Neon Cyan (#93C5FD) - Phông chữ chuẩn nét tiếng Việt, đồng nhất chiều cao */
         .marquee-text-primary {
-          color: #00E5FF;
-          font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+          color: #93C5FD;
+          font-family: var(--font);
           font-size: clamp(24px, 3.2vw, 42px);
           font-weight: 900;
           letter-spacing: 0.04em;
@@ -116,8 +116,8 @@ export default function KineticMarquee() {
 
         /* ROW 2: High-contrast Pure White with Space Mono vibe - Rõ nét, đồng đều */
         .marquee-text-secondary {
-          color: #E0F2FE;
-          font-family: "Space Mono", "Consolas", "Courier New", monospace;
+          color: #FFFFFF;
+          font-family: var(--font);
           font-size: clamp(12.5px, 1.5vw, 17px);
           font-weight: 700;
           letter-spacing: 0.08em;

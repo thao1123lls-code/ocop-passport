@@ -233,7 +233,7 @@ export default function Dashboard() {
   };
 
   // 1. MÀN HÌNH ĐĂNG NHẬP
-  if (!checked) return <p style={{ padding: 48, textAlign: "center", color: "#94A3B8" }}>Đang tải…</p>;
+  if (!checked) return <p style={{ padding: 48, textAlign: "center", color: "#577189" }}>Đang tải…</p>;
 
   if (!authed) {
     return (
@@ -247,7 +247,7 @@ export default function Dashboard() {
             </div>
             <div>
               <span className="badge-blue">Cổng quản trị riêng</span>
-              <div style={{ fontSize: 12, color: "#94A3B8", marginTop: 2 }}>Xác thực hệ thống OCOP</div>
+              <div style={{ fontSize: 12, color: "#577189", marginTop: 2 }}>Xác thực hệ thống OCOP</div>
             </div>
           </div>
 
@@ -320,18 +320,18 @@ export default function Dashboard() {
             align-items: center;
             justify-content: center;
             padding: 100px 20px 48px;
-            background: #070B14;
+            background: #EFF6FF;
           }
           .login-card {
             width: 100%;
             max-width: 440px;
-            background: #0F172A;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: #EFF6FF;
+            border: 1px solid rgba(29, 78, 216, 0.2);
             border-radius: 20px;
             padding: 36px 32px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(147, 197, 253, 0.15);
           }
           .glow-bar {
             position: absolute;
@@ -339,7 +339,7 @@ export default function Dashboard() {
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #00E5FF, #38BDF8, transparent);
+            background: linear-gradient(90deg, transparent, #93C5FD, #93C5FD, transparent);
           }
           .login-header {
             display: flex;
@@ -351,16 +351,16 @@ export default function Dashboard() {
             width: 40px;
             height: 40px;
             border-radius: 12px;
-            background: #00E5FF;
+            background: #93C5FD;
             display: grid;
             place-items: center;
-            color: #070B14;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            color: #17324D;
+            box-shadow: 0 0 15px rgba(147, 197, 253, 0.4);
           }
           .badge-blue {
-            background: rgba(0, 229, 255, 0.12);
-            color: #00E5FF;
-            border: 1px solid rgba(0, 229, 255, 0.3);
+            background: rgba(147, 197, 253, 0.12);
+            color: #1E40AF;
+            border: 1px solid rgba(147, 197, 253, 0.3);
             padding: 3px 10px;
             border-radius: 99px;
             font-size: 11px;
@@ -370,12 +370,12 @@ export default function Dashboard() {
           .login-title {
             font-size: 24px;
             font-weight: 850;
-            color: #FFFFFF;
+            color: #17324D;
             margin: 0 0 8px;
           }
           .login-sub {
             font-size: 13.5px;
-            color: #94A3B8;
+            color: #577189;
             margin: 0 0 24px;
             line-height: 1.5;
           }
@@ -386,7 +386,7 @@ export default function Dashboard() {
             display: block;
             font-size: 11.5px;
             font-weight: 750;
-            color: #CBD5E1;
+            color: #35536E;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 8px;
@@ -405,17 +405,17 @@ export default function Dashboard() {
           .dash-input {
             width: 100%;
             padding: 12px 40px 12px 38px;
-            background: #070B14;
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: #EFF6FF;
+            border: 1px solid rgba(29, 78, 216, 0.26);
             border-radius: 12px;
-            color: #FFFFFF;
+            color: #17324D;
             font-size: 14px;
             outline: none;
             transition: border-color 0.2s;
           }
           .dash-input:focus {
-            border-color: #00E5FF;
-            box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
+            border-color: #93C5FD;
+            box-shadow: 0 0 12px rgba(147, 197, 253, 0.25);
           }
           .pw-toggle-btn {
             position: absolute;
@@ -429,36 +429,36 @@ export default function Dashboard() {
             display: flex;
           }
           .pw-toggle-btn:hover {
-            color: #E2E8F0;
+            color: #35536E;
           }
           .remember-row {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 13px;
-            color: #94A3B8;
+            color: #577189;
             cursor: pointer;
             margin-top: 10px;
             user-select: none;
           }
           .remember-row input {
             cursor: pointer;
-            accent-color: #00E5FF;
+            accent-color: #93C5FD;
           }
           .pw-note-row {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 13px;
-            color: #94A3B8;
+            color: #577189;
             margin-top: 8px;
           }
           .err-box {
             padding: 10px 14px;
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.35);
+            background: rgba(147, 197, 253, 0.15);
+            border: 1px solid rgba(147, 197, 253, 0.35);
             border-radius: 10px;
-            color: #FCA5A5;
+            color: #1E40AF;
             font-size: 12.5px;
             margin-bottom: 16px;
           }
@@ -470,28 +470,28 @@ export default function Dashboard() {
           .btn-primary-glow {
             width: 100%;
             padding: 12px;
-            background: #00E5FF;
-            color: #070B14;
+            background: #93C5FD;
+            color: #17324D;
             font-weight: 800;
             font-size: 14.5px;
             border: none;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 0 18px rgba(0, 229, 255, 0.4);
+            box-shadow: 0 0 18px rgba(147, 197, 253, 0.4);
             transition: transform 0.15s, background 0.15s;
           }
           .btn-primary-glow:hover {
-            background: #38BDF8;
+            background: #93C5FD;
             transform: translateY(-1px);
           }
           .btn-back-home {
             width: 100%;
             padding: 10px;
             background: rgba(255, 255, 255, 0.05);
-            color: #CBD5E1;
+            color: #35536E;
             font-weight: 700;
             font-size: 13.5px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(29, 78, 216, 0.2);
             border-radius: 12px;
             text-align: center;
             text-decoration: none;
@@ -503,16 +503,16 @@ export default function Dashboard() {
           .demo-hint {
             margin-top: 18px;
             padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(29, 78, 216, 0.14);
             text-align: center;
             font-size: 12px;
             color: #64748B;
           }
           .demo-pw-btn {
-            font-family: monospace;
-            background: #070B14;
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            color: #00E5FF;
+            font-family: var(--font);
+            background: #EFF6FF;
+            border: 1px solid rgba(147, 197, 253, 0.3);
+            color: #1E40AF;
             padding: 2px 6px;
             border-radius: 6px;
             font-weight: 700;
@@ -606,7 +606,7 @@ export default function Dashboard() {
             <div className="stat-card-title">Hộ chiếu đã xác minh</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
               <span className="stat-card-number">{verifiedCount}</span>
-              <span style={{ fontSize: 13, color: "#94A3B8" }}>/ {P.length} ({verifiedPercent}%)</span>
+              <span style={{ fontSize: 13, color: "#577189" }}>/ {P.length} ({verifiedPercent}%)</span>
             </div>
           </div>
           <div className="mini-progress-track">
@@ -711,7 +711,7 @@ export default function Dashboard() {
                             }}
                             style={{ display: "inline-flex", alignItems: "center", gap: 6 }}
                           >
-                            <span style={{ fontSize: 12, color: "#38BDF8", fontWeight: 700 }}>Giá:</span>
+                            <span style={{ fontSize: 12, color: "#1E40AF", fontWeight: 700 }}>Giá:</span>
                             <input
                               type="number"
                               step="5000"
@@ -722,10 +722,10 @@ export default function Dashboard() {
                               style={{
                                 width: 110,
                                 padding: "3px 6px",
-                                background: "#070B14",
-                                border: "1px solid #00E5FF",
+                                background: "#EFF6FF",
+                                border: "1px solid #93C5FD",
                                 borderRadius: 6,
-                                color: "#FFFFFF",
+                                color: "#17324D",
                                 fontSize: 13,
                                 fontWeight: 800,
                               }}
@@ -734,8 +734,8 @@ export default function Dashboard() {
                               type="submit"
                               style={{
                                 padding: "3px 8px",
-                                background: "#00E5FF",
-                                color: "#070B14",
+                                background: "#93C5FD",
+                                color: "#17324D",
                                 border: "none",
                                 borderRadius: 6,
                                 fontWeight: 800,
@@ -751,7 +751,7 @@ export default function Dashboard() {
                               style={{
                                 padding: "3px 6px",
                                 background: "transparent",
-                                color: "#94A3B8",
+                                color: "#577189",
                                 border: "1px solid rgba(255,255,255,0.15)",
                                 borderRadius: 6,
                                 fontSize: 12,
@@ -770,9 +770,9 @@ export default function Dashboard() {
                             }}
                             title="Bấm để sửa giá sản phẩm này"
                             style={{
-                              background: "rgba(56, 189, 248, 0.08)",
-                              border: "1px solid rgba(56, 189, 248, 0.25)",
-                              color: "#38BDF8",
+                              background: "rgba(147, 197, 253, 0.08)",
+                              border: "1px solid rgba(147, 197, 253, 0.25)",
+                              color: "#1E40AF",
                               padding: "2px 8px",
                               borderRadius: 6,
                               fontSize: 12,
@@ -848,7 +848,7 @@ export default function Dashboard() {
             {/* Summary Footer */}
             <div className="panel-footer-count">
               <span>
-                Hiển thị <strong style={{ color: "#00E5FF" }}>{filteredRows.length}</strong> / {P.length} sản phẩm OCOP
+                Hiển thị <strong style={{ color: "#1E40AF" }}>{filteredRows.length}</strong> / {P.length} sản phẩm OCOP
               </span>
             </div>
           </div>
@@ -859,7 +859,7 @@ export default function Dashboard() {
         <div className="pw-modal-overlay" onClick={() => setChangePwOpen(false)}>
           <div className="pw-modal-card" onClick={(e) => e.stopPropagation()}>
             <div className="pw-modal-head">
-              <h3 style={{ margin: 0, fontSize: 18, color: "#FFFFFF" }}>Đổi mật khẩu Quản trị</h3>
+              <h3 style={{ margin: 0, fontSize: 18, color: "#17324D" }}>Đổi mật khẩu Quản trị</h3>
               <button
                 type="button"
                 className="pw-modal-close"
@@ -902,9 +902,9 @@ export default function Dashboard() {
                   fontSize: 12.5,
                   fontWeight: 600,
                   marginBottom: 14,
-                  background: changePwMsg.startsWith("✓") ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.15)",
-                  color: changePwMsg.startsWith("✓") ? "#34D399" : "#F87171",
-                  border: changePwMsg.startsWith("✓") ? "1px solid rgba(16, 185, 129, 0.3)" : "1px solid rgba(239, 68, 68, 0.3)",
+                  background: changePwMsg.startsWith("✓") ? "rgba(147, 197, 253, 0.15)" : "rgba(147, 197, 253, 0.15)",
+                  color: changePwMsg.startsWith("✓") ? "#1E40AF" : "#1E40AF",
+                  border: changePwMsg.startsWith("✓") ? "1px solid rgba(147, 197, 253, 0.3)" : "1px solid rgba(147, 197, 253, 0.3)",
                 }}>
                   {changePwMsg}
                 </div>
@@ -934,13 +934,13 @@ export default function Dashboard() {
           max-width: min(1780px, 97vw);
           margin: 0 auto;
           padding: 104px max(24px, 2.5vw) 60px;
-          color: #F1F5F9;
+          color: #35536E;
         }
 
         .pw-modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(11, 19, 32, 0.85);
+          background: rgba(242, 249, 254, 0.85);
           backdrop-filter: blur(8px);
           display: grid;
           place-items: center;
@@ -951,8 +951,8 @@ export default function Dashboard() {
         .pw-modal-card {
           width: 100%;
           max-width: 440px;
-          background: #131E31;
-          border: 1.5px solid rgba(0, 229, 255, 0.3);
+          background: #F7FAFF;
+          border: 1.5px solid rgba(147, 197, 253, 0.3);
           border-radius: 18px;
           padding: 24px;
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
@@ -964,16 +964,16 @@ export default function Dashboard() {
           justify-content: space-between;
           margin-bottom: 18px;
           padding-bottom: 12px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(29, 78, 216, 0.14);
         }
 
         .pw-modal-close {
           background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          border: 1px solid rgba(29, 78, 216, 0.2);
           border-radius: 50%;
           width: 32px;
           height: 32px;
-          color: #94A3B8;
+          color: #577189;
           cursor: pointer;
           padding: 0;
           display: grid;
@@ -982,9 +982,9 @@ export default function Dashboard() {
         }
 
         .pw-modal-close:hover {
-          color: #FFFFFF;
+          color: #17324D;
           background: rgba(255, 255, 255, 0.12);
-          border-color: #00E5FF;
+          border-color: #93C5FD;
         }
 
         .dash-header-wrap {
@@ -999,7 +999,7 @@ export default function Dashboard() {
         .dash-main-title {
           font-size: clamp(26px, 3.2vw, 36px);
           font-weight: 850;
-          color: #FFFFFF;
+          color: #17324D;
           margin: 8px 0 6px;
           letter-spacing: -0.02em;
         }
@@ -1007,7 +1007,7 @@ export default function Dashboard() {
         .dash-main-sub {
           margin: 0;
           font-size: 14.5px;
-          color: #94A3B8;
+          color: #577189;
           max-width: 600px;
           line-height: 1.5;
         }
@@ -1026,8 +1026,8 @@ export default function Dashboard() {
           padding: 9px 16px;
           border-radius: 10px;
           background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.16);
-          color: #E2E8F0;
+          border: 1px solid rgba(29, 78, 216, 0.24);
+          color: #35536E;
           font-size: 13.5px;
           font-weight: 700;
           cursor: pointer;
@@ -1036,8 +1036,8 @@ export default function Dashboard() {
 
         .btn-outline-action:hover {
           background: rgba(255, 255, 255, 0.1);
-          border-color: #00E5FF;
-          color: #00E5FF;
+          border-color: #93C5FD;
+          color: #1E40AF;
         }
 
         .btn-primary-action {
@@ -1046,17 +1046,17 @@ export default function Dashboard() {
           gap: 8px;
           padding: 9px 18px;
           border-radius: 10px;
-          background: #00E5FF;
-          color: #070B14;
+          background: #93C5FD;
+          color: #17324D;
           font-size: 13.5px;
           font-weight: 800;
           text-decoration: none;
-          box-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+          box-shadow: 0 0 16px rgba(147, 197, 253, 0.4);
           transition: all 0.2s;
         }
 
         .btn-primary-action:hover {
-          background: #38BDF8;
+          background: #93C5FD;
           transform: translateY(-1px);
         }
 
@@ -1066,9 +1066,9 @@ export default function Dashboard() {
           gap: 6px;
           padding: 9px 14px;
           border-radius: 10px;
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.25);
-          color: #F87171;
+          background: rgba(147, 197, 253, 0.1);
+          border: 1px solid rgba(147, 197, 253, 0.25);
+          color: #1E40AF;
           font-size: 13px;
           font-weight: 700;
           cursor: pointer;
@@ -1076,8 +1076,8 @@ export default function Dashboard() {
         }
 
         .btn-logout-action:hover {
-          background: rgba(239, 68, 68, 0.2);
-          color: #EF4444;
+          background: rgba(147, 197, 253, 0.2);
+          color: #1E40AF;
         }
 
         /* 4 Stats Cards Grid */
@@ -1089,7 +1089,7 @@ export default function Dashboard() {
         }
 
         .dash-stat-card {
-          background: #0F172A;
+          background: #EFF6FF;
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 16px;
           padding: 20px;
@@ -1103,7 +1103,7 @@ export default function Dashboard() {
         .stat-card-title {
           font-size: 12px;
           font-weight: 750;
-          color: #94A3B8;
+          color: #577189;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin-bottom: 8px;
@@ -1112,7 +1112,7 @@ export default function Dashboard() {
         .stat-card-number {
           font-size: 28px;
           font-weight: 850;
-          color: #00E5FF;
+          color: #1E40AF;
           line-height: 1;
         }
 
@@ -1125,7 +1125,7 @@ export default function Dashboard() {
         }
 
         .stat-card-footer.green {
-          color: #34D399;
+          color: #1E40AF;
           font-weight: 700;
         }
 
@@ -1137,7 +1137,7 @@ export default function Dashboard() {
           margin-top: 12px;
           width: 100%;
           height: 6px;
-          background: #1E293B;
+          background: #FFFFFF;
           border-radius: 99px;
           overflow: hidden;
         }
@@ -1145,8 +1145,8 @@ export default function Dashboard() {
         .mini-progress-bar {
           height: 100%;
           border-radius: 99px;
-          background: #00E5FF;
-          box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+          background: #93C5FD;
+          box-shadow: 0 0 8px rgba(147, 197, 253, 0.6);
         }
 
         /* 2 Columns Grid */
@@ -1158,7 +1158,7 @@ export default function Dashboard() {
         }
 
         .dash-panel {
-          background: #0F172A;
+          background: #EFF6FF;
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 18px;
           padding: 24px;
@@ -1169,7 +1169,7 @@ export default function Dashboard() {
         .panel-title {
           font-size: 17px;
           font-weight: 800;
-          color: #FFFFFF;
+          color: #17324D;
           margin: 0 0 20px;
         }
 
@@ -1194,18 +1194,18 @@ export default function Dashboard() {
         }
 
         .label-text {
-          color: #CBD5E1;
+          color: #35536E;
         }
 
         .label-fraction {
-          color: #00E5FF;
+          color: #1E40AF;
           font-weight: 800;
         }
 
         .progress-track {
           width: 100%;
           height: 8px;
-          background: #1E293B;
+          background: #FFFFFF;
           border-radius: 99px;
           overflow: hidden;
         }
@@ -1213,16 +1213,16 @@ export default function Dashboard() {
         .progress-fill {
           height: 100%;
           border-radius: 99px;
-          background: linear-gradient(90deg, #00E5FF, #38BDF8);
-          box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+          background: linear-gradient(90deg, #93C5FD, #93C5FD);
+          box-shadow: 0 0 8px rgba(147, 197, 253, 0.4);
           transition: width 0.4s ease;
         }
 
         .info-tip-box {
           margin-top: 24px;
           padding: 14px;
-          background: rgba(30, 41, 59, 0.6);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.92);
+          border: 1px solid rgba(29, 78, 216, 0.14);
           border-radius: 12px;
           display: flex;
           gap: 12px;
@@ -1230,7 +1230,7 @@ export default function Dashboard() {
         }
 
         .tip-icon {
-          color: #00E5FF;
+          color: #1E40AF;
           flex-shrink: 0;
           margin-top: 1px;
         }
@@ -1238,12 +1238,12 @@ export default function Dashboard() {
         .tip-text {
           margin: 0;
           font-size: 12.5px;
-          color: #94A3B8;
+          color: #577189;
           line-height: 1.5;
         }
 
         .tip-text strong {
-          color: #F1F5F9;
+          color: #35536E;
         }
 
         /* Right Column Panel */
@@ -1253,7 +1253,7 @@ export default function Dashboard() {
           align-items: center;
           gap: 16px;
           padding: 20px 24px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(29, 78, 216, 0.14);
           background: rgba(255, 255, 255, 0.02);
           flex-wrap: wrap;
         }
@@ -1275,38 +1275,45 @@ export default function Dashboard() {
         .search-input-field {
           width: 100%;
           padding: 8px 14px 8px 36px;
-          background: #070B14;
+          background: #EFF6FF;
           border: 1px solid rgba(255, 255, 255, 0.15);
           border-radius: 10px;
-          color: #FFFFFF;
+          color: #17324D;
           font-size: 13px;
           outline: none;
         }
 
         .search-input-field:focus {
-          border-color: #00E5FF;
-          box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+          border-color: #93C5FD;
+          box-shadow: 0 0 10px rgba(147, 197, 253, 0.25);
         }
 
         /* Products List */
         .product-items-list {
           display: flex;
           flex-direction: column;
+          gap: 12px;
+          padding: 12px 16px;
         }
 
         .product-row-item {
-          padding: 20px 24px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          padding: 18px 20px;
+          background: #FFFFFF;
+          border: 1px solid rgba(59, 130, 246, 0.3);
+          border-radius: 14px;
           display: flex;
           justify-content: space-between;
           align-items: center;
           gap: 16px;
           flex-wrap: wrap;
-          transition: background 0.15s;
+          box-shadow: 0 3px 12px rgba(29, 78, 216, 0.08);
+          transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
         }
 
         .product-row-item:hover {
-          background: rgba(255, 255, 255, 0.02);
+          background: #F7FAFF;
+          border-color: rgba(59, 130, 246, 0.55);
+          box-shadow: 0 5px 16px rgba(29, 78, 216, 0.12);
         }
 
         .product-info-left {
@@ -1325,13 +1332,13 @@ export default function Dashboard() {
         .product-name {
           font-size: 16px;
           font-weight: 800;
-          color: #FFFFFF;
+          color: #17324D;
           margin: 0;
         }
 
         .product-meta {
           font-size: 13px;
-          color: #94A3B8;
+          color: #577189;
         }
 
         .issues-row {
@@ -1344,9 +1351,9 @@ export default function Dashboard() {
         .issue-pill {
           font-size: 11.5px;
           font-weight: 700;
-          color: #FCD34D;
-          background: rgba(245, 158, 11, 0.15);
-          border: 1px solid rgba(245, 158, 11, 0.35);
+          color: #1E40AF;
+          background: rgba(147, 197, 253, 0.15);
+          border: 1px solid rgba(147, 197, 253, 0.35);
           padding: 3px 8px;
           border-radius: 6px;
         }
@@ -1358,14 +1365,14 @@ export default function Dashboard() {
           gap: 5px;
           font-size: 12.5px;
           font-weight: 750;
-          color: #34D399;
+          color: #1E40AF;
         }
 
         /* Badges */
         .badge-green {
-          background: rgba(16, 185, 129, 0.15);
-          color: #34D399;
-          border: 1px solid rgba(16, 185, 129, 0.3);
+          background: rgba(147, 197, 253, 0.15);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.3);
           padding: 2px 10px;
           border-radius: 99px;
           font-size: 11.5px;
@@ -1376,9 +1383,9 @@ export default function Dashboard() {
         }
 
         .badge-gray {
-          background: rgba(148, 163, 184, 0.12);
-          color: #94A3B8;
-          border: 1px solid rgba(148, 163, 184, 0.25);
+          background: rgba(29, 78, 216, 0.12);
+          color: #577189;
+          border: 1px solid rgba(29, 78, 216, 0.25);
           padding: 2px 10px;
           border-radius: 99px;
           font-size: 11.5px;
@@ -1386,9 +1393,9 @@ export default function Dashboard() {
         }
 
         .badge-blue {
-          background: rgba(0, 229, 255, 0.12);
-          color: #00E5FF;
-          border: 1px solid rgba(0, 229, 255, 0.3);
+          background: rgba(147, 197, 253, 0.12);
+          color: #1E40AF;
+          border: 1px solid rgba(147, 197, 253, 0.3);
           padding: 3px 10px;
           border-radius: 99px;
           font-size: 11px;
@@ -1413,14 +1420,14 @@ export default function Dashboard() {
           font-weight: 700;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.14);
-          color: #E2E8F0;
+          color: #35536E;
           text-decoration: none;
           transition: all 0.15s;
         }
 
         .btn-view-passport:hover {
           background: rgba(255, 255, 255, 0.1);
-          color: #00E5FF;
+          color: #1E40AF;
         }
 
         .btn-toggle-verify {
@@ -1428,16 +1435,16 @@ export default function Dashboard() {
           border-radius: 8px;
           font-size: 12.5px;
           font-weight: 800;
-          background: #00E5FF;
-          color: #070B14;
+          background: #93C5FD;
+          color: #17324D;
           border: none;
           cursor: pointer;
-          box-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+          box-shadow: 0 0 12px rgba(147, 197, 253, 0.35);
           transition: all 0.15s;
         }
 
         .btn-toggle-verify:hover {
-          background: #38BDF8;
+          background: #93C5FD;
           transform: translateY(-1px);
         }
 
@@ -1448,22 +1455,22 @@ export default function Dashboard() {
           font-weight: 700;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.14);
-          color: #94A3B8;
+          color: #577189;
           cursor: pointer;
           transition: all 0.15s;
         }
 
         .btn-toggle-unverify:hover {
           background: rgba(255, 255, 255, 0.1);
-          color: #E2E8F0;
+          color: #35536E;
         }
 
         .btn-trash {
           padding: 7px 10px;
           border-radius: 8px;
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.25);
-          color: #F87171;
+          background: rgba(147, 197, 253, 0.1);
+          border: 1px solid rgba(147, 197, 253, 0.25);
+          color: #1E40AF;
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -1471,16 +1478,16 @@ export default function Dashboard() {
         }
 
         .btn-trash:hover {
-          background: rgba(239, 68, 68, 0.25);
-          color: #EF4444;
+          background: rgba(147, 197, 253, 0.25);
+          color: #1E40AF;
         }
 
         .panel-footer-count {
           padding: 14px 24px;
-          background: rgba(7, 11, 20, 0.6);
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(29, 78, 216, 0.6);
+          border-top: 1px solid rgba(29, 78, 216, 0.14);
           font-size: 13px;
-          color: #94A3B8;
+          color: #577189;
           text-align: center;
         }
 

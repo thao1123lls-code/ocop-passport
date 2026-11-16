@@ -1,10 +1,13 @@
 import "./globals.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "@fontsource/roboto/900.css";
 import PWA from "@/components/PWA";
 import NavBar from "@/components/NavBar";
 import ScrollReveal from "@/components/ScrollReveal";
 import ClientWidgets from "@/components/ClientWidgets";
 import LanguageTextSync from "@/components/LanguageTextSync";
-import SyncToast from "@/components/SyncToast";
 
 export const metadata = {
   title: {
@@ -24,7 +27,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0297DE",
+  themeColor: "#93C5FD",
   width: "device-width",
   initialScale: 1,
 };
@@ -39,7 +42,6 @@ export default function Root({ children }) {
         <ScrollReveal />
         <ClientWidgets />
         <PWA />
-        <SyncToast />
       </body>
     </html>
   );

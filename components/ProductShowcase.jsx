@@ -43,7 +43,7 @@ export default function ProductShowcase() {
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 10, borderTop: "1px solid var(--line)", fontSize: 13 }}>
               <span className="mute">{p.entries.length} mốc nhật ký</span>
-              <strong style={{ color: "var(--blue)" }}>Xem hộ chiếu →</strong>
+              <strong style={{ color: "var(--blue-dark)" }}>Xem hộ chiếu →</strong>
             </div>
           </Link>
         ))}

@@ -197,22 +197,22 @@ export default function CartDrawer({
       <style jsx>{`
         :global(:root), .u240 {
           color-scheme: dark;
-          --ux-page: #0F172A;
-          --ux-surface: #1E293B;
-          --ux-surface-2: #131D2E;
-          --ux-surface-3: #0B1120;
-          --ux-ink: #F8FAFC;
-          --ux-ink-2: #CBD5E1;
-          --ux-ink-3: #94A3B8;
-          --ux-line: rgba(255, 255, 255, 0.08);
-          --ux-line-2: rgba(255, 255, 255, 0.16);
-          --ux-accent: #38BDF8;
-          --ux-accent-2: #7DD3FC;
-          --ux-accent-soft: rgba(56, 189, 248, 0.16);
-          --ux-mint: #2DD4BF;
-          --ux-warn: #F59E0B;
-          --ux-danger: #F43F5E;
-          --ux-shadow-strong: rgba(0, 0, 0, 0.85);
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #EAF2FF;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-mint: #93C5FD;
+          --ux-warn: #1E40AF;
+          --ux-danger: #1E40AF;
+          --ux-shadow-strong: rgba(52, 112, 153, 0.16);
           --ux-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
           --ux-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
         }
@@ -236,7 +236,7 @@ export default function CartDrawer({
         .u240-ov {
           position: fixed;
           inset: 0;
-          background: rgba(15, 23, 42, 0.75) !important;
+          background: rgba(216, 239, 241, 0.94) !important;
           backdrop-filter: blur(8px) !important;
           -webkit-backdrop-filter: blur(8px) !important;
           opacity: 0;
@@ -260,16 +260,16 @@ export default function CartDrawer({
           height: 100%;
           display: flex;
           flex-direction: column;
-          background: #1E293B !important;
-          border-left: 1.5px solid rgba(56, 189, 248, 0.35);
-          box-shadow: -20px 0 60px rgba(0, 0, 0, 0.85);
+          background: #FFFFFF !important;
+          border-left: 1.5px solid rgba(147, 197, 253, 0.35);
+          box-shadow: -20px 0 60px rgba(52, 112, 153, 0.16);
           transform: translateX(105%);
           transition: transform 0.45s cubic-bezier(0.3, 1, 0.3, 1);
           border-top-left-radius: 20px;
           border-bottom-left-radius: 20px;
           z-index: 102;
           overflow: hidden;
-          color: #F8FAFC !important;
+          color: #17324D !important;
         }
 
         .u240.is-open .u240-dr {
@@ -281,7 +281,7 @@ export default function CartDrawer({
           display: flex;
           align-items: center;
           padding: 20px 18px 14px 22px;
-          background: #1E293B !important;
+          background: #FFFFFF !important;
           border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
           flex-shrink: 0;
         }
@@ -290,7 +290,7 @@ export default function CartDrawer({
           margin-right: auto;
           font-size: 18px;
           font-weight: 850;
-          color: #F8FAFC !important;
+          color: #17324D !important;
           display: inline-flex;
           align-items: center;
         }
@@ -303,13 +303,13 @@ export default function CartDrawer({
           margin-left: 8px;
           padding: 0 6px;
           border-radius: 11px;
-          background: #38BDF8 !important;
-          color: #0F172A !important;
+          background: #93C5FD !important;
+          color: #17324D !important;
           font-style: normal;
           font-size: 11.5px;
           font-weight: 900;
           vertical-align: middle;
-          box-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
+          box-shadow: 0 0 10px rgba(147, 197, 253, 0.45);
         }
 
         .u240-x {
@@ -317,8 +317,8 @@ export default function CartDrawer({
           height: 32px;
           border: 0;
           border-radius: 50%;
-          background: #131D2E !important;
-          color: #94A3B8 !important;
+          background: #F7FAFF !important;
+          color: #577189 !important;
           display: grid;
           place-items: center;
           cursor: pointer;
@@ -326,8 +326,8 @@ export default function CartDrawer({
         }
 
         .u240-x:hover {
-          background: #0F172A !important;
-          color: #F8FAFC !important;
+          background: #EFF6FF !important;
+          color: #17324D !important;
           transform: scale(1.05);
         }
 
@@ -340,35 +340,35 @@ export default function CartDrawer({
           margin: 14px 18px 10px;
           padding: 12px 16px;
           border-radius: 14px;
-          background: #131D2E !important;
+          background: #F7FAFF !important;
           font-size: 12.5px;
           font-weight: 700;
-          color: #CBD5E1 !important;
+          color: #35536E !important;
           border: 1px solid rgba(255, 255, 255, 0.1) !important;
           transition: background 0.3s, color 0.3s, border-color 0.3s;
           flex-shrink: 0;
         }
 
         .u240-fs b {
-          color: #F8FAFC !important;
+          color: #17324D !important;
           font-weight: 850;
         }
 
         .u240-fs.is-ok {
-          background: rgba(45, 212, 191, 0.16) !important;
-          color: #2DD4BF !important;
-          border-color: rgba(45, 212, 191, 0.4) !important;
+          background: rgba(147, 197, 253, 0.16) !important;
+          color: #1E40AF !important;
+          border-color: rgba(147, 197, 253, 0.4) !important;
         }
 
         .u240-fs.is-ok b {
-          color: #4ADE80 !important;
+          color: #1E40AF !important;
         }
 
         .u240-bar {
           height: 7px;
           margin-top: 8px;
           border-radius: 4px;
-          background: #0F172A !important;
+          background: #EFF6FF !important;
           overflow: hidden;
         }
 
@@ -376,14 +376,14 @@ export default function CartDrawer({
           display: block;
           height: 100%;
           border-radius: 4px;
-          background: #38BDF8 !important;
-          box-shadow: 0 0 10px #38BDF8 !important;
+          background: #93C5FD !important;
+          box-shadow: 0 0 10px #93C5FD !important;
           transition: width 0.6s cubic-bezier(0.3, 1.2, 0.5, 1), background 0.3s;
         }
 
         .u240-fs.is-ok .u240-bar i {
-          background: #2DD4BF !important;
-          box-shadow: 0 0 10px #2DD4BF !important;
+          background: #3B82F6 !important;
+          box-shadow: 0 0 10px #93C5FD !important;
         }
 
         /* List */
@@ -434,7 +434,7 @@ export default function CartDrawer({
             background: transparent;
           }
           20% {
-            background: rgba(2, 132, 199, 0.18);
+            background: rgba(29, 78, 216, 0.18);
           }
           100% {
             background: transparent;
@@ -447,7 +447,7 @@ export default function CartDrawer({
           height: 60px;
           border-radius: 10px;
           overflow: hidden;
-          background: #131D2E !important;
+          background: #F7FAFF !important;
           display: grid;
           place-items: center;
           border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -472,7 +472,7 @@ export default function CartDrawer({
           display: block;
           font-size: 13.5px;
           font-weight: 850;
-          color: #F8FAFC !important;
+          color: #17324D !important;
           line-height: 1.3;
           white-space: nowrap;
           overflow: hidden;
@@ -483,7 +483,7 @@ export default function CartDrawer({
           display: block;
           font-size: 11px;
           font-weight: 600;
-          color: #94A3B8 !important;
+          color: #577189 !important;
           margin-top: 2px;
         }
 
@@ -493,7 +493,7 @@ export default function CartDrawer({
           margin-top: 8px;
           border-radius: 8px;
           box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
-          background: #131D2E !important;
+          background: #F7FAFF !important;
           overflow: hidden;
         }
 
@@ -502,7 +502,7 @@ export default function CartDrawer({
           height: 26px;
           border: 0;
           background: none;
-          color: #CBD5E1 !important;
+          color: #35536E !important;
           font: inherit;
           font-size: 15px;
           font-weight: 700;
@@ -514,8 +514,8 @@ export default function CartDrawer({
         }
 
         .u240-qt button:hover {
-          background: #0B1120 !important;
-          color: #F8FAFC !important;
+          background: #FFFFFF !important;
+          color: #17324D !important;
         }
 
         .u240-qt span {
@@ -523,7 +523,7 @@ export default function CartDrawer({
           text-align: center;
           font-size: 12px;
           font-weight: 850;
-          color: #F8FAFC !important;
+          color: #17324D !important;
           font-variant-numeric: tabular-nums;
         }
 
@@ -534,7 +534,7 @@ export default function CartDrawer({
           gap: 12px;
           font-size: 13px;
           font-weight: 850;
-          color: #F8FAFC !important;
+          color: #17324D !important;
           font-variant-numeric: tabular-nums;
         }
 
@@ -544,7 +544,7 @@ export default function CartDrawer({
           border: 0;
           border-radius: 6px;
           background: none;
-          color: #94A3B8 !important;
+          color: #577189 !important;
           display: grid;
           place-items: center;
           cursor: pointer;
@@ -552,15 +552,15 @@ export default function CartDrawer({
         }
 
         .u240-rm:hover {
-          background: rgba(244, 63, 94, 0.2) !important;
-          color: #FB7185 !important;
+          background: rgba(147, 197, 253, 0.2) !important;
+          color: #1E40AF !important;
         }
 
         /* Footer */
         .u240-ft {
           padding: 16px 20px 24px;
           border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-          background: #1E293B !important;
+          background: #FFFFFF !important;
           flex-shrink: 0;
         }
 
@@ -570,13 +570,13 @@ export default function CartDrawer({
           align-items: baseline;
           font-size: 13px;
           font-weight: 750;
-          color: #CBD5E1 !important;
+          color: #35536E !important;
         }
 
         .u240-sm b {
           font-size: 20px;
           font-weight: 900;
-          color: #38BDF8 !important;
+          color: #1E40AF !important;
           font-variant-numeric: tabular-nums;
         }
 
@@ -587,7 +587,7 @@ export default function CartDrawer({
           border: 0;
           border-radius: 12px;
           background: var(--ux-accent);
-          color: #0F172A;
+          color: #17324D;
           font: inherit;
           font-size: 14.5px;
           font-weight: 850;
@@ -597,12 +597,12 @@ export default function CartDrawer({
           align-items: center;
           justify-content: center;
           gap: 8px;
-          box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+          box-shadow: 0 0 16px rgba(147, 197, 253, 0.35);
         }
 
         .u240-ck:hover {
-          background: var(--ux-accent-2);
-          box-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
+          background: var(--ux-accent-soft);
+          box-shadow: 0 0 22px rgba(147, 197, 253, 0.55);
           transform: translateY(-1px);
         }
 
@@ -645,7 +645,7 @@ export default function CartDrawer({
         .u240-empty {
           text-align: center;
           padding: 60px 20px;
-          color: #94A3B8 !important;
+          color: #577189 !important;
         }
 
         .u240-empty-icon {
@@ -665,7 +665,7 @@ export default function CartDrawer({
           display: block;
           font-size: 12px;
           font-weight: 750;
-          color: #94A3B8 !important;
+          color: #577189 !important;
           margin-bottom: 4px;
         }
 
@@ -675,8 +675,8 @@ export default function CartDrawer({
           padding: 9px 12px;
           border-radius: 8px;
           border: 1px solid rgba(255, 255, 255, 0.14) !important;
-          background: #131D2E !important;
-          color: #F8FAFC !important;
+          background: #F7FAFF !important;
+          color: #17324D !important;
           font: inherit;
           font-size: 13.5px;
           outline: none;
@@ -685,15 +685,15 @@ export default function CartDrawer({
 
         .u240-field input:focus,
         .u240-field textarea:focus {
-          border-color: #38BDF8 !important;
-          box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25) !important;
+          border-color: #93C5FD !important;
+          box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.25) !important;
         }
 
         .u240-idemp-badge {
           font-size: 11.5px;
-          background: rgba(56, 189, 248, 0.12) !important;
-          color: #38BDF8 !important;
-          border: 1px solid rgba(56, 189, 248, 0.35) !important;
+          background: rgba(147, 197, 253, 0.12) !important;
+          color: #1E40AF !important;
+          border: 1px solid rgba(147, 197, 253, 0.35) !important;
           padding: 6px 10px;
           border-radius: 8px;
           display: flex;
@@ -703,11 +703,11 @@ export default function CartDrawer({
 
         .u240-order-success {
           padding: 18px;
-          background: rgba(45, 212, 191, 0.15) !important;
-          border: 1px solid rgba(45, 212, 191, 0.4) !important;
+          background: rgba(147, 197, 253, 0.15) !important;
+          border: 1px solid rgba(147, 197, 253, 0.4) !important;
           border-radius: 12px;
           margin-bottom: 14px;
-          color: #2DD4BF !important;
+          color: #1E40AF !important;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -810,7 +810,7 @@ export default function CartDrawer({
                   style={{
                     background: "none",
                     border: "none",
-                    color: "var(--ux-accent)",
+                    color: "var(--ux-accent-2)",
                     fontWeight: 700,
                     fontSize: 12.5,
                     cursor: "pointer",
@@ -829,7 +829,7 @@ export default function CartDrawer({
               </div>
 
               {paymentError && (
-                <div style={{ background: "#FEF2F2", color: "#B91C1C", border: "1px solid #FCA5A5", padding: "8px 12px", borderRadius: 8, fontSize: 12 }}>
+                <div style={{ background: "#EAF2FF", color: "#1E40AF", border: "1px solid #17324D", padding: "8px 12px", borderRadius: 8, fontSize: 12 }}>
                   ⚠️ {paymentError}
                 </div>
               )}

@@ -102,6 +102,7 @@ export default function VideoCreator({ product }) {
 
   const generateVideo = async () => {
     setErr("");
+    if (document.fonts?.load) await document.fonts.load('16px "Roboto"');
     if (typeof MediaRecorder === "undefined") {
       setErr("Trình duyệt chưa hỗ trợ tạo file video (hãy dùng Chrome hoặc Edge).");
       return;
@@ -128,7 +129,7 @@ export default function VideoCreator({ product }) {
       const qrData = await QR.toDataURL(`${window.location.origin}/p/${product.id}`, {
         margin: 2,
         width: 260,
-        color: { dark: "#0F172A", light: "#FFFFFF" },
+        color: { dark: "#000000", light: "#FFFFFF" },
       });
       qrImg = await new Promise((res) => {
         const im = new Image();
@@ -185,13 +186,13 @@ export default function VideoCreator({ product }) {
       // Dynamic Ad Background with commercial gradient (light & deep blue aesthetic)
       const grad = ctx.createLinearGradient(0, 0, W, H);
       if (sc.type === "cta") {
-        grad.addColorStop(0, "#0284C7");
-        grad.addColorStop(0.5, "#026AA2");
-        grad.addColorStop(1, "#075985");
+        grad.addColorStop(0, "#D9F0FC");
+        grad.addColorStop(0.5, "#DBEAFE");
+        grad.addColorStop(1, "#EAF7FD");
       } else {
-        grad.addColorStop(0, "#026AA2");
-        grad.addColorStop(0.55, "#0284C7");
-        grad.addColorStop(1, "#38BDF8");
+        grad.addColorStop(0, "#DBEAFE");
+        grad.addColorStop(0.55, "#D9F0FC");
+        grad.addColorStop(1, "#93C5FD");
       }
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
@@ -204,22 +205,22 @@ export default function VideoCreator({ product }) {
       ctx.fill();
 
       // Top Ad Header: Brand + Flash badge
-      ctx.fillStyle = "rgba(15, 23, 42, 0.4)";
+      ctx.fillStyle = "rgba(217, 240, 252, 0.94)";
       ctx.fillRect(24, 36, W - 48, 54);
 
-      ctx.fillStyle = "#FFDD00";
-      ctx.font = "bold 15px system-ui, sans-serif";
+      ctx.fillStyle = "#1E40AF";
+      ctx.font = 'bold 15px "Roboto", system-ui, sans-serif';
       ctx.fillText(translateUI("★ OCOP PASSPORT ĐỒNG NAI", lang), 42, 70);
 
-      ctx.fillStyle = "#FFFFFF";
-      ctx.font = "bold 13px system-ui, sans-serif";
+      ctx.fillStyle = "#17324D";
+      ctx.font = 'bold 13px "Roboto", system-ui, sans-serif';
       ctx.fillText(translateUI(`LÔ ${product.lot || "0926"}`, lang), W - 120, 70);
 
       // Hook Banner (Tiktok / Reels style headline)
-      ctx.fillStyle = "#FFDD00";
+      ctx.fillStyle = "#93C5FD";
       ctx.fillRect(36, 114, W - 72, 48);
       ctx.fillStyle = "#0F172A";
-      ctx.font = "bold 18px system-ui, sans-serif";
+      ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
       ctx.textAlign = "center";
       ctx.fillText(sc.hook, W / 2, 145);
       ctx.textAlign = "left";
@@ -235,17 +236,17 @@ export default function VideoCreator({ product }) {
 
         ctx.drawImage(qrImg, W / 2 - 110, boxY + 28, 220, 220);
 
-        ctx.fillStyle = "#0284C7";
-        ctx.font = "bold 26px system-ui, sans-serif";
+        ctx.fillStyle = "#1E40AF";
+        ctx.font = 'bold 26px "Roboto", system-ui, sans-serif';
         ctx.textAlign = "center";
         ctx.fillText(sc.headline, W / 2, boxY + 290);
 
-        ctx.fillStyle = "#0278B3";
-        ctx.font = "bold 18px system-ui, sans-serif";
+        ctx.fillStyle = "#1E40AF";
+        ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
         ctx.fillText(translateUI("QUÉT QR ĐỂ XEM HỘ CHIẾU & MUA", lang), W / 2, boxY + 335);
 
         ctx.fillStyle = "#0F172A";
-        ctx.font = "14px system-ui, sans-serif";
+        ctx.font = '14px "Roboto", system-ui, sans-serif';
         ctx.fillText(translateUI("Giao hàng tận nơi · Kiểm tra nguồn gốc", lang), W / 2, boxY + 375);
         ctx.textAlign = "left";
       } else if (img) {
@@ -264,61 +265,61 @@ export default function VideoCreator({ product }) {
         ctx.restore();
 
         // Overlay sticker on photo
-        ctx.fillStyle = "rgba(2, 132, 199, 0.95)";
+        ctx.fillStyle = "#D9F0FC";
         ctx.fillRect(52, boxY + 20, 180, 34);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.font = "bold 13px system-ui, sans-serif";
+        ctx.fillStyle = "#17324D";
+        ctx.font = 'bold 13px "Roboto", system-ui, sans-serif';
         ctx.fillText(translateUI("✓ ẢNH THẬT TẠI VƯỜN", lang), 66, boxY + 42);
       } else {
         // Clean typographic product card
         ctx.fillStyle = "#FFFFFF";
         ctx.fillRect(36, boxY, W - 72, boxH);
 
-        ctx.fillStyle = "#0297DE";
-        ctx.font = "bold 18px system-ui, sans-serif";
+        ctx.fillStyle = "#1E40AF";
+        ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
         ctx.fillText(sc.badge, 64, boxY + 60);
 
         ctx.fillStyle = "#0F172A";
-        ctx.font = "bold 32px system-ui, sans-serif";
+        ctx.font = 'bold 32px "Roboto", system-ui, sans-serif';
         wrapText(ctx, product.name, 64, boxY + 115, W - 128, 42);
 
         if (product.price) {
-          ctx.fillStyle = "#0284C7";
-          ctx.font = "bold 36px system-ui, sans-serif";
+          ctx.fillStyle = "#1E40AF";
+          ctx.font = 'bold 36px "Roboto", system-ui, sans-serif';
           ctx.fillText(fmtVND(product.price), 64, boxY + 260);
           if (product.oldPrice) {
             ctx.fillStyle = "#64748B";
-            ctx.font = "20px system-ui, sans-serif";
+            ctx.font = '20px "Roboto", system-ui, sans-serif';
             ctx.fillText(fmtVND(product.oldPrice), 64, boxY + 300);
           }
         }
 
-        ctx.fillStyle = "#0278B3";
-        ctx.font = "bold 16px system-ui, sans-serif";
+        ctx.fillStyle = "#1E40AF";
+        ctx.font = 'bold 16px "Roboto", system-ui, sans-serif';
         ctx.fillText(translateUI(`Cơ sở: ${product.farm || "Đồng Nai"}`, lang), 64, boxY + 370);
       }
 
       // Bottom Commercial Caption Bar
-      ctx.fillStyle = "rgba(15, 23, 42, 0.88)";
+      ctx.fillStyle = "rgba(234, 247, 253, 0.97)";
       ctx.fillRect(36, 640, W - 72, 230);
 
-      ctx.fillStyle = "#7DD3FC";
-      ctx.font = "bold 14px system-ui, sans-serif";
+      ctx.fillStyle = "#1E40AF";
+      ctx.font = 'bold 14px "Roboto", system-ui, sans-serif';
       ctx.fillText(sc.badge, 58, 678);
 
-      ctx.fillStyle = "#FFFFFF";
-      ctx.font = "bold 26px system-ui, sans-serif";
+      ctx.fillStyle = "#17324D";
+      ctx.font = 'bold 26px "Roboto", system-ui, sans-serif';
       wrapText(ctx, sc.headline, 58, 718, W - 116, 34);
 
-      ctx.fillStyle = "rgba(255,255,255,0.92)";
-      ctx.font = "18px system-ui, sans-serif";
+      ctx.fillStyle = "#17324D";
+      ctx.font = '18px "Roboto", system-ui, sans-serif';
       wrapText(ctx, sc.sub, 58, 792, W - 116, 26);
 
       // Flashing Call-To-Action Button at bottom
-      ctx.fillStyle = "#FFDD00";
+      ctx.fillStyle = "#93C5FD";
       ctx.fillRect(48, 888, W - 96, 44);
       ctx.fillStyle = "#0F172A";
-      ctx.font = "bold 16px system-ui, sans-serif";
+      ctx.font = 'bold 16px "Roboto", system-ui, sans-serif';
       ctx.textAlign = "center";
       ctx.fillText(translateUI("👉 BẤM ĐẶT HÀNG / QUÉT QR NGAY", lang), W / 2, 916);
       ctx.textAlign = "left";
@@ -391,7 +392,7 @@ export default function VideoCreator({ product }) {
               >
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5, fontWeight: 800, color: "var(--blue-dark)" }}>
                   <span>CẢNH {idx + 1} · {s.badge}</span>
-                  <span style={{ color: "var(--blue)" }}>{s.hook}</span>
+                  <span style={{ color: "var(--blue-dark)" }}>{s.hook}</span>
                 </div>
                 <b style={{ fontSize: 14.5 }}>{s.headline}</b>
                 <p className="mute" style={{ margin: "2px 0 0", fontSize: 13 }}>
@@ -428,7 +429,7 @@ export default function VideoCreator({ product }) {
                   aspectRatio: "9 / 16",
                   borderRadius: 12,
                   border: "1px solid var(--line-strong)",
-                  background: "#0F172A",
+                  background: "#EFF6FF",
                   boxShadow: "var(--shadow-md)",
                 }}
               />
@@ -448,8 +449,8 @@ export default function VideoCreator({ product }) {
                 maxWidth: 270,
                 aspectRatio: "9 / 16",
                 borderRadius: 12,
-                background: "linear-gradient(135deg, #0278B3, #0284C7 50%, #38BDF8)",
-                color: "#fff",
+                background: "linear-gradient(135deg, #93C5FD, #93C5FD 50%, #93C5FD)",
+                color: "#17324D",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",

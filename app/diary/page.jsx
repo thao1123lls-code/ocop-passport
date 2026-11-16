@@ -298,7 +298,7 @@ export default function Diary() {
                 padding: "4px 12px",
                 borderRadius: 8,
                 background: voiceOpen ? "var(--blue)" : "var(--blue-soft)",
-                color: voiceOpen ? "#fff" : "var(--blue-dark)",
+                color: voiceOpen ? "#17324D" : "var(--blue-dark)",
                 border: "1px solid var(--blue)",
               }}
               onClick={() => setVoiceOpen(!voiceOpen)}
@@ -427,7 +427,7 @@ export default function Diary() {
                     {e.photo && <img src={e.photo} alt={stageLabel} />}
                     {e.audio && (
                       <div style={{ marginTop: 8 }}>
-                        <span style={{ fontSize: 12, color: "var(--blue)", fontWeight: 700, display: "block", marginBottom: 3 }}>
+                        <span style={{ fontSize: 12, color: "var(--blue-dark)", fontWeight: 700, display: "block", marginBottom: 3 }}>
                           🎙️ Nghe giọng nói nông hộ tại vườn:
                         </span>
                         <audio controls src={e.audio} style={{ height: 32, width: "100%", maxWidth: 320 }} />

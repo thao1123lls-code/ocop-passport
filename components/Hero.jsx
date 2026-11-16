@@ -273,26 +273,26 @@ export default function Hero() {
         .u226 {
           position: relative;
           overflow: hidden;
-          background: #07080F;
-          color: #F2F4FF;
+          background: #DBEAFE;
+          color: #17324D;
           --mx: -400px;
           --my: -400px;
-          --ux-page: #07080D;
-          --ux-surface: #13141C;
-          --ux-surface-2: #1A1B25;
-          --ux-surface-3: #252632;
-          --ux-ink: #F4F0E8;
-          --ux-ink-2: rgba(244, 240, 232, 0.68);
-          --ux-ink-3: rgba(244, 240, 232, 0.42);
-          --ux-line: rgba(255, 255, 255, 0.08);
-          --ux-line-2: rgba(255, 255, 255, 0.16);
-          --ux-accent: #B7A4FF;
-          --ux-accent-2: #7DB4FF;
-          --ux-accent-soft: rgba(183, 164, 255, 0.15);
-          --ux-accent-ink: #0B0C12;
-          --ux-mint: #7EE8C0;
-          --ux-warn: #FFB26B;
-          --ux-danger: #FF7D8C;
+          --ux-page: #EFF6FF;
+          --ux-surface: #FFFFFF;
+          --ux-surface-2: #F7FAFF;
+          --ux-surface-3: #DBEAFE;
+          --ux-ink: #17324D;
+          --ux-ink-2: #35536E;
+          --ux-ink-3: #577189;
+          --ux-line: rgba(29, 78, 216, 0.14);
+          --ux-line-2: rgba(29, 78, 216, 0.24);
+          --ux-accent: #93C5FD;
+          --ux-accent-2: #1E40AF;
+          --ux-accent-soft: rgba(147, 197, 253, 0.18);
+          --ux-accent-ink: #17324D;
+          --ux-mint: #93C5FD;
+          --ux-warn: #1E40AF;
+          --ux-danger: #1E40AF;
           --ux-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
           --ux-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
         }
@@ -347,7 +347,7 @@ export default function Hero() {
           height: 320px;
           margin: -160px 0 0 -250px;
           border-radius: 50%;
-          background: radial-gradient(closest-side, rgba(99, 102, 241, 0.35), transparent);
+          background: radial-gradient(closest-side, rgba(147, 197, 253, 0.35), transparent);
           filter: blur(28px);
           pointer-events: none;
           z-index: 0;
@@ -369,7 +369,6 @@ export default function Hero() {
 
         :global(.hero-inner) {
           max-width: min(1680px, 95vw) !important;
-          grid-template-columns: 1.15fr 0.85fr !important;
           gap: 56px !important;
         }
 
@@ -380,29 +379,29 @@ export default function Hero() {
           margin: 0 0 16px;
           font-weight: 900;
           letter-spacing: -0.03em;
-          background: linear-gradient(180deg, #FFFFFF 15%, #AEB4D6 100%);
+          background: linear-gradient(180deg, #1D4ED8 15%, #3B82F6 100%);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
         }
 
         :global(.hero-pill) {
-          background: rgba(255, 255, 255, 0.06) !important;
-          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12) !important;
-          color: #A5B4FC !important;
+          background: rgba(147, 197, 253, 0.16) !important;
+          box-shadow: inset 0 0 0 1.5px rgba(29, 78, 216, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.75) !important;
+          color: #1E40AF !important;
           letter-spacing: 0.04em;
         }
 
         :global(.hero .lead) {
-          color: #9AA0C3 !important;
+          color: #577189 !important;
           font-size: clamp(16px, 1.25vw, 18.5px) !important;
           max-width: 660px;
           line-height: 1.6 !important;
         }
 
         :global(.hero-metric) {
-          background: rgba(255, 255, 255, 0.04) !important;
-          border: 1px solid rgba(255, 255, 255, 0.09) !important;
+          background: transparent !important;
+          border: 1.5px solid rgba(29, 78, 216, 0.4) !important;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -411,14 +410,14 @@ export default function Hero() {
         }
 
         :global(.hero-metric b) {
-          color: #FFFFFF !important;
+          color: #17324D !important;
           font-size: 14.5px;
           font-weight: 750;
         }
 
         :global(.btn.white) {
           background: #FFFFFF !important;
-          color: #07080F !important;
+          color: #17324D !important;
           box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
         }
 
@@ -430,7 +429,7 @@ export default function Hero() {
         :global(.btn.ghost) {
           background: rgba(255, 255, 255, 0.07) !important;
           box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16) !important;
-          color: #FFFFFF !important;
+          color: #17324D !important;
         }
 
         :global(.btn.ghost:hover) {
@@ -500,7 +499,7 @@ export default function Hero() {
           background: rgba(255, 255, 255, 0.18);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
-          color: #fff;
+          color: #17324D;
           font: inherit;
           font-size: 11.5px;
           font-weight: 750;
@@ -528,6 +527,46 @@ export default function Hero() {
             top: 14px;
             right: 14px;
           }
+
+          :global(.hero) {
+            min-height: auto !important;
+            padding: 82px 18px calc(160px + env(safe-area-inset-bottom)) !important;
+          }
+
+          :global(.hero-inner) {
+            width: 100%;
+            max-width: 640px !important;
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 28px !important;
+          }
+
+          .hc {
+            width: 100%;
+            min-width: 0;
+          }
+
+          .u216-h {
+            max-width: 100%;
+            font-size: clamp(34px, 8vw, 48px);
+            line-height: 1.12;
+          }
+
+        }
+
+        @media (max-width: 480px) {
+          :global(.hero) {
+            padding-inline: 16px !important;
+          }
+
+          :global(.hero-inner) {
+            gap: 22px !important;
+          }
+
+          .u216-h {
+            font-size: clamp(32px, 9vw, 40px);
+            margin-bottom: 12px;
+          }
+
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -584,7 +623,7 @@ export default function Hero() {
           left: 50%;
           width: 86%;
           height: 32px;
-          background: radial-gradient(ellipse at center, rgba(0, 229, 255, 0.5) 0%, rgba(2, 132, 199, 0.28) 45%, transparent 75%);
+          background: radial-gradient(ellipse at center, rgba(147, 197, 253, 0.5) 0%, rgba(29, 78, 216, 0.28) 45%, transparent 75%);
           filter: blur(16px);
           transform: translateX(-50%);
           pointer-events: none;
@@ -606,17 +645,17 @@ export default function Hero() {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
           /* Tông Cyber Dark Navy cao cấp ăn khớp với website */
-          background: linear-gradient(160deg, #0F172A 0%, #0B1320 45%, #060A12 100%);
-          border: 1.5px solid rgba(0, 229, 255, 0.45);
+          background: linear-gradient(160deg, #EFF6FF 0%, #FFFFFF 45%, #EFF6FF 100%);
+          border: 1.5px solid rgba(147, 197, 253, 0.45);
           /* Hiệu ứng nổi bật đa tầng (Neon glow + 3D shadow) */
           box-shadow:
             0 25px 60px -10px rgba(0, 0, 0, 0.9),
-            0 0 35px rgba(0, 229, 255, 0.3),
+            0 0 35px rgba(147, 197, 253, 0.3),
             inset 0 1px 1px rgba(255, 255, 255, 0.25);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          color: #F8FAFC;
+          color: #17324D;
         }
 
         .face-front {
@@ -633,8 +672,8 @@ export default function Hero() {
           align-items: center;
           justify-content: space-between;
           padding: 12px 18px;
-          background: rgba(11, 19, 32, 0.88);
-          border-bottom: 1px solid rgba(0, 229, 255, 0.22);
+          background: rgba(242, 249, 254, 0.88);
+          border-bottom: 1px solid rgba(147, 197, 253, 0.22);
           backdrop-filter: blur(10px);
         }
 
@@ -642,41 +681,41 @@ export default function Hero() {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          background: rgba(0, 229, 255, 0.12);
-          border: 1px solid rgba(0, 229, 255, 0.45);
+          background: rgba(147, 197, 253, 0.12);
+          border: 1px solid rgba(147, 197, 253, 0.45);
           border-radius: 99px;
           padding: 4px 12px;
           font-size: 11.5px;
           font-weight: 800;
-          color: #00E5FF;
+          color: #1E40AF;
           letter-spacing: 0.04em;
-          box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
+          box-shadow: 0 0 12px rgba(147, 197, 253, 0.2);
         }
 
         .warm-dot {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #00E5FF;
-          box-shadow: 0 0 8px #00E5FF;
+          background: #93C5FD;
+          box-shadow: 0 0 8px #93C5FD;
         }
 
         .warm-dot-mint {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #38BDF8;
-          box-shadow: 0 0 8px #38BDF8;
+          background: #93C5FD;
+          box-shadow: 0 0 8px #93C5FD;
         }
 
         .warm-lot {
           font-size: 11.5px;
           font-weight: 750;
-          color: #94A3B8;
-          background: rgba(0, 0, 0, 0.45);
+          color: #577189;
+          background: rgba(29, 78, 216, 0.18);
           padding: 3px 10px;
           border-radius: 99px;
-          border: 1px solid rgba(0, 229, 255, 0.2);
+          border: 1px solid rgba(147, 197, 253, 0.2);
         }
 
         /* Khung ảnh sản phẩm mặt trước - To hơn, chiếm trọn tâm điểm thị giác */
@@ -684,12 +723,12 @@ export default function Hero() {
           position: relative;
           width: 100%;
           height: 385px;
-          background: radial-gradient(circle at center, #132238 0%, #080D18 100%);
+          background: radial-gradient(circle at center, #F7FAFF 0%, #EAF2FF 100%);
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+          border-bottom: 1px solid rgba(147, 197, 253, 0.2);
         }
 
         .warm-img {
@@ -709,14 +748,14 @@ export default function Hero() {
           position: absolute;
           top: 12px;
           right: 12px;
-          background: linear-gradient(135deg, #00E5FF 0%, #0284C7 100%);
-          color: #04101E;
+          background: linear-gradient(135deg, #93C5FD 0%, #93C5FD 100%);
+          color: #17324D;
           border: 1px solid rgba(255, 255, 255, 0.6);
           font-size: 11.5px;
           font-weight: 850;
           padding: 4px 12px;
           border-radius: 99px;
-          box-shadow: 0 4px 14px rgba(0, 229, 255, 0.45);
+          box-shadow: 0 4px 14px rgba(147, 197, 253, 0.45);
         }
 
         /* Nội dung chi tiết mặt trước */
@@ -732,7 +771,7 @@ export default function Hero() {
         .warm-title {
           font-size: 20px;
           font-weight: 850;
-          color: #FFFFFF;
+          color: #17324D;
           margin: 0 0 6px;
           line-height: 1.3;
           letter-spacing: -0.01em;
@@ -740,7 +779,7 @@ export default function Hero() {
 
         .warm-farm {
           font-size: 13px;
-          color: #94A3B8;
+          color: #577189;
           margin: 0 0 8px;
           line-height: 1.45;
         }
@@ -757,15 +796,15 @@ export default function Hero() {
           font-weight: 700;
           padding: 3px 9px;
           border-radius: 6px;
-          background: rgba(0, 229, 255, 0.1);
-          border: 1px solid rgba(0, 229, 255, 0.3);
-          color: #38BDF8;
+          background: rgba(147, 197, 253, 0.1);
+          border: 1px solid rgba(147, 197, 253, 0.3);
+          color: #1E40AF;
         }
 
         .warm-story-snippet {
           font-size: 12.5px;
           line-height: 1.55;
-          color: #CBD5E1;
+          color: #35536E;
           margin: 0;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -778,32 +817,32 @@ export default function Hero() {
           align-items: center;
           justify-content: space-between;
           padding: 10px 14px;
-          background: rgba(6, 10, 18, 0.65);
+          background: rgba(147, 197, 253, 0.65);
           border-radius: 12px;
-          border: 1px solid rgba(0, 229, 255, 0.35);
+          border: 1px solid rgba(147, 197, 253, 0.35);
           box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
           margin-top: 4px;
         }
 
         .warm-price-label {
           font-size: 12px;
-          color: #94A3B8;
+          color: #577189;
           font-weight: 600;
         }
 
         .warm-price-val {
           font-size: 22px;
           font-weight: 900;
-          color: #00E5FF;
-          text-shadow: 0 0 14px rgba(0, 229, 255, 0.55);
+          color: #1E40AF;
+          text-shadow: 0 0 14px rgba(147, 197, 253, 0.55);
         }
 
         .warm-hover-hint {
           text-align: center;
           font-size: 11.5px;
-          color: #38BDF8;
-          background: rgba(0, 229, 255, 0.1);
-          border: 1px dashed rgba(0, 229, 255, 0.35);
+          color: #1E40AF;
+          background: rgba(147, 197, 253, 0.1);
+          border: 1px dashed rgba(147, 197, 253, 0.35);
           border-radius: 8px;
           padding: 6px 10px;
           font-weight: 650;
@@ -824,20 +863,20 @@ export default function Hero() {
           background: #FFFFFF;
           padding: 12px;
           border-radius: 14px;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 229, 255, 0.35);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(147, 197, 253, 0.35);
           margin-bottom: 16px;
         }
 
         .warm-back-title {
           font-size: 16.5px;
           font-weight: 800;
-          color: #FFFFFF;
+          color: #17324D;
           margin: 0 0 8px;
         }
 
         .warm-back-desc {
           font-size: 12px;
-          color: #94A3B8;
+          color: #577189;
           line-height: 1.5;
           margin: 0 auto 16px;
           max-width: 280px;
@@ -845,8 +884,8 @@ export default function Hero() {
 
         .warm-btn-action {
           width: 100%;
-          background: linear-gradient(135deg, #00E5FF 0%, #0284C7 100%);
-          color: #04101E !important;
+          background: linear-gradient(135deg, #93C5FD 0%, #93C5FD 100%);
+          color: #17324D !important;
           border: none;
           border-radius: 12px;
           padding: 11px 16px;
@@ -858,14 +897,51 @@ export default function Hero() {
           justify-content: center;
           gap: 6px;
           text-decoration: none !important;
-          box-shadow: 0 0 20px rgba(0, 229, 255, 0.45);
+          box-shadow: 0 0 20px rgba(147, 197, 253, 0.45);
           transition: all 0.2s ease;
         }
 
         .warm-btn-action:hover {
-          background: linear-gradient(135deg, #38BDF8 0%, #00E5FF 100%);
-          box-shadow: 0 0 28px rgba(0, 229, 255, 0.7);
+          background: linear-gradient(135deg, #93C5FD 0%, #93C5FD 100%);
+          box-shadow: 0 0 28px rgba(147, 197, 253, 0.7);
           transform: translateY(-2px);
+        }
+
+        @media (max-width: 860px) {
+          .featured-flip-scene {
+            width: min(100%, 460px);
+          }
+
+          .featured-flip-card {
+            min-height: 560px;
+          }
+
+          .warm-stage {
+            height: clamp(250px, 62vw, 340px);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .featured-flip-card {
+            min-height: 520px;
+          }
+
+          .warm-stage {
+            height: clamp(220px, 60vw, 280px);
+          }
+
+          .warm-body {
+            padding: 14px;
+          }
+
+          .warm-price-row {
+            gap: 8px;
+            padding: 10px;
+          }
+
+          .warm-price-val {
+            font-size: 20px;
+          }
         }
       `}</style>
 
@@ -998,7 +1074,7 @@ export default function Hero() {
                     ) : (
                       <div style={{ textAlign: "center", padding: 20 }}>
                         <span style={{ fontSize: 56 }}>🍫</span>
-                        <p style={{ margin: "6px 0 0", color: "#F8FAFC", fontSize: 13, fontWeight: 700 }}>
+                        <p style={{ margin: "6px 0 0", color: "#17324D", fontSize: 13, fontWeight: 700 }}>
                           {featured.name}
                         </p>
                       </div>
@@ -1011,7 +1087,7 @@ export default function Hero() {
                       <h3 className="warm-title" style={{ fontSize: 21, fontWeight: 900, marginBottom: 4 }}>
                         {featured.name}
                       </h3>
-                      <p className="warm-farm" style={{ fontSize: 13.5, color: "#94A3B8", margin: 0 }}>
+                      <p className="warm-farm" style={{ fontSize: 13.5, color: "#577189", margin: 0 }}>
                         {featured.farm || "Cơ sở sản xuất OCOP Đồng Nai"}
                       </p>
                     </div>
@@ -1040,12 +1116,12 @@ export default function Hero() {
                             fontSize: 13,
                             padding: "11px 16px",
                             borderRadius: 12,
-                            background: "rgba(0, 229, 255, 0.12)",
-                            color: "#E0F2FE",
-                            border: "1px solid rgba(0, 229, 255, 0.4)",
+                            background: "rgba(147, 197, 253, 0.12)",
+                            color: "#17324D",
+                            border: "1px solid rgba(147, 197, 253, 0.4)",
                             cursor: "pointer",
                             whiteSpace: "nowrap",
-                            boxShadow: "0 0 12px rgba(0, 229, 255, 0.15)",
+                            boxShadow: "0 0 12px rgba(147, 197, 253, 0.15)",
                           }}
                           onClick={(e) => {
                             e.stopPropagation();

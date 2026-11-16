@@ -5,6 +5,25 @@ import { usePathname, useRouter } from "next/navigation";
 import { useLang } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth-client";
 
+function NavIcon({ href }) {
+  const common = {
+    width: 18,
+    height: 18,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.9,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": true,
+  };
+
+  if (href === "/") return <svg {...common}><path d="m3 10 9-7 9 7" /><path d="M5 9v11h14V9M9 20v-6h6v6" /></svg>;
+  if (href === "/diary") return <svg {...common}><path d="M6 3h9l4 4v14H6z" /><path d="M14 3v5h5M9 12h7M9 16h7" /></svg>;
+  if (href === "/studio") return <svg {...common}><path d="m12 3 1.9 5.7L20 11l-6.1 2.1L12 19l-1.9-5.9L4 11l6.1-2.3L12 3Z" /><path d="m19 15 .9 2.1L22 18l-2.1.8L19 21l-.8-2.2L16 18l2.2-.9L19 15Z" /></svg>;
+  return <svg {...common}><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>;
+}
+
 export default function NavBar() {
   const path = usePathname();
   const router = useRouter();
@@ -88,13 +107,13 @@ export default function NavBar() {
           }}
         >
           <span className="brand-qr-box" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F172A" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EFF6FF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="6" height="6" rx="1.5" />
               <rect x="15" y="3" width="6" height="6" rx="1.5" />
               <rect x="3" y="15" width="6" height="6" rx="1.5" />
-              <circle cx="6" cy="6" r="1" fill="#0F172A" stroke="none" />
-              <circle cx="18" cy="6" r="1" fill="#0F172A" stroke="none" />
-              <circle cx="6" cy="18" r="1" fill="#0F172A" stroke="none" />
+              <circle cx="6" cy="6" r="1" fill="#EFF6FF" stroke="none" />
+              <circle cx="18" cy="6" r="1" fill="#EFF6FF" stroke="none" />
+              <circle cx="6" cy="18" r="1" fill="#EFF6FF" stroke="none" />
               <path d="M15 15h2v2h-2zM19 19h2v2h-2zM19 15h2v2h-2zM15 19h2v2h-2z" />
             </svg>
           </span>
@@ -123,7 +142,8 @@ export default function NavBar() {
                   }, 1400);
                 }}
               >
-                {label}
+                <span className="nav-link-icon"><NavIcon href={href} /></span>
+                <span className="nav-link-label">{label}</span>
               </Link>
             );
           })}
@@ -160,7 +180,7 @@ export default function NavBar() {
             className={`nav-lock-btn ${path?.startsWith("/login") ? "active" : ""}`}
             title={user ? `${user.name} · Tài khoản` : "Đăng nhập / Đăng ký"}
             aria-label={user ? `Tài khoản ${user.name}` : "Đăng nhập"}
-            style={user ? { color: "#34D399", borderColor: "rgba(52,211,153,.5)" } : undefined}
+            style={user ? { color: "#1E40AF", borderColor: "rgba(52,211,153,.5)" } : undefined}
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="12" cy="8" r="4" />
