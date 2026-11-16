@@ -250,7 +250,7 @@ export default function JourneyShowcase({ entries = [], lang = "vi" }) {
         </div>
 
         {/* Right: Editorial Number + Stage Title + Recorded Entries */}
-        <div style={{ paddingTop: 4 }}>
+        <div style={{ paddingTop: 0, marginTop: -10 }}>
           <div
             style={{
               fontSize: "clamp(56px, 6vw, 72px)",

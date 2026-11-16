@@ -129,6 +129,20 @@ export default function GiftBoxBuilder({ onAddBox }) {
 
   return (
     <section aria-labelledby="gift-title" style={{ marginTop: 32 }}>
+      <style jsx global>{`
+        .giftbox-product-option,
+        .giftbox-product-option:disabled {
+          background: #ffffff !important;
+          color: #17324d !important;
+          border: 1px solid rgba(29, 78, 216, 0.22) !important;
+          box-shadow: 0 2px 8px rgba(52, 112, 153, 0.08) !important;
+        }
+
+        .giftbox-product-option:hover:not(:disabled) {
+          background: #eff6ff !important;
+          color: #17324d !important;
+        }
+      `}</style>
       <div className="sec-head">
         <div>
           <span className="badge">{isEn ? "— Dong Nai OCOP Gift Box" : "— Quà tặng OCOP Đồng Nai"}</span>
@@ -258,6 +272,7 @@ export default function GiftBoxBuilder({ onAddBox }) {
 
             {items.length === 0 ? (
               <div
+                className="giftbox-product-grid"
                 style={{
                   background: "var(--panel-subtle)",
                   border: "1px dashed var(--line-strong)",
@@ -310,14 +325,16 @@ export default function GiftBoxBuilder({ onAddBox }) {
                   <button
                     key={item.id}
                     type="button"
+                    className="giftbox-product-option"
                     disabled={count >= 7}
                     onClick={() => pickItem(item)}
                     style={{
-                      background: "#F7FAFF",
-                      color: "var(--ink)",
-                      border: "1px solid rgba(29, 78, 216, 0.2)",
+                      background: "#FFFFFF",
+                      color: "#17324D",
+                      border: "1px solid rgba(29, 78, 216, 0.22)",
                       borderRadius: 12,
                       padding: "9px 12px",
+                      boxShadow: "0 2px 8px rgba(52, 112, 153, 0.08)",
                       justifyContent: "flex-start",
                       textAlign: "left",
                       fontWeight: 600,

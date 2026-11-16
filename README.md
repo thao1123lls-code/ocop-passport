@@ -307,7 +307,7 @@ git push -u origin feat/ten-tinh-nang
 | Vấn đề gặp phải | Cách khắc phục |
 |---|---|
 | Báo lỗi khi đăng nhập trên máy mới | Đảm bảo đã cập nhật `lib/db.js`, `lib/auth.js` và `app/api/auth/login/route.js` bản mới nhất (tích hợp sẵn 24 tài khoản dự phòng). Ở trang `/dashboard` nhớ dùng `admin@ocop.vn` / `Demo@12345`. |
-| Cổng 3000 đang bị ứng dụng khác chiếm | Chạy lệnh `npm run dev -- -p 3001` để mở ở cổng 3001. |
+| Cổng 3000 đang bị ứng dụng khác chiếm | Dừng ứng dụng đang dùng cổng 3000 rồi chạy lại `npm run dev`. |
 | Micro hoặc GPS không hoạt động | Chỉ hoạt động trên `http://localhost` hoặc tên miền có `https://`. Hãy cấp quyền Micro/Vị trí cho trình duyệt (khuyến nghị dùng Chrome hoặc Edge). |
 | Git báo lỗi `Filename too long` trên Windows | Mở PowerShell chạy `git config --global core.longpaths true`. |
 | Trợ lý AI báo “Soạn bằng mẫu câu” | Bạn chưa điền `ANTHROPIC_API_KEY` trong `.env.local` — hệ thống tự động chuyển sang bộ mẫu câu thông minh để không làm gián đoạn trải nghiệm. |
