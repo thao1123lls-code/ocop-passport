@@ -4,7 +4,22 @@ import { usePathname } from "next/navigation";
 export default function PWA() {
   const path = usePathname();
   useEffect(() => {
-    if (!("serviceWorker" in navigator) || process.env.NODE_ENV !== "production") return;
+    if (!("serviceWorker" in navigator)) return;
+    if (process.env.NODE_ENV !== "production") {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (const registration of registrations) {
+          registration.unregister().catch(() => {});
+        }
+      });
+      if (typeof window !== "undefined" && "caches" in window) {
+        caches.keys().then((keys) => {
+          for (const key of keys) {
+            caches.delete(key).catch(() => {});
+          }
+        });
+      }
+      return;
+    }
     let disposed = false;
     navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).then((registration) => {
       if (!disposed) registration.update().catch(() => {});

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useDB, STAGES, fmt, dec, fmtVND } from "@/lib/store";
-import { useAuth } from "@/lib/auth-client";
 import ProductQR, { getPassportUrl } from "@/components/ProductQR";
 import JourneyShowcase from "@/components/JourneyShowcase";
 import FlavorRadar from "@/components/FlavorRadar";
@@ -18,17 +17,13 @@ const CartDrawer = dynamic(() => import("@/components/CartDrawer"), { ssr: false
 export default function ProductDetailPage() {
   const { lang } = useLang();
   const { id } = useParams();
-  const [db, save] = useDB();
-  const { user } = useAuth();
+  const [db] = useDB();
   const [q, setQ] = useState();
   const [url, setUrl] = useState("");
   const [copied, setCopied] = useState(false);
   const [bag, setBag] = useState([]);
   const [bagOpen, setBagOpen] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
-  const [editingPrice, setEditingPrice] = useState(false);
-  const [priceInput, setPriceInput] = useState("");
-  const [priceSaved, setPriceSaved] = useState(false);
 
   // Khởi tạo giỏ hàng từ LocalStorage
   useEffect(() => {
@@ -57,7 +52,6 @@ export default function ProductDetailPage() {
     }
   }, []);
 
-  const canEdit = !!user && (user.role === "admin" || (user.role === "owner" && db?.products?.find((x) => x.id === id)?.ownerId === user.id));
   const p = db && q !== undefined ? db.products?.find((x) => x.id === id) || q : null;
 
   useEffect(() => {
@@ -179,7 +173,6 @@ export default function ProductDetailPage() {
 
             {/* Badges góc ảnh */}
             <div className="detail-badge-top-left">
-              <span className="detail-badge-icon" title="Hệ thống OCOP Passport">🧠</span>
               <span className="detail-badge-pill-dark">Sản phẩm OCOP</span>
             </div>
             <div className="detail-badge-bottom-right">
@@ -230,136 +223,9 @@ export default function ProductDetailPage() {
           {/* Tên sản phẩm to đậm */}
           <h1 className="detail-product-title">{p.name}</h1>
 
-          {/* Hàng Giá & Tình trạng kho - Cho phép ấn vào để sửa giá */}
+          {/* Giá hộ chiếu chỉ để xem; thay đổi giá trong bảng điều khiển. */}
           <div className="detail-price-status-row" style={{ flexWrap: "wrap", gap: 10, alignItems: "center" }}>
-            {!editingPrice ? (
-              <>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (!canEdit) return;
-                    setPriceInput(String(p.price || 145000));
-                    setEditingPrice(true);
-                  }}
-                  title={canEdit ? "Bấm để chỉnh sửa giá bán sản phẩm" : undefined}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: 0,
-                    cursor: canEdit ? "pointer" : "default",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    textAlign: "left",
-                  }}
-                >
-                  <span className="detail-price-val">
-                    {fmtVND(p.price || 145000)}
-                  </span>
-{canEdit && (
-                  <span
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 750,
-                      color: "var(--blue-dark)",
-                      background: "rgba(147, 197, 253, 0.12)",
-                      border: "1px solid rgba(147, 197, 253, 0.3)",
-                      padding: "3px 8px",
-                      borderRadius: 6,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 4,
-                    }}
-                  >
-                    ✏️ Sửa giá
-                  </span>
-)}
-                </button>
-                {priceSaved && (
-                  <span style={{ fontSize: 12.5, color: "#1E40AF", fontWeight: 700 }}>
-                    ✓ Đã lưu giá mới!
-                  </span>
-                )}
-              </>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const num = parseInt(String(priceInput).replace(/\D/g, ""), 10);
-                  if (!isNaN(num) && num > 0) {
-                    save((d) => {
-                      const item = d.products?.find((x) => x.id === p.id);
-                      if (item) item.price = num;
-                    });
-                    setPriceSaved(true);
-                    setEditingPrice(false);
-                    setTimeout(() => setPriceSaved(false), 2500);
-                  }
-                }}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "#EFF6FF",
-                  padding: "6px 12px",
-                  borderRadius: 10,
-                  border: "1px solid rgba(147, 197, 253, 0.4)",
-                  boxShadow: "0 0 14px rgba(147, 197, 253, 0.25)",
-                }}
-              >
-                <span style={{ fontSize: 13, color: "#577189", fontWeight: 700 }}>Giá:</span>
-                <input
-                  type="number"
-                  step="5000"
-                  min="1000"
-                  value={priceInput}
-                  onChange={(e) => setPriceInput(e.target.value)}
-                  autoFocus
-                  style={{
-                    width: 130,
-                    padding: "5px 8px",
-                    background: "#FFFFFF",
-                    border: "1px solid var(--line-cyber)",
-                    borderRadius: 6,
-                    color: "#17324D",
-                    fontSize: 15,
-                    fontWeight: 800,
-                  }}
-                />
-                <span style={{ fontSize: 12, color: "#577189" }}>đ</span>
-                <button
-                  type="submit"
-                  style={{
-                    padding: "5px 12px",
-                    background: "#93C5FD",
-                    color: "#17324D",
-                    border: "none",
-                    borderRadius: 6,
-                    fontWeight: 800,
-                    fontSize: 12.5,
-                    cursor: "pointer",
-                  }}
-                >
-                  Lưu
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEditingPrice(false)}
-                  style={{
-                    padding: "5px 10px",
-                    background: "rgba(255,255,255,0.08)",
-                    color: "#35536E",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    borderRadius: 6,
-                    fontWeight: 700,
-                    fontSize: 12.5,
-                    cursor: "pointer",
-                  }}
-                >
-                  Hủy
-                </button>
-              </form>
-            )}
+            <span className="detail-price-val">{fmtVND(p.price || 145000)}</span>
             <span className="detail-stock-badge">
               ✓ Còn hàng
             </span>
@@ -537,7 +403,6 @@ export default function ProductDetailPage() {
                       )}
                     </Link>
                     <div className="pcard-badge-top-left">
-                      <span className="pcard-badge-icon">🧠</span>
                       <span className="pcard-badge-pill-dark">Sản phẩm OCOP</span>
                     </div>
                   </div>

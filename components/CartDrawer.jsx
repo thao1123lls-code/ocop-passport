@@ -196,7 +196,7 @@ export default function CartDrawer({
     <div className={`ux u240 ${isOpen ? "is-open" : ""}`}>
       <style jsx>{`
         :global(:root), .u240 {
-          color-scheme: dark;
+          color-scheme: light;
           --ux-page: #EFF6FF;
           --ux-surface: #FFFFFF;
           --ux-surface-2: #F7FAFF;

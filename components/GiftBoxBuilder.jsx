@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useDB, fmtVND } from "@/lib/store";
 import { useLang } from "@/lib/i18n";
 
-const PALETTE = ["#DBEAFE", "#D9F0FC", "#A9DDF6", "#EAF7FD", "#93C5FD", "#D9F0FC"];
+const PALETTE = ["#BAE6FD", "#E0F2FE", "#BAE6FD", "#CFE8FC", "#BAE6FD", "#E0F2FE"];
 
 function HexSlot({ item, onClick }) {
   return (
@@ -18,9 +18,9 @@ function HexSlot({ item, onClick }) {
         padding: 6,
         border: 0,
         background: item
-          ? `linear-gradient(135deg, ${item.color}, #D9F0FC)`
-          : "rgba(29, 78, 216, 0.08)",
-        color: item ? "#17324D" : "var(--blue-dark)",
+          ? `linear-gradient(135deg, ${item.color}, #BAE6FD)`
+          : "rgba(56, 189, 248, 0.14)",
+        color: item ? "#0369A1" : "#0284C7",
         clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
         display: "flex",
         flexDirection: "column",
@@ -31,7 +31,7 @@ function HexSlot({ item, onClick }) {
         fontWeight: 700,
         lineHeight: 1.2,
         cursor: item ? "pointer" : "default",
-        boxShadow: item ? "0 8px 20px rgba(29, 78, 216, 0.25)" : "none",
+        boxShadow: item ? "0 8px 20px rgba(56, 189, 248, 0.28)" : "none",
         transition: "transform 0.15s ease",
       }}
     >
@@ -130,17 +130,27 @@ export default function GiftBoxBuilder({ onAddBox }) {
   return (
     <section aria-labelledby="gift-title" style={{ marginTop: 32 }}>
       <style jsx global>{`
-        .giftbox-product-option,
+        .giftbox-product-option {
+          background: #E0F2FE !important;
+          color: #0369A1 !important;
+          border: 1.5px solid #7DD3FC !important;
+          box-shadow: 0 2px 8px rgba(56, 189, 248, 0.12) !important;
+          transition: all 0.18s ease !important;
+        }
+
         .giftbox-product-option:disabled {
-          background: #ffffff !important;
-          color: #17324d !important;
-          border: 1px solid rgba(29, 78, 216, 0.22) !important;
-          box-shadow: 0 2px 8px rgba(52, 112, 153, 0.08) !important;
+          background: #F0F9FF !important;
+          color: #94A3B8 !important;
+          border-color: #E2E8F0 !important;
+          opacity: 0.72;
         }
 
         .giftbox-product-option:hover:not(:disabled) {
-          background: #eff6ff !important;
-          color: #17324d !important;
+          background: #BAE6FD !important;
+          border-color: #38BDF8 !important;
+          color: #0284C7 !important;
+          transform: translateY(-1px) !important;
+          box-shadow: 0 4px 14px rgba(56, 189, 248, 0.28) !important;
         }
       `}</style>
       <div className="sec-head">
@@ -161,8 +171,9 @@ export default function GiftBoxBuilder({ onAddBox }) {
         className="card"
         style={{
           padding: "26px 24px",
-          background: "linear-gradient(135deg, rgba(29, 78, 216, 0.05), rgba(147, 197, 253, 0.08))",
-          borderColor: "rgba(29, 78, 216, 0.22)",
+          background: "linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)",
+          borderColor: "#BAE6FD",
+          boxShadow: "0 8px 24px rgba(56, 189, 248, 0.12)",
         }}
       >
         <div className="grid-2" style={{ gap: 28, alignItems: "center" }}>
@@ -329,15 +340,15 @@ export default function GiftBoxBuilder({ onAddBox }) {
                     disabled={count >= 7}
                     onClick={() => pickItem(item)}
                     style={{
-                      background: "#FFFFFF",
-                      color: "#17324D",
-                      border: "1px solid rgba(29, 78, 216, 0.22)",
+                      background: "#E0F2FE",
+                      color: "#0369A1",
+                      border: "1.5px solid #7DD3FC",
                       borderRadius: 12,
                       padding: "9px 12px",
-                      boxShadow: "0 2px 8px rgba(52, 112, 153, 0.08)",
+                      boxShadow: "0 2px 8px rgba(56, 189, 248, 0.12)",
                       justifyContent: "flex-start",
                       textAlign: "left",
-                      fontWeight: 600,
+                      fontWeight: 700,
                       fontSize: 13,
                     }}
                   >
@@ -346,8 +357,9 @@ export default function GiftBoxBuilder({ onAddBox }) {
                         width: 28,
                         height: 28,
                         borderRadius: 8,
-                        background: item.color,
-                        color: "#17324D",
+                        background: "#BAE6FD",
+                        color: "#0284C7",
+                        border: "1px solid #7DD3FC",
                         display: "grid",
                         placeItems: "center",
                         fontSize: 11,
@@ -361,7 +373,7 @@ export default function GiftBoxBuilder({ onAddBox }) {
                       <span style={{ display: "block", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                         {item.name}
                       </span>
-                      <span className="mute" style={{ fontSize: 12 }}>
+                      <span style={{ fontSize: 12, color: "#0284C7", fontWeight: 750 }}>
                         {fmtVND(item.price)}
                       </span>
                     </span>

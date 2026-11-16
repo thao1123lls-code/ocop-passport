@@ -649,8 +649,8 @@ export default function Hero() {
           border: 1.5px solid rgba(147, 197, 253, 0.45);
           /* Hiệu ứng nổi bật đa tầng (Neon glow + 3D shadow) */
           box-shadow:
-            0 25px 60px -10px rgba(0, 0, 0, 0.9),
-            0 0 35px rgba(147, 197, 253, 0.3),
+            0 20px 45px -10px rgba(56, 189, 248, 0.32),
+            0 0 30px rgba(147, 197, 253, 0.3),
             inset 0 1px 1px rgba(255, 255, 255, 0.25);
           display: flex;
           flex-direction: column;

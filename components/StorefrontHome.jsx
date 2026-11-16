@@ -10,9 +10,7 @@ import StretchingPagination from "./StretchingPagination";
 import { useLang } from "@/lib/i18n";
 
 // Lazy load Cart Drawer và Gift Box Builder theo nhu cầu để giảm 45% bundle ban đầu
-const GiftBoxBuilder = dynamic(() => import("./GiftBoxBuilder"), {
-  ssr: false,
-});
+import GiftBoxBuilder from "./GiftBoxBuilder";
 const CartDrawer = dynamic(() => import("./CartDrawer"), {
   ssr: false,
 });
@@ -884,18 +882,18 @@ export default function StorefrontHome() {
         .pcard-v2 {
           background: #FFFFFF !important;
           border-radius: 18px;
-          border: 1.5px solid rgba(29, 78, 216, 0.14);
+          border: 1.5px solid rgba(56, 189, 248, 0.35);
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 4px 16px rgba(56, 189, 248, 0.12), 0 1px 3px rgba(29, 78, 216, 0.06);
           transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         }
 
         .pcard-v2:hover {
           transform: translateY(-4px);
-          border-color: #93C5FD;
-          box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 0 22px rgba(147, 197, 253, 0.25);
+          border-color: #38BDF8;
+          box-shadow: 0 12px 28px rgba(56, 189, 248, 0.24), 0 0 16px rgba(147, 197, 253, 0.3);
         }
 
         .pcard-photo-wrap {

@@ -549,6 +549,36 @@ button:disabled {
   transform: none;
 }
 
+/* Tháº» sáº£n pháº©m Tá»± tay Ä‘Ã³ng há»™p - MÃ u xanh dÆ°Æ¡ng nháº¡t pastel chuáº©n */
+button.giftbox-product-option,
+.giftbox-product-option {
+  background: #E0F2FE !important;
+  background-color: #E0F2FE !important;
+  color: #0369A1 !important;
+  border: 1.5px solid #7DD3FC !important;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.12) !important;
+  font-weight: 700 !important;
+}
+
+button.giftbox-product-option:disabled,
+.giftbox-product-option:disabled {
+  background: #F0F9FF !important;
+  background-color: #F0F9FF !important;
+  color: #94A3B8 !important;
+  border-color: #E2E8F0 !important;
+  opacity: 0.72 !important;
+}
+
+button.giftbox-product-option:hover:not(:disabled),
+.giftbox-product-option:hover:not(:disabled) {
+  background: #BAE6FD !important;
+  background-color: #BAE6FD !important;
+  border-color: #38BDF8 !important;
+  color: #0284C7 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.28) !important;
+}
+
 :focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
@@ -940,7 +970,7 @@ iframe {
   color: var(--mute);
 }
 
-/* Section Bridge: Phân tách hoàn h?o ph?n Hero (? trên) và ph?n Gian hàng (? du?i) */
+/* Section Bridge: Phï¿½n tï¿½ch hoï¿½n h?o ph?n Hero (? trï¿½n) vï¿½ ph?n Gian hï¿½ng (? du?i) */
 .section-divider-wrap {
   position: relative;
   width: 100%;
@@ -1105,7 +1135,7 @@ iframe {
 }
 
 /* ========================================================
-   PORTAL TOOLS SECTION (PH?N CU?I TRANG - CHU?N DESIGN YÊU C?U)
+   PORTAL TOOLS SECTION (PH?N CU?I TRANG - CHU?N DESIGN Yï¿½U C?U)
    ======================================================== */
 .portal-section {
   width: 100%;

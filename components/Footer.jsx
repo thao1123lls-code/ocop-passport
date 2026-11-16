@@ -204,7 +204,7 @@ export default function Footer() {
           background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
           background-size: 28px 28px;
           border-top: 1px solid rgba(29, 78, 216, 0.14);
-          padding: 38px 36px 24px;
+          padding: 28px 36px 20px;
           color: #577189;
           font-size: 14px;
           overflow: hidden;
@@ -438,7 +438,7 @@ export default function Footer() {
 
         @media (max-width: 640px) {
           .site-custom-footer {
-            padding: 48px 18px 28px;
+            padding: 34px 18px 22px;
           }
           .footer-grid {
             grid-template-columns: 1fr;

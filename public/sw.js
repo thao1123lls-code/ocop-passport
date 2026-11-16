@@ -1,4 +1,4 @@
-const C = "ocop-v7";
+const C = "ocop-v8";
 self.addEventListener("install", (e) =>
   e.waitUntil(caches.open(C).then((cache) => cache.add("/offline.html")).then(() => self.skipWaiting()))
 );
