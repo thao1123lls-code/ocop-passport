@@ -535,9 +535,24 @@ export default function StorefrontHome() {
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
-            <div style={{ display: "inline-flex", gap: 6, marginBottom: 8 }}>
+            <div style={{ display: "inline-flex", gap: 6, marginBottom: 8, flexWrap: "wrap", alignItems: "center" }}>
               <span className="pcard-ocop-badge">✓ OCOP {qrModalProduct.certs || (lang === "en" ? "4-star" : "4 sao")}</span>
               <span className="pcard-lot-text">{storeT.lot} {qrModalProduct.lot || "CDQ-2026"}</span>
+              <span
+                style={{
+                  background: "#1E40AF",
+                  color: "#FFFFFF",
+                  padding: "2px 8px",
+                  borderRadius: 6,
+                  fontSize: 11,
+                  fontWeight: 750,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                🛡️ Đã xác minh bởi Đoàn xã/phường
+              </span>
             </div>
             <h3 style={{ margin: "4px 0 10px", fontSize: 18.5, fontWeight: 800, color: "#17324D" }}>
               {qrModalProduct.name}

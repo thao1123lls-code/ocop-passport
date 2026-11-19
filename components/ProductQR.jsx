@@ -77,12 +77,32 @@ export default function ProductQR({ product, size = 160, showDownload = false })
           imageRendering: "pixelated",
         }}
       />
+      <div
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 5,
+          background: "rgba(30, 64, 175, 0.08)",
+          color: "#1E40AF",
+          border: "1px solid rgba(147, 197, 253, 0.45)",
+          borderRadius: 99,
+          padding: "3px 10px",
+          fontSize: 11,
+          fontWeight: 750,
+          whiteSpace: "nowrap",
+          letterSpacing: "0.02em",
+          boxShadow: "0 1px 3px rgba(30, 64, 175, 0.06)",
+        }}
+        title="Dữ liệu nhật ký và nguồn gốc OCOP đã được Đoàn xã/phường thẩm định"
+      >
+        <span>🛡️</span>
+        <span>Đã xác minh bởi Đoàn xã/phường</span>
+      </div>
       {showDownload && (
         <a className="btn" download={`qr-${product.id}.png`} href={src} style={{ fontSize: 13.5, padding: "8px 14px" }}>
           Tải mã QR ({product.id})
         </a>
       )}
-
     </div>
   );
 }

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useDB, STAGES, slug, uid, fmt, fmtVND } from "@/lib/store";
@@ -59,6 +59,8 @@ export default function Diary() {
   const [txt, setTxt] = useState("");
   const [img, setImg] = useState(null);
   const [vol, setVol] = useState(false);
+  const [volName, setVolName] = useState("");
+  const [volOrg, setVolOrg] = useState("Đoàn xã/phường Đồng Nai");
   const [msg, setMsg] = useState("");
   const [nn, setNn] = useState("");
   const [newPrice, setNewPrice] = useState(150000);
@@ -203,13 +205,20 @@ export default function Diary() {
           ts: Date.now(),
           geo,
           by: vol ? "volunteer" : "owner",
+          volunteerName: vol ? (volName.trim() || "Đoàn viên thanh niên") : null,
+          volunteerOrg: vol ? (volOrg.trim() || "Đoàn xã/phường") : null,
+          verifiedByYouthUnion: !!vol,
         });
+        if (vol) {
+          prod.verifiedByYouthUnion = true;
+          prod.youthUnionOrg = volOrg.trim() || prod.youthUnionOrg || "Đoàn xã/phường";
+        }
       }
     });
     setTxt("");
     setImg(null);
     setAudioRecord(null);
-    setMsg(`Đã lưu mốc “${STAGES[st][0]}”${audioRecord ? " kèm giọng nói" : ""}${geo ? " kèm vị trí" : ""}${on ? "" : " (ngoại tuyến, lưu trên máy)"}.`);
+    setMsg(`Đã lưu mốc “${STAGES[st][0]}”${vol ? " (Đoàn viên nhập hộ & Đã xác minh)" : ""}${audioRecord ? " kèm giọng nói" : ""}${geo ? " kèm vị trí" : ""}${on ? "" : " (ngoại tuyến, lưu trên máy)"}.`);
   };
 
   return (
@@ -376,12 +385,90 @@ export default function Diary() {
             onChange={async (e) => e.target.files[0] && setImg(await shrink(e.target.files[0]))}
           />
           {img && <img src={img} alt="Xem trước" style={{ maxWidth: 180, borderRadius: 10, marginTop: 10, border: "1px solid var(--line)" }} />}
-          <label className="ck" style={{ marginTop: 14 }}>
-            <input type="checkbox" checked={vol} onChange={(e) => setVol(e.target.checked)} />
-            Tôi nhập hộ (tình nguyện viên Đoàn đồng hành số)
-          </label>
-          <div className="row" style={{ marginTop: 14 }}>
-            <button onClick={add}>Lưu vào nhật ký</button>
+          {/* Mục Chế độ: Đoàn viên nhập hộ */}
+          <div
+            style={{
+              marginTop: 18,
+              padding: "14px 16px",
+              background: vol ? "rgba(30, 64, 175, 0.08)" : "rgba(147, 197, 253, 0.1)",
+              borderRadius: 12,
+              border: vol ? "1.5px solid var(--blue-dark)" : "1px dashed var(--line-strong)",
+              transition: "all 0.2s ease",
+            }}
+          >
+            <label
+              className="ck"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                cursor: "pointer",
+                margin: 0,
+                fontWeight: 750,
+                fontSize: 14,
+                color: "var(--ink)",
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={vol}
+                onChange={(e) => setVol(e.target.checked)}
+                style={{ width: 18, height: 18, accentColor: "#1E40AF" }}
+              />
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                🚩 <b>Đoàn viên nhập hộ</b>
+                <span
+                  style={{
+                    fontSize: 11.5,
+                    padding: "2px 8px",
+                    borderRadius: 99,
+                    background: vol ? "#1E40AF" : "rgba(30, 64, 175, 0.12)",
+                    color: vol ? "#FFFFFF" : "#1E40AF",
+                    fontWeight: 700,
+                  }}
+                >
+                  {vol ? "Đang bật chế độ Đoàn viên" : "Đoàn Thanh niên đồng hành số"}
+                </span>
+              </span>
+            </label>
+
+            {vol && (
+              <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px dashed rgba(30, 64, 175, 0.2)" }}>
+                <p style={{ margin: "0 0 10px", fontSize: 12.5, color: "var(--blue-dark)", lineHeight: 1.45 }}>
+                  🛡️ Khi bật mục này, dữ liệu nhật ký sẽ được đánh dấu <b>“Đã xác minh bởi Đoàn xã/phường”</b> hiển thị chính thức trên Hộ chiếu số và mã QR của sản phẩm.
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10 }}>
+                  <div>
+                    <label style={{ fontSize: 12, fontWeight: 700, marginBottom: 4, display: "block" }}>
+                      Họ tên Đoàn viên hỗ trợ
+                    </label>
+                    <input
+                      placeholder="VD: Nguyễn Văn An"
+                      value={volName}
+                      onChange={(e) => setVolName(e.target.value)}
+                      style={{ fontSize: 13, padding: "7px 10px", borderRadius: 8 }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: 12, fontWeight: 700, marginBottom: 4, display: "block" }}>
+                      Đoàn cơ sở / Chi đoàn xã, phường
+                    </label>
+                    <input
+                      placeholder="VD: Đoàn xã Phú Hòa, H. Định Quán"
+                      value={volOrg}
+                      onChange={(e) => setVolOrg(e.target.value)}
+                      style={{ fontSize: 13, padding: "7px 10px", borderRadius: 8 }}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="row" style={{ marginTop: 16 }}>
+            <button onClick={add} style={{ width: "100%", justifyContent: "center" }}>
+              {vol ? "✓ Lưu nhật ký & Xác nhận xác minh Đoàn viên" : "Lưu vào nhật ký"}
+            </button>
           </div>
           {msg && (
             <p className="mute" role="status" style={{ marginTop: 10, color: "var(--blue-dark)", fontWeight: 600 }}>
@@ -420,8 +507,27 @@ export default function Diary() {
                     <span className="mute">
                       {fmt(e.ts)}
                       {e.geo ? " · có GPS" : ""}
-                      {e.by === "volunteer" ? " · Đoàn viên nhập hộ" : ""}
                     </span>
+                    {(e.by === "volunteer" || e.verifiedByYouthUnion) && (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
+                          background: "rgba(30, 64, 175, 0.12)",
+                          color: "#1E40AF",
+                          border: "1px solid rgba(147, 197, 253, 0.45)",
+                          padding: "2px 8px",
+                          borderRadius: 6,
+                          fontSize: 11,
+                          fontWeight: 750,
+                          marginLeft: 6,
+                          verticalAlign: "middle",
+                        }}
+                      >
+                        🛡️ Đã xác minh bởi Đoàn xã/phường {e.volunteerName ? `(${e.volunteerName})` : ""}
+                      </span>
+                    )}
                     <br />
                     {e.text}
                     {e.photo && <img src={e.photo} alt={stageLabel} />}

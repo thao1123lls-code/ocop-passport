@@ -172,8 +172,27 @@ export default function ProductDetailPage() {
             )}
 
             {/* Badges góc ảnh */}
-            <div className="detail-badge-top-left">
+            <div className="detail-badge-top-left" style={{ display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
               <span className="detail-badge-pill-dark">Sản phẩm OCOP</span>
+              <span
+                style={{
+                  background: "#1E40AF",
+                  color: "#FFFFFF",
+                  padding: "4px 10px",
+                  borderRadius: 99,
+                  fontSize: 11.5,
+                  fontWeight: 800,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 5,
+                  boxShadow: "0 2px 8px rgba(30, 64, 175, 0.4)",
+                  letterSpacing: "0.02em",
+                }}
+                title="Hồ sơ và nhật ký số đã được thẩm định & xác minh bởi Đoàn xã/phường"
+              >
+                <span>🛡️</span>
+                <span>Đã xác minh bởi Đoàn xã/phường</span>
+              </span>
             </div>
             <div className="detail-badge-bottom-right">
               <span className="detail-badge-pill-green">Từ năm 2005</span>
@@ -184,9 +203,25 @@ export default function ProductDetailPage() {
           <div className="detail-mini-qr-box">
             <ProductQR product={p} size={76} />
             <div style={{ flex: 1 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2, flexWrap: "wrap" }}>
                 <b style={{ fontSize: 13.5, color: "var(--ink)" }}>Mã Hộ chiếu số OCOP</b>
                 <span className="badge ok" style={{ padding: "1px 6px", fontSize: 10.5 }}>✓ Đã cấp</span>
+                <span
+                  style={{
+                    background: "rgba(30, 64, 175, 0.12)",
+                    color: "#1E40AF",
+                    border: "1px solid rgba(147, 197, 253, 0.45)",
+                    padding: "1px 7px",
+                    borderRadius: 6,
+                    fontSize: 10.5,
+                    fontWeight: 750,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 3,
+                  }}
+                >
+                  🛡️ Đã xác minh bởi Đoàn xã/phường
+                </span>
               </div>
               <p style={{ margin: 0, fontSize: 12, color: "var(--mute)", lineHeight: 1.4 }}>
                 Tem QR động chống giả mạo, liên kết trực tiếp với nhật ký số từ vườn.
@@ -346,6 +381,26 @@ export default function ProductDetailPage() {
                 <li key={e.id}>
                   <b>{typeof e.stage === "number" ? STAGES[e.stage]?.[0] : e.stage}</b>{" "}
                   <span className="mute" style={{ fontSize: 12 }}>{fmt(e.ts)}</span>
+                  {(e.by === "volunteer" || e.verifiedByYouthUnion) && (
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 4,
+                        background: "rgba(30, 64, 175, 0.12)",
+                        color: "#1E40AF",
+                        border: "1px solid rgba(147, 197, 253, 0.45)",
+                        padding: "2px 8px",
+                        borderRadius: 6,
+                        fontSize: 11,
+                        fontWeight: 750,
+                        marginLeft: 6,
+                        verticalAlign: "middle",
+                      }}
+                    >
+                      🛡️ Đoàn viên nhập hộ · Đã xác minh bởi Đoàn xã/phường {e.volunteerName ? `(${e.volunteerName})` : ""}
+                    </span>
+                  )}
                   <br />
                   <span style={{ fontSize: 14, color: "var(--ink)", display: "block", marginTop: 3 }}>
                     {e.text}
