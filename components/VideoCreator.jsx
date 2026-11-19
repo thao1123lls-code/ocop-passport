@@ -163,21 +163,24 @@ export default function VideoCreator({ product }) {
         console.warn("Không thể tạo mã QR cho video:", e);
       }
 
-      // Preload any real photos from diary entries with crossOrigin safe handling
+      // Preload any real photos from diary entries with safe handling
       const loadedImgs = await Promise.all(
         scenes.map(
           (s) =>
             new Promise((res) => {
               if (!s.photo) return res(null);
               const im = new Image();
-              im.crossOrigin = "anonymous";
+              // Chỉ bật anonymous cho URL tuyệt đối bên ngoài (http/https), không bật cho ảnh local / data uri
+              if (s.photo.startsWith("http://") || s.photo.startsWith("https://")) {
+                im.crossOrigin = "anonymous";
+              }
               im.onload = () => res(im);
               im.onerror = () => {
-                // Thử lại không gắn crossOrigin phòng khi ảnh data-uri hoặc cùng host
-                const fallbackIm = new Image();
-                fallbackIm.onload = () => res(fallbackIm);
-                fallbackIm.onerror = () => res(null);
-                fallbackIm.src = s.photo;
+                // Thử tải lại dạng fallback nếu CORS bị từ chối
+                const fb = new Image();
+                fb.onload = () => res(fb);
+                fb.onerror = () => res(null);
+                fb.src = s.photo;
               };
               im.src = s.photo;
             })
@@ -186,6 +189,7 @@ export default function VideoCreator({ product }) {
 
       const captureFn = canvas.captureStream ? canvas.captureStream.bind(canvas) : canvas.mozCaptureStream.bind(canvas);
       const stream = captureFn(30);
+      const track = stream.getVideoTracks ? stream.getVideoTracks()[0] : null;
 
       let options = {};
       if (typeof MediaRecorder.isTypeSupported === "function") {
@@ -209,6 +213,11 @@ export default function VideoCreator({ product }) {
       const done = new Promise((resolve, reject) => {
         rec.onstop = () => {
           try {
+            const totalBytes = chunks.reduce((s, c) => s + c.size, 0);
+            if (totalBytes === 0) {
+              reject(new Error("Không thể ghi nhận khung hình video. Hãy bấm tạo lại."));
+              return;
+            }
             const mimeType = options.mimeType || "video/webm";
             const blob = new Blob(chunks, { type: mimeType });
             resolve(URL.createObjectURL(blob));
@@ -219,168 +228,182 @@ export default function VideoCreator({ product }) {
         rec.onerror = (err) => reject(err);
       });
 
-      rec.start(200);
-
-      const totalMs = 6000; // 4 scenes x 1.5s (tổng 6s gọn gàng, dựng nhanh)
+      const totalMs = 6000; // 4 scenes x 1.5s
       const sceneMs = totalMs / scenes.length;
+
+      const drawFrameAt = (elapsed) => {
+        const sIdx = Math.min(scenes.length - 1, Math.floor(elapsed / sceneMs));
+        const localT = Math.min(1, (elapsed % sceneMs) / sceneMs);
+        const sc = scenes[sIdx];
+        const img = loadedImgs[sIdx];
+
+        // Dynamic Ad Background with commercial gradient
+        const grad = ctx.createLinearGradient(0, 0, W, H);
+        if (sc.type === "cta") {
+          grad.addColorStop(0, "#D9F0FC");
+          grad.addColorStop(0.5, "#DBEAFE");
+          grad.addColorStop(1, "#EAF7FD");
+        } else {
+          grad.addColorStop(0, "#DBEAFE");
+          grad.addColorStop(0.55, "#D9F0FC");
+          grad.addColorStop(1, "#93C5FD");
+        }
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+
+        // Pulsing glow circle in background
+        const pulse = 1 + 0.08 * Math.sin(localT * Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.14)";
+        ctx.beginPath();
+        ctx.arc(W / 2, 420, 220 * pulse, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Top Ad Header: Brand + Flash badge
+        ctx.fillStyle = "rgba(217, 240, 252, 0.94)";
+        ctx.fillRect(24, 36, W - 48, 54);
+
+        ctx.fillStyle = "#1E40AF";
+        ctx.font = 'bold 15px "Roboto", system-ui, sans-serif';
+        ctx.fillText(translateUI("★ OCOP PASSPORT ĐỒNG NAI", lang), 42, 70);
+
+        ctx.fillStyle = "#17324D";
+        ctx.font = 'bold 13px "Roboto", system-ui, sans-serif';
+        ctx.fillText(translateUI(`LÔ ${product.lot || "0926"}`, lang), W - 120, 70);
+
+        // Hook Banner
+        ctx.fillStyle = "#93C5FD";
+        ctx.fillRect(36, 114, W - 72, 48);
+        ctx.fillStyle = "#0F172A";
+        ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
+        ctx.textAlign = "center";
+        ctx.fillText(sc.hook, W / 2, 145);
+        ctx.textAlign = "left";
+
+        // Center Visual Area
+        const boxY = 186;
+        const boxH = 430;
+
+        if (sc.type === "cta" && qrImg) {
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(36, boxY, W - 72, boxH);
+
+          ctx.drawImage(qrImg, W / 2 - 110, boxY + 28, 220, 220);
+
+          ctx.fillStyle = "#1E40AF";
+          ctx.font = 'bold 26px "Roboto", system-ui, sans-serif';
+          ctx.textAlign = "center";
+          ctx.fillText(sc.headline, W / 2, boxY + 290);
+
+          ctx.fillStyle = "#1E40AF";
+          ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
+          ctx.fillText(translateUI("QUÉT QR ĐỂ XEM HỘ CHIẾU & MUA", lang), W / 2, boxY + 335);
+
+          ctx.fillStyle = "#0F172A";
+          ctx.font = '14px "Roboto", system-ui, sans-serif';
+          ctx.fillText(translateUI("Giao hàng tận nơi · Kiểm tra nguồn gốc", lang), W / 2, boxY + 375);
+          ctx.textAlign = "left";
+        } else if (img) {
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(36, boxY, W - 72, boxH);
+
+          const scale = Math.max((W - 72) / img.width, boxH / img.height);
+          const dw = img.width * scale;
+          const dh = img.height * scale;
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(36, boxY, W - 72, boxH);
+          ctx.clip();
+          ctx.drawImage(img, 36 + (W - 72 - dw) / 2, boxY + (boxH - dh) / 2, dw, dh);
+          ctx.restore();
+
+          // Overlay sticker on photo
+          ctx.fillStyle = "#D9F0FC";
+          ctx.fillRect(52, boxY + 20, 180, 34);
+          ctx.fillStyle = "#17324D";
+          ctx.font = 'bold 13px "Roboto", system-ui, sans-serif';
+          ctx.fillText(translateUI("✓ ẢNH THẬT TẠI VƯỜN", lang), 66, boxY + 42);
+        } else {
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(36, boxY, W - 72, boxH);
+
+          ctx.fillStyle = "#1E40AF";
+          ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
+          ctx.fillText(sc.badge, 64, boxY + 60);
+
+          ctx.fillStyle = "#0F172A";
+          ctx.font = 'bold 30px "Roboto", system-ui, sans-serif';
+          wrapText(ctx, product.name, 64, boxY + 115, W - 128, 42);
+
+          if (product.price) {
+            ctx.fillStyle = "#1E40AF";
+            ctx.font = 'bold 36px "Roboto", system-ui, sans-serif';
+            ctx.fillText(fmtVND(product.price), 64, boxY + 260);
+            if (product.oldPrice) {
+              ctx.fillStyle = "#64748B";
+              ctx.font = '20px "Roboto", system-ui, sans-serif';
+              ctx.fillText(fmtVND(product.oldPrice), 64, boxY + 300);
+            }
+          }
+
+          ctx.fillStyle = "#1E40AF";
+          ctx.font = 'bold 16px "Roboto", system-ui, sans-serif';
+          ctx.fillText(translateUI(`Cơ sở: ${product.farm || "Đồng Nai"}`, lang), 64, boxY + 370);
+        }
+
+        // Bottom Commercial Caption Bar
+        ctx.fillStyle = "rgba(234, 247, 253, 0.97)";
+        ctx.fillRect(36, 640, W - 72, 230);
+
+        ctx.fillStyle = "#1E40AF";
+        ctx.font = 'bold 14px "Roboto", system-ui, sans-serif';
+        ctx.fillText(sc.badge, 58, 678);
+
+        ctx.fillStyle = "#17324D";
+        ctx.font = 'bold 26px "Roboto", system-ui, sans-serif';
+        wrapText(ctx, sc.headline, 58, 718, W - 116, 34);
+
+        ctx.fillStyle = "#17324D";
+        ctx.font = '18px "Roboto", system-ui, sans-serif';
+        wrapText(ctx, sc.sub, 58, 792, W - 116, 26);
+
+        // Flashing Call-To-Action Button at bottom
+        ctx.fillStyle = "#93C5FD";
+        ctx.fillRect(48, 888, W - 96, 44);
+        ctx.fillStyle = "#0F172A";
+        ctx.font = 'bold 16px "Roboto", system-ui, sans-serif';
+        ctx.textAlign = "center";
+        ctx.fillText(translateUI("👉 BẤM ĐẶT HÀNG / QUÉT QR NGAY", lang), W / 2, 916);
+        ctx.textAlign = "left";
+
+        if (track && track.requestFrame) {
+          try {
+            track.requestFrame();
+          } catch {}
+        }
+      };
+
+      // Vẽ ngay frame đầu tiên trước khi bấm máy ghi
+      drawFrameAt(0);
+
+      rec.start(100);
+
       const start = performance.now();
 
       await new Promise((resolveRender) => {
-        const renderFrame = (now) => {
+        const renderLoop = (now) => {
           const elapsed = now - start;
-          const sIdx = Math.min(scenes.length - 1, Math.floor(elapsed / sceneMs));
-          const localT = Math.min(1, (elapsed % sceneMs) / sceneMs);
-          const sc = scenes[sIdx];
-          const img = loadedImgs[sIdx];
-
-          // Dynamic Ad Background with commercial gradient (light & deep blue aesthetic)
-          const grad = ctx.createLinearGradient(0, 0, W, H);
-          if (sc.type === "cta") {
-            grad.addColorStop(0, "#D9F0FC");
-            grad.addColorStop(0.5, "#DBEAFE");
-            grad.addColorStop(1, "#EAF7FD");
-          } else {
-            grad.addColorStop(0, "#DBEAFE");
-            grad.addColorStop(0.55, "#D9F0FC");
-            grad.addColorStop(1, "#93C5FD");
-          }
-          ctx.fillStyle = grad;
-          ctx.fillRect(0, 0, W, H);
-
-          // Pulsing glow circle in background
-          const pulse = 1 + 0.08 * Math.sin(localT * Math.PI * 2);
-          ctx.fillStyle = "rgba(255,255,255,0.12)";
-          ctx.beginPath();
-          ctx.arc(W / 2, 420, 220 * pulse, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Top Ad Header: Brand + Flash badge
-          ctx.fillStyle = "rgba(217, 240, 252, 0.94)";
-          ctx.fillRect(24, 36, W - 48, 54);
-
-          ctx.fillStyle = "#1E40AF";
-          ctx.font = 'bold 15px "Roboto", system-ui, sans-serif';
-          ctx.fillText(translateUI("★ OCOP PASSPORT ĐỒNG NAI", lang), 42, 70);
-
-          ctx.fillStyle = "#17324D";
-          ctx.font = 'bold 13px "Roboto", system-ui, sans-serif';
-          ctx.fillText(translateUI(`LÔ ${product.lot || "0926"}`, lang), W - 120, 70);
-
-          // Hook Banner (Tiktok / Reels style headline)
-          ctx.fillStyle = "#93C5FD";
-          ctx.fillRect(36, 114, W - 72, 48);
-          ctx.fillStyle = "#0F172A";
-          ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
-          ctx.textAlign = "center";
-          ctx.fillText(sc.hook, W / 2, 145);
-          ctx.textAlign = "left";
-
-          // Center Visual Area
-          const boxY = 186;
-          const boxH = 430;
-
-          if (sc.type === "cta" && qrImg) {
-            // Scene 4: Big QR Code + Scan to Buy CTA
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(36, boxY, W - 72, boxH);
-
-            ctx.drawImage(qrImg, W / 2 - 110, boxY + 28, 220, 220);
-
-            ctx.fillStyle = "#1E40AF";
-            ctx.font = 'bold 26px "Roboto", system-ui, sans-serif';
-            ctx.textAlign = "center";
-            ctx.fillText(sc.headline, W / 2, boxY + 290);
-
-            ctx.fillStyle = "#1E40AF";
-            ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
-            ctx.fillText(translateUI("QUÉT QR ĐỂ XEM HỘ CHIẾU & MUA", lang), W / 2, boxY + 335);
-
-            ctx.fillStyle = "#0F172A";
-            ctx.font = '14px "Roboto", system-ui, sans-serif';
-            ctx.fillText(translateUI("Giao hàng tận nơi · Kiểm tra nguồn gốc", lang), W / 2, boxY + 375);
-            ctx.textAlign = "left";
-          } else if (img) {
-            // Product / Diary photo
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(36, boxY, W - 72, boxH);
-
-            const scale = Math.max((W - 72) / img.width, boxH / img.height);
-            const dw = img.width * scale;
-            const dh = img.height * scale;
-            ctx.save();
-            ctx.beginPath();
-            ctx.rect(36, boxY, W - 72, boxH);
-            ctx.clip();
-            ctx.drawImage(img, 36 + (W - 72 - dw) / 2, boxY + (boxH - dh) / 2, dw, dh);
-            ctx.restore();
-
-            // Overlay sticker on photo
-            ctx.fillStyle = "#D9F0FC";
-            ctx.fillRect(52, boxY + 20, 180, 34);
-            ctx.fillStyle = "#17324D";
-            ctx.font = 'bold 13px "Roboto", system-ui, sans-serif';
-            ctx.fillText(translateUI("✓ ẢNH THẬT TẠI VƯỜN", lang), 66, boxY + 42);
-          } else {
-            // Clean typographic product card
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(36, boxY, W - 72, boxH);
-
-            ctx.fillStyle = "#1E40AF";
-            ctx.font = 'bold 18px "Roboto", system-ui, sans-serif';
-            ctx.fillText(sc.badge, 64, boxY + 60);
-
-            ctx.fillStyle = "#0F172A";
-            ctx.font = 'bold 32px "Roboto", system-ui, sans-serif';
-            wrapText(ctx, product.name, 64, boxY + 115, W - 128, 42);
-
-            if (product.price) {
-              ctx.fillStyle = "#1E40AF";
-              ctx.font = 'bold 36px "Roboto", system-ui, sans-serif';
-              ctx.fillText(fmtVND(product.price), 64, boxY + 260);
-              if (product.oldPrice) {
-                ctx.fillStyle = "#64748B";
-                ctx.font = '20px "Roboto", system-ui, sans-serif';
-                ctx.fillText(fmtVND(product.oldPrice), 64, boxY + 300);
-              }
-            }
-
-            ctx.fillStyle = "#1E40AF";
-            ctx.font = 'bold 16px "Roboto", system-ui, sans-serif';
-            ctx.fillText(translateUI(`Cơ sở: ${product.farm || "Đồng Nai"}`, lang), 64, boxY + 370);
-          }
-
-          // Bottom Commercial Caption Bar
-          ctx.fillStyle = "rgba(234, 247, 253, 0.97)";
-          ctx.fillRect(36, 640, W - 72, 230);
-
-          ctx.fillStyle = "#1E40AF";
-          ctx.font = 'bold 14px "Roboto", system-ui, sans-serif';
-          ctx.fillText(sc.badge, 58, 678);
-
-          ctx.fillStyle = "#17324D";
-          ctx.font = 'bold 26px "Roboto", system-ui, sans-serif';
-          wrapText(ctx, sc.headline, 58, 718, W - 116, 34);
-
-          ctx.fillStyle = "#17324D";
-          ctx.font = '18px "Roboto", system-ui, sans-serif';
-          wrapText(ctx, sc.sub, 58, 792, W - 116, 26);
-
-          // Flashing Call-To-Action Button at bottom
-          ctx.fillStyle = "#93C5FD";
-          ctx.fillRect(48, 888, W - 96, 44);
-          ctx.fillStyle = "#0F172A";
-          ctx.font = 'bold 16px "Roboto", system-ui, sans-serif';
-          ctx.textAlign = "center";
-          ctx.fillText(translateUI("👉 BẤM ĐẶT HÀNG / QUÉT QR NGAY", lang), W / 2, 916);
-          ctx.textAlign = "left";
+          drawFrameAt(elapsed);
 
           setProgress(Math.min(100, Math.round((elapsed / totalMs) * 100)));
 
           if (elapsed < totalMs) {
-            requestAnimationFrame(renderFrame);
+            requestAnimationFrame(renderLoop);
           } else {
             try {
               if (rec.state !== "inactive") {
+                try {
+                  rec.requestData();
+                } catch {}
                 rec.stop();
               }
             } catch (err) {
@@ -390,7 +413,7 @@ export default function VideoCreator({ product }) {
           }
         };
 
-        requestAnimationFrame(renderFrame);
+        requestAnimationFrame(renderLoop);
       });
 
       const url = await done;
@@ -477,67 +500,91 @@ export default function VideoCreator({ product }) {
           {err && <p className="warn">{err}</p>}
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", maxWidth: 280 }}>
+          {/* Canvas trực tiếp trên giao diện: hiển thị sống động khi bấm tạo video */}
           <canvas
             ref={canvasRef}
+            width={540}
+            height={960}
             style={{
-              position: "fixed",
-              left: -9999,
-              top: -9999,
-              width: 540,
-              height: 960,
-              pointerEvents: "none",
-              opacity: 0,
-              zIndex: -9999,
+              width: "100%",
+              maxWidth: 270,
+              aspectRatio: "9 / 16",
+              borderRadius: 12,
+              border: "2px solid #38BDF8",
+              background: "#0F172A",
+              boxShadow: "0 8px 24px rgba(56, 189, 248, 0.25)",
+              display: busy ? "block" : "none",
             }}
           />
-          {videoUrl ? (
-            <>
+
+          {/* Khi đã xuất video xong và không còn bận: Hiện trình phát Video hoàn chỉnh */}
+          {!busy && videoUrl && (
+            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
               <video
+                key={videoUrl}
                 src={videoUrl}
                 controls
                 autoPlay
                 loop
+                muted
                 playsInline
+                onLoadedMetadata={(e) => {
+                  // Mẹo chuẩn hóa duration cho định dạng WebM trên Chrome
+                  if (e.target.duration === Infinity || isNaN(e.target.duration) || e.target.duration === 0) {
+                    e.target.currentTime = 1e101;
+                    e.target.ontimeupdate = () => {
+                      e.target.ontimeupdate = null;
+                      e.target.currentTime = 0;
+                    };
+                  }
+                }}
                 style={{
                   width: "100%",
                   maxWidth: 270,
                   aspectRatio: "9 / 16",
                   borderRadius: 12,
-                  border: "1px solid var(--line-strong)",
-                  background: "#EFF6FF",
+                  border: "1.5px solid var(--line-strong)",
+                  background: "#000000",
                   boxShadow: "var(--shadow-md)",
                 }}
               />
-              <a
-                className="btn"
-                href={videoUrl}
-                download={`video-quang-cao-${product.id}.webm`}
-                style={{ marginTop: 10 }}
-              >
-                Tải video quảng cáo về máy (.webm)
-              </a>
-            </>
-          ) : (
+              <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap", justifyContent: "center" }}>
+                <a
+                  className="btn"
+                  href={videoUrl}
+                  download={`video-quang-cao-${product.id}.webm`}
+                  style={{ fontSize: 13, padding: "8px 14px" }}
+                >
+                  ⬇ Tải video về máy (.webm)
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Trạng thái chờ ban đầu */}
+          {!busy && !videoUrl && (
             <div
               style={{
                 width: "100%",
                 maxWidth: 270,
                 aspectRatio: "9 / 16",
                 borderRadius: 12,
-                background: "linear-gradient(135deg, #93C5FD, #93C5FD 50%, #93C5FD)",
+                background: "linear-gradient(135deg, #DBEAFE, #93C5FD)",
                 color: "#17324D",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
-                padding: 20,
+                padding: 22,
+                boxShadow: "var(--shadow-sm)",
               }}
             >
-              <strong style={{ fontSize: 17, marginBottom: 6 }}>Khung video dọc 9:16</strong>
-              <span style={{ fontSize: 13.5, opacity: 0.9 }}>
-                Bấm “Tạo video quảng cáo ngay” để AI dựng video TikTok / Reels / Shopee Video hoàn chỉnh có mã QR và giá bán.
+              <span style={{ fontSize: 40, marginBottom: 8 }}>🎬</span>
+              <strong style={{ fontSize: 16.5, marginBottom: 6 }}>Khung video dọc 9:16</strong>
+              <span style={{ fontSize: 13, opacity: 0.9, lineHeight: 1.5 }}>
+                Bấm <b>“Tạo video quảng cáo ngay”</b> để xem AI dựng video trực tiếp với ảnh thật tại vườn và mã QR Hộ chiếu số.
               </span>
             </div>
           )}
