@@ -80,12 +80,23 @@ export default function Studio() {
   }
 
   const p = products.find((x) => x.id === pid) || products[0];
-  const shown = dr || p.content;
+
+  const defaultDraft = (prod) => ({
+    desc: prod.story || `Sản phẩm ${prod.name} đạt chứng nhận ${prod.certs || "OCOP Đồng Nai"}. Quy trình sản xuất đạt chuẩn an toàn, kiểm soát minh bạch từ nông trại ${prod.farm || "Đồng Nai"}.`,
+    post: `🌿 Khám phá hương vị đặc sản Đồng Nai: ${prod.name}!\n✓ Cơ sở sản xuất: ${prod.farm || "Đồng Nai"}\n✓ Tiêu chuẩn: ${prod.certs || "OCOP chuẩn hóa"}\n👉 Quét mã QR Hộ chiếu số trên sản phẩm để kiểm chứng toàn bộ nhật ký vườn và nguồn gốc nông sản!`,
+    live: `[00:00 - 02:00] Chào mừng mọi người đến với phiên livestream đặc sản Đồng Nai hôm nay! Trên tay em là ${prod.name} vừa thu hoạch tại ${prod.farm || "vườn Đồng Nai"}...\n[02:00 - 06:00] Cho khách xem ảnh thật và nhật ký ghi chép GPS tại vườn qua mã QR...\n[06:00 - 10:00] Báo giá ưu đãi độc quyền hôm nay và hướng dẫn quét QR chốt đơn ngay!`,
+    en: `Authentic Dong Nai OCOP specialty: ${prod.name}. Cultivated with care by ${prod.farm || "local farms"}. Scan the Digital Passport QR code for verified farm diary entries.`,
+    tags: `#OCOP #DongNai #${prod.id} #NongSanSach #DacSanVietNam`,
+    source: "template",
+  });
+
+  const shown = dr || p.content || defaultDraft(p);
+  const isApproved = !dr && p.content?.approved;
   const currentApprover = approver || p.farm || "Chủ cơ sở OCOP";
 
   // Kiểm tra cảnh báo từ ngữ quảng cáo quá đà trên tất cả các trường nội dung
   const allText = shown ? K.map(([k]) => shown[k] || "").join(" ") : "";
-  const warns = shown ? check(allText) : [];
+  const warns = check(allText);
 
   const gen = async () => {
     setBusy(true);
@@ -110,11 +121,12 @@ export default function Studio() {
       setMsg("Chưa thể duyệt! Vui lòng sửa lại các từ ngữ quảng cáo bị cảnh báo đỏ.");
       return;
     }
+    const current = dr || p.content || defaultDraft(p);
     save((d) => {
       const target = d.products.find((x) => x.id === p.id);
       if (target) {
         target.content = {
-          ...dr,
+          ...current,
           approved: true,
           approvedBy: currentApprover,
           at: Date.now(),
@@ -126,8 +138,8 @@ export default function Studio() {
   };
 
   const autoFixWarnings = () => {
-    if (!dr) return;
-    let next = { ...dr };
+    const current = dr || p.content || defaultDraft(p);
+    let next = { ...current };
     for (const [k] of K) {
       if (typeof next[k] === "string") {
         next[k] = next[k]
@@ -146,14 +158,14 @@ export default function Studio() {
   };
 
   const insertGoldenHour = (hour) => {
-    if (!dr) return;
+    const current = dr || p.content || defaultDraft(p);
     const addText = `\n⏰ Khung giờ đăng gợi ý: ${hour.time} (${hour.label} - ${hour.channel})`;
-    setDr((prev) => ({
-      ...prev,
-      tags: (prev.tags || "") + addText,
-      post: (prev.post || "") + `\n(Khung giờ đăng gợi ý: ${hour.time})`,
-    }));
-    setMsg(`✓ Đã chèn khung giờ vàng [${hour.time}] vào bài đăng và thẻ tag.`);
+    setDr({
+      ...current,
+      tags: (current.tags || "") + addText,
+      post: (current.post || "") + `\n(Khung giờ đăng gợi ý: ${hour.time} - ${hour.label})`,
+    });
+    setMsg(`✓ Đã chèn khung giờ vàng [${hour.time}] vào bài đăng.`);
   };
 
   const copy = () =>
@@ -237,7 +249,16 @@ export default function Studio() {
 
             {/* Cụm nút hành động chính */}
             <div className="row" style={{ marginTop: 0, gap: 10, alignItems: "center" }}>
-              {dr && (
+              {isApproved && !dr ? (
+                <button
+                  className="alt"
+                  onClick={() => setDr({ ...shown })}
+                  style={{ fontWeight: 700 }}
+                  title="Mở bản nháp để chỉnh sửa và duyệt lại"
+                >
+                  ✏️ Chỉnh sửa bản nháp
+                </button>
+              ) : (
                 <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                   <input
                     aria-label="Tên chủ cơ sở duyệt"
@@ -257,9 +278,9 @@ export default function Studio() {
                     onClick={approve}
                     disabled={warns.length > 0}
                     style={{
-                      background: warns.length > 0 ? "rgba(239, 68, 68, 0.2)" : "var(--blue-dark)",
-                      color: warns.length > 0 ? "#EF4444" : "#FFFFFF",
-                      border: warns.length > 0 ? "1px solid #EF4444" : "none",
+                      background: warns.length > 0 ? "rgba(239, 68, 68, 0.15)" : "var(--blue-dark)",
+                      color: warns.length > 0 ? "#DC2626" : "#FFFFFF",
+                      border: warns.length > 0 ? "1.5px solid #EF4444" : "none",
                       cursor: warns.length > 0 ? "not-allowed" : "pointer",
                       padding: "8px 16px",
                       fontWeight: 800,
@@ -270,7 +291,7 @@ export default function Studio() {
                   </button>
                 </div>
               )}
-              <button className="alt" onClick={copy} disabled={!!dr} title={dr ? "Cần duyệt bản nháp trước khi sao chép" : "Sao chép tất cả nội dung"}>
+              <button className="alt" onClick={copy} title="Sao chép tất cả nội dung">
                 📋 Sao chép tất cả
               </button>
             </div>
@@ -385,10 +406,12 @@ export default function Studio() {
                 </div>
                 <textarea
                   id={k}
-                  readOnly={!dr}
                   value={shown[k] || ""}
                   rows={k === "live" ? 8 : 4}
-                  onChange={(e) => setDr({ ...dr, [k]: e.target.value })}
+                  onChange={(e) => {
+                    const current = dr || p.content || defaultDraft(p);
+                    setDr({ ...current, [k]: e.target.value });
+                  }}
                   style={{
                     border: hasWarn ? "2px solid #EF4444" : undefined,
                     background: hasWarn ? "#FFF5F5" : undefined,
@@ -470,27 +493,23 @@ export default function Studio() {
                       Kênh: {h.channel}
                     </div>
                   </div>
-                  {dr && (
-                    <button
-                      type="button"
-                      className="alt btn"
-                      style={{ marginTop: 10, fontSize: 11.5, padding: "5px 10px", width: "100%", justifyContent: "center" }}
-                      onClick={() => insertGoldenHour(h)}
-                      title={`Bấm để chèn khung giờ ${h.time} vào bài đăng`}
-                    >
-                      + Chèn giờ này
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    className="alt btn"
+                    style={{ marginTop: 10, fontSize: 11.5, padding: "5px 10px", width: "100%", justifyContent: "center" }}
+                    onClick={() => insertGoldenHour(h)}
+                    title={`Bấm để chèn khung giờ ${h.time} vào bài đăng`}
+                  >
+                    + Chèn giờ này
+                  </button>
                 </div>
               ))}
             </div>
           </div>
 
-          {dr && (
-            <p className="mute" style={{ marginTop: 14, fontSize: 12.5 }}>
-              💡 Sau khi hoàn tất biên tập và đảm bảo không có cảnh báo đỏ, bấm <b>“✍️ Chủ cơ sở duyệt bản nháp”</b> ở trên để lưu chính thức vào cơ sở dữ liệu.
-            </p>
-          )}
+          <p className="mute" style={{ marginTop: 14, fontSize: 12.5 }}>
+            💡 Sau khi hoàn tất biên tập và đảm bảo không có cảnh báo đỏ, bấm <b>“✍️ Chủ cơ sở duyệt bản nháp”</b> ở trên để lưu chính thức vào cơ sở dữ liệu.
+          </p>
         </div>
       )}
 
